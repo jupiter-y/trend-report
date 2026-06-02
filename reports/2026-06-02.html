@@ -3,21 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 비용 혁명, 오픈소스가 프론티어 모델 격차 붕괴 중</title>
+    <title>AI 비용혁명·보안전쟁·광고재편 동시진행</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://jupiter-y.github.io/trend-report/default_shadcn_theme.css">
     <style>
-        body { font-family: 'Pretendard', sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; color: #333; }
-        h1 { font-size: 2em; font-weight: 700; margin-bottom: 4px; }
-        h2 { font-size: 1.4em; color: #1a1a1a; margin-top: 40px; border-bottom: 2px solid #eee; padding-bottom: 8px; }
-        h3 { font-size: 1.1em; color: #444; margin-top: 20px; }
-        p { line-height: 1.8; color: #555; }
-        li { line-height: 1.8; color: #555; }
-        hr { border: none; border-top: 1px solid #eee; margin: 30px 0; }
-        .date { color: #999; font-size: 0.9em; margin-bottom: 30px; }
-        .updated { color: #999; font-size: 0.8em; text-align: right; margin-top: 40px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #0f1117;
+            color: #e0e0e0;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* 왼쪽 사이드바 - 아카이브 리스트 */
+        .sidebar {
+            width: 280px;
+            min-width: 280px;
+            background-color: #1a1d27;
+            border-right: 1px solid #2a2d3a;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-title {
+            font-size: 0.75em;
+            font-weight: 700;
+            color: #6b7280;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .archive-item {
+            padding: 12px 14px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .archive-item:hover {
+            background-color: #252836;
+            border-color: #3a3d4a;
+        }
+
+        .archive-item.active {
+            background-color: #252836;
+            border-color: #4f46e5;
+        }
+
+        .archive-headline {
+            font-size: 0.85em;
+            font-weight: 500;
+            color: #c0c4d0;
+            line-height: 1.5;
+            margin-bottom: 4px;
+        }
+
+        .archive-date {
+            font-size: 0.75em;
+            color: #6b7280;
+        }
+
+        /* 메인 콘텐츠 */
+        .main {
+            margin-left: 280px;
+            flex: 1;
+            padding: 50px 60px;
+            max-width: 860px;
+        }
+
+        .report-date {
+            font-size: 0.85em;
+            color: #6b7280;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 2em;
+            font-weight: 700;
+            color: #f0f0f0;
+            line-height: 1.4;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #a78bfa;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #2a2d3a;
+        }
+
+        h3 {
+            font-size: 1em;
+            font-weight: 600;
+            color: #c0c4d0;
+            margin-top: 24px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 0.95em;
+            line-height: 1.9;
+            color: #9ca3af;
+            margin-bottom: 12px;
+        }
+
+        li {
+            font-size: 0.9em;
+            line-height: 1.9;
+            color: #9ca3af;
+            margin-left: 20px;
+            margin-bottom: 6px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #2a2d3a;
+            margin: 40px 0;
+        }
+
+        .updated {
+            font-size: 0.8em;
+            color: #4b5563;
+            text-align: right;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #2a2d3a;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main { margin-left: 0; padding: 30px 20px; }
+        }
     </style>
 </head>
 <body>
-    <h1>AI 비용 혁명, 오픈소스가 프론티어 모델 격차 붕괴 중</h1><p>2026년 06월 02일</p><br><h2>AI 광고 트렌드</h2><br><hr><br><h3>오늘의 핵심 키워드</h3><p>`AI 도입` `B2B 마케팅` `미래 기술` `창작자 경제` `소비자 행동 변화`</p><br><hr><br><h3>핵심 트렌드 분석 (3가지)</h3><br><hr><br><p>**1. 'AI 도입의 역설': 개인은 앞서가고, 조직은 뒤처진다**</p><br><p>B2B 마케팅 리더들에게 핵심적인 단절이 나타나고 있다. 전문가 개인의 53%는 AI를 일상 워크플로에 통합하거나 역할을 재편하는 '통합·전환 단계'에 이미 진입했지만, 조직 차원에서 스케일링 단계에 도달한 곳은 25%에 불과하며, 47%는 여전히 파일럿 모드에 머물고 있다. 이는 단순한 기술 이해 부족의 문제가 아니다. 96%의 마케터가 AI를 업무에 사용한다고 응답하지만, 실제 실행 수준을 '높다'고 평가하는 비율은 26%에 불과하다. 더 근본적으로는 거버넌스의 공백이 문제다. Deloitte의 2026년 데이터에 따르면, 자율 AI 에이전트를 감독할 성숙한 모델을 갖춘 기업은 5곳 중 1곳뿐이며, MuleSoft 조사에서는 AI 에이전트의 50%가 고립된 사일로 안에서 운영되고 있다. 실무 시사점: 지금 당장 AI 도입보다 '스케일링 거버넌스' 수립이 선행 과제다. 데이터 사용 정책, 브랜드 기준, 법적 검토, 인간 감독 체계를 먼저 갖춰야 조직 전체의 AI 전환이 가능하다.</p><br><p>출처: [74% of Professionals Call AI Essential But Their Companies Lag Behind] - Marketing AI Institute (https://www.marketingaiinstitute.com/blog/ai-b2b-marketers-summit-adoption)</p><br><hr><br><p>**2. 창작자 경제의 진화: 단순 어필리에이트를 넘어 '퍼포먼스 미디어 채널'로**</p><br><p>Target, Aerie 등 주요 리테일러들이 단순한 어필리에이트 링크 방식에서 탈피해 다각적 크리에이터 파트너십으로 전략을 전환하고 있다. 어필리에이트 마케팅 지출(전통적 방식과 크리에이터 어필리에이트 포함)은 2025년~2026년 사이 10.1% 증가해 132억 달러에 달할 전망이며, 크리에이터 대상 어필리에이트 수익은 2021~2024년 사이 두 배로 증가해 5억 7천만 달러에서 11억 달러로 성장했다. 배경에는 광고 신뢰도의 하락이 있다. 소셜 미디어 채널의 소비 급증과 iOS 트래킹 변경, 광고 차단기, 전통 광고에 대한 신뢰 하락이 맞물리며 새로운 유형의 어필리에이트 마케팅 플랫폼의 필요성이 커졌다. 특히 상승하는 CAC(고객 획득 비용)와 Meta·Google의 신호 손실이 브랜드들로 하여금 크리에이터 마케팅과 파트너십으로 예산을 재배분하게 만들었으며, 이 흐름은 2026년까지 가속화되고 있다. 실무 시사점: 크리에이터를 '노출 채널'이 아닌 '성과 미디어 파트너'로 재정의하고, 커스텀 스토어프론트·콘텐츠 라이선싱·CTV 확장 등 복합 구조로 계약을 고도화해야 한다.</p><br><p>출처: [Why retailers like Target and Aerie are moving beyond straight affiliate deals with creators] - Digiday (https://digiday.com/media/why-retailers-like-target-and-aerie-are-moving-beyond-straight-affiliate-deals-with-creators/)</p><br><hr><br><p>**3. 유가 상승이 바꾸는 소비자 행동: 이커머스로의 구조적 이동**</p><br><p>올해 초 미국 휘발유 가격은 갤런당 4달러를 돌파하며 2022년 이후 최고치를 기록했고, 5월 기준 전국 평균은 4.43달러로 지난해의 3.16달러에서 크게 뛰었다. 이 변화는 소비자의 쇼핑 방식을 근본적으로 뒤흔들고 있다. 재량 소비 감소와 함께 임의 소비재 유통 방문객은 4주 연속 전년 대비 감소한 반면, 생필품 유통 방문은 4주 연속 증가했으며, 소비자들은 창고형 클럽·대형 마트·저가 유통으로 몰리고 있다. 이 흐름에서 최대 수혜자는 Amazon이다. Amazon의 1시간·3시간·30분 배달 서비스 확장은 추가 이동 없이 편의를 원하는 소비자 수요를 흡수하기에 최적화된 포지션이며, eMarketer 분석가는 "소비자들이 드라이빙을 줄이려 할 때 이커머스가 수혜를 입는다"고 분석한다. 이 영향은 저소득층(71%)과 서부 미국 지역(66%)에서</p><br><hr><br><p>수집된 정보를 바탕으로 심층 트렌드 리포트를 작성합니다.</p><br><hr><br><h2>AI 전반 트렌드</h2><br><h3>오늘의 핵심 키워드</h3><p>`오픈소스 AI 모델` `프롬프트 인젝션 공격` `AI 에이전트 보안` `저비용 AI 모델` `멀티모달 AI`</p><br><hr><br><h3>핵심 트렌드 분석 (3가지)</h3><br><hr><br><p>#### 1. 오픈소스 프론티어의 반격 — MiniMax M3가 바꾼 비용-성능 방정식</p><br><p>중국 AI 스타트업 MiniMax가 2026년 6월 1일 공개한 M3 모델은 오픈소스 AI의 역사적 한계였던 '성능 vs 비용' 트레이드오프를 정면으로 돌파했다. M3는 프론티어급 코딩 성능, 100만 토큰 컨텍스트 창, 네이티브 멀티모달 기능을 하나의 모델에 통합한 최초의 오픈 웨이트 모델로 등장했다. 핵심 경쟁력은 아키텍처 혁신에 있다. MiniMax Sparse Attention(MSA) 기술은 100만 토큰 컨텍스트에서 이전 M2 세대 대비 디코딩 속도를 15.6배, 프리필을 9.7배 가속시키며, 관련 데이터 블록만 처리하는 방식으로 컴퓨팅 비용을 기존의 1/20 수준으로 절감한다. 벤치마크 성과도 실질적이다. M3는 GPT-5.5와 Gemini 3.1 Pro를 SWE-Bench Pro에서 앞서고, BrowseComp와 SVG-Bench에서는 Claude Opus 4.7마저 능가했다. 가격 경쟁력도 압도적이다. 론칭 시점 OpenRouter 기준 입력 토큰 $0.30/M, 출력 $1.20/M의 프로모션 가격을 제공하며, 이는 Claude Opus 4.8($5/$25)의 약 5~10% 수준이다. AI 비용 절감 트렌드는 구조적이다. 추론 비용이 같은 성능 기준으로 연간 약 10배씩 하락하고 있으며, 오픈 웨이트 모델이 독점 모델과의 격차를 빠르게 좁히는 것이 2026년의 핵심 AI 트렌드로 자리잡았다. 단, M3의 비교 기준선이 최신 Opus 4.8이 아닌 Opus 4.7임을 고려하면, 실제 최상위 프론티어와의 격차는 발표보다 더 클 수 있다는 점은 유의해야 한다.</p><br><p>**실무 인사이트**: 엔터프라이즈 팀은 지금 즉시 MiniMax M3 API를 파이럿 비용으로 테스트하고, 오픈 웨이트 출시 후 온프레미스 배포 경제성(데이터 주권 + 벤더 락인 제거)을 GPT-5.5/Claude 대비 정량 비교해볼 것을 권장한다. 업계 초점이 '더 큰 모델'에서 '더 스마트한 서빙'으로 이동하며, 파라미터 당 또는 와트 당 성능인 '인텔리전스 밀도'가 핵심 경쟁 지표로 부상하고 있다.</p><br><p>**출처**: [MiniMax-M3 debuts, eclipsing GPT-5.5 and Gemini 3.1 Pro](https://venturebeat.com/technology/minimax-m3-debuts-eclipsing-gpt-5-5-and-gemini-3-1-pro-on-key-benchmark-performance-for-just-5-10-of-the-cost) - VentureBeat / [MiniMax M3 Developer Guide](https://lushbinary.com/blog/minimax-m3-developer-guide-benchmarks-pricing-msa-architecture/) - Lushbinary</p><br><hr><br><p>#### 2. 프롬프트 인젝션, 이제 기업 보안의 최전선 — 업계 표준 부재가 더 큰 위협</p><br><p>AI 에이전트가 브라우저, 코드 환경, 엔터프라이즈 시스템에 실질적으로 통합되면서 프롬프트 인젝션 공격은 이론적 위협에서 현실적 위협으로 격상됐다. 2026년 프롬프트 인젝션은 AI 시스템에 대한 최대 보안 위협으로 전년 대비 340% 급증했으며, 2023년 장난감 챗봇 수준의 공격 벡터가 이제 실제 엔터프라이즈 AI 배포에서 가장 안정적으로 악용되는 카테고리로 진화했다. 특히 이번 주 Anthropic이 공개한 Claude Opus 4.8 시스템 카드는 업계에 충격을 줬다. Anthropic은 129개 브라우저 환경에서 세이프가드 없이 전문 레드팀 공격자가 모델을 하이재킹하는 데 **31.5%** 성공했음을 공개했고, 세이프가드 적용 후에는 0.5%로 떨어졌다. 문제는 이 수치가 단순히 취약성을 드러내는 게 아니라, 업계에서 유일하게 표면별 공격 성공률을 공개한 선도적 투명성이라는 역설이다. 모든 AI 통합(챗봇, 에이전트, 어시스턴트)이 새로운 공격 진입점</p><br><hr><br><h2>에디터 코멘트</h2><br><p>AI의 민주화와 보안 위협의 고도화가 동시에 진행되면서, 2026년 광고·마케팅 업계는 '저비용 고성능 AI 모델을 어떻게 안전하게 활용할 것인가'라는 근본적 물음에 직면했다. MiniMax M3 같은 오픈소스 모델이 엔터프라이즈 수준의 성능을 5~10% 가격에 제공하면서 모든 조직이 AI 에이전트 도입을 검토하게 되었지만, 동시에 프롬프트 인젝션 공격 성공률이 31.5%에 달하고 조직의 AI 거버넌스는 여전히 미성숙한 상태다. 결국 B2B 마케팅의 진정한 경쟁력은 '더 좋은 AI 모델 선택'이 아니라 '데이터 정책·브랜드 기준·법적 검토·인간 감독을 갖춘 스케일링 체계'를 먼저 구축하는 조직이 될 것이다. 동시에 유가 상승으로 이커머스로 대량 이동하는 소비자 기저 위에서, 신뢰할 수 있는 AI 기반 개인화와 자동화가 가능한 기업이 고객 획득 비용을 절감하고 마진을 확보할 수 있는 '기술-거버넌스-실행의 삼각형'이 2026년 마케팅 승패를 결정할 핵심이 </p>
-    <p class="updated">업데이트: 2026년 06월 02일</p>
+    <div class="sidebar">
+        <div class="sidebar-title">리포트 아카이브</div>
+        <div class="archive-item active">
+            <div class="archive-headline">AI 비용혁명·보안전쟁·광고재편 동시진행</div>
+            <div class="archive-date">2026년 06월 02일</div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="report-date">2026년 06월 02일</div>
+        <h1>AI 비용혁명·보안전쟁·광고재편 동시진행</h1><p>2026년 06월 02일</p><br><p>충분한 정보가 수집되었습니다. 이제 심층 트렌드 리포트를 작성하겠습니다.</p><br><hr><br><h2>AI 광고 트렌드</h2><br><h3>오늘의 핵심 키워드</h3><p>`인공지능` `B2B 마케팅` `창작자 경제` `소비자 행동` `광고 기술`</p><br><hr><br><h3>핵심 트렌드 분석 (3가지)</h3><br><hr><br><p>**1. AI 도입의 '실행 격차(Execution Gap)' — 쓰는 것과 잘 쓰는 것 사이의 간극**</p><br><p>B2B 마케팅에서 AI는 이미 필수 인프라로 자리 잡았지만, 진짜 문제는 이제부터다. 개인은 앞서가고 조직은 뒤처지는 구조가 뚜렷하다 — 전문가의 53%는 이미 AI를 일상 워크플로에 통합하거나 역할 자체를 재정의하는 단계에 있다고 답했지만, 조직 차원에서 '스케일링 단계'에 도달한 곳은 25%에 불과하며, 절반 가까이(47%)가 여전히 파일럿 모드에 머물러 있다. 이 현상을 수치로 보면 더 명확하다. 88%의 B2B 리더가 AI를 마케팅 전략에 통합했다고 답했지만, 효과적으로 활용하고 있다고 강하게 확신하는 비율은 단 21%에 그쳤으며, 가장 큰 장벽은 예산 제약(14%)이 아니라 사내 역량 부족(68%)이었다. 더 나아가 91%가 AI를 사용하지만 브랜드 거버넌스, 하이퍼 개인화, 워크플로 자동화 등 고부가가치 에이전트 역량에 활용하는 비율은 3분의 1에도 미치지 못한다 — 도구 채택은 기본값이 되었고, 진짜 경쟁 우위는 AI를 의사결정 워크플로에 얼마나 깊이 내재화했느냐에 달려 있다. 실무자라면 지금 당장 "무엇을 쓰는가"가 아닌 "어느 지점에서 측정 가능한 성과를 내는가"를 기준으로 AI 로드맵을 재설계해야 할 시점이다.</p><br><p>> 출처: [74% of Professionals Call AI Essential But Their Companies Lag Behind] - Marketing AI Institute (https://www.marketingaiinstitute.com/blog/ai-b2b-marketers-summit-adoption)</p><br><hr><br><p>**2. 크리에이터 경제의 구조 재편 — 어필리에이트 링크에서 '게이미파이드 커뮤니티'로**</p><br><p>단순 커미션 기반의 어필리에이트 모델이 한계에 부딪히면서, 리테일 브랜드들이 크리에이터 관계를 통째로 재설계하고 있다. Target은 기존 커미션 기반 프로그램을 폐지하고 일반 고객과 신흥 크리에이터를 위한 게이미파이드 커뮤니티 'Club Target'과, 성과 기반 인센티브와 독점 캠페인 접근권을 제공하는 초청 전용 'Target Ambassadors' 두 프로그램으로 전환했다. Aerie의 행보는 더욱 주목할 만하다. AI 사용을 아예 금지한 나노 크리에이터 프로그램 'Aerie Realmakers'를 론칭했는데, 오픈 2주 만에 1만 건 이상의 지원이 몰렸고, 출시 24시간 내에 주간 가입 목표의 절반을 달성하고 7일 만에 월간 목표를 100% 초과 달성했다. 이 같은 전환의 배경에는 구조적 이유가 있다. 게이미피케이션은 어필리에이트가 갖지 못한 장점을 제공한다 — 브랜드는 챌린지와 미션을 통해 콘텐츠 방향을 조율할 수 있는 반면, 기존 어필리에이트 모델에서 크리에이터는 오직 판매 전환에만 최적화되어 브랜드가 원하는 제품 서사 구축과 어긋나는 경우가 많았다. AI 생성 콘텐츠가 피드를 잠식하는 시대일수록 인간적 스토리가 더 큰 힘을 발휘한다 — 전문가들은 "AI 슬럽이 피드를 채울수록 진짜 사람의 이야기가 부상할 것"이라며 2026년 크리에이터 프로그램의 확산을 예고했다.</p><br><p>> 출처: [Why retailers like Target and Aerie are moving beyond straight affiliate deals with creators] - Digiday / Glossy (https://digiday.com/media/why-retailers-like-target-and-aerie-are-moving-beyond-straight-affiliate-deals-with-creators/)</p><br><hr><br><p>**3. 광고 기술의 '공급 경로 지능화' — 컨테이너화가 경쟁 전선으로 부상**</p><br><p>프로그래매틱 광고의 오랜 숙제였던 공급 경로 비효율 문제가 AI 에이전트 기반의 '컨테이너화(Containerization)' 기술로 정면 돌파되고 있다. PubMatic은 파트너사의 의사결정 모델이 프로그래매틱 경매 인프라 내부에서 직접 실행될 수 있는 컨테이너화 레이어 'Decision Fabric'을 론칭했다. IAB Tech Lab의 ARTF 오</p><br><hr><br><h2>AI 전반 트렌드</h2><br><h3>오늘의 핵심 키워드</h3><p>`AI 모델 비용 효율성` `AI 에이전트 보안` `프롬프트 인젝션` `오픈 웨이트 모델` `멀티모달 AI`</p><br><hr><br><h3>핵심 트렌드 분석 (3가지)</h3><br><hr><br><p>#### 1. 오픈 웨이트 모델의 반격: 중국발 비용 혁명이 프런티어 AI 생태계를 뒤흔들다</p><br><p>MiniMax M3는 2026년 6월 1일 출시된 프런티어급 코딩 능력, 100만 토큰 컨텍스트 윈도우, 네이티브 멀티모달 기능을 동시에 갖춘 최초의 오픈 웨이트 모델이다. 이 모델의 핵심 차별점은 성능이 아니라 **경제성**에 있다. M3는 SWE-bench Pro에서 GPT-5.5(58.6%)를 제치는 59%를 기록하면서도, 입력 토큰 기준 12배, 출력 토큰 기준 12.5배 저렴한 비용으로 구동된다. 아키텍처 혁신도 주목할 만하다. MSA 아키텍처는 100만 토큰 컨텍스트 처리 시 토큰당 연산량을 이전 세대의 1/20 수준으로 줄이고, 프리필 속도 9배 이상, 디코딩 속도 15배 이상의 가속을 실현했다. 실무 적용 가능성도 입증됐는데, M3는 ICLR 2025 우수 논문의 핵심 실험을 약 12시간 동안 자율적으로 재현하며 18개의 커밋과 23개의 실험 그래프를 생성했고, 별도 테스트에서는 NVIDIA Hopper GPU의 행렬 연산 커널을 24시간에 걸쳐 최적화해 하드웨어 활용률을 7.6%에서 71.3%로 끌어올렸다. 다만, M3의 SWE-Bench Pro 59.0% 성적이 GPT-5.5와 Gemini 3.1 Pro를 앞서고 Claude Opus 4.7에 근접한 것은 사실이나, 여러 결과가 MiniMax 자체 인프라와 에이전트 스캐폴딩에서 측정된 것이어서 독립적 검증이 아직 남아 있다. 또한 중국의 2017년 국가정보법에 따라 MiniMax를 포함한 모든 중국 기업은 국가 정보 업무에 협력·지원해야 하며, 이 의무는 조건 없이 지속적으로 적용된다는 점도 기업 보안 담당자들이 반드시 고려해야 할 변수다.</p><br><p>> **출처:** [MiniMax-M3 debuts, eclipsing GPT-5.5 and Gemini 3.1 Pro on key benchmark performance for just 5-10% of the cost](https://venturebeat.com/technology/minimax-m3-debuts-eclipsing-gpt-5-5-and-gemini-3-1-pro-on-key-benchmark-performance-for-just-5-10-of-the-cost) - VentureBeat</p><br><hr><br><p>#### 2. 프롬프트 인젝션, 이제 1순위 보안 위협: AI 에이전트 시대의 새로운 공격 지형</p><br><p>AI 에이전트가 브라우저·코드베이스·데이터베이스에 직접 연결되면서 프롬프트 인젝션이 이론적 위험에서 현실적 위협으로 격상됐다. 2026년 현재, 프롬프트 인젝션은 연구 단계의 관심거리에서 1순위 보안 위협으로 격상되었다. Anthropic이 Claude Opus 4.8의 시스템 카드를 통해 공개한 수치는 업계에 경종을 울렸다. 브라우저 환경에서 세이프가드 없이 사용하면 31.5%의 확률로 에이전트가 하이재킹될 수 있으며, 세이프가드 적용 시 0.5%까지 내려간다. 그러나 프롬프트 인젝션은 OWASP가 LLM01로 선정한 최고 AI 보안 위험으로, 시스템 구성과 시도 횟수에 따라 공격 성공률이 50~84%에 달하며, 최고 수준의 방어를 적용한 OpenAI·Google·Anthropic의 프런티어 모델조차 완전한 해결책이 없다. 기업 현장의 대비 수준도 심각하게 미흡하다. Cisco의 'State of AI Security 2026' 보고서에 따르면 83%의 조직이 에이전틱 AI 배포를 계획 중이지만 안전한 배포에 자신 있다고 답한 곳은 29%에 불과하며, 전용 프롬프트 인젝션 방어 시스템을 배포한 조직은 34.7%에 그쳤다. 보안 전문가들이 권고하는 대응 방향은 분명하다. 최소 권한 원칙, 즉 각 에이전트에게 지정된 기능에 필요한 접근 권한만 부여하고 그 이상을 허용하지 않는 것이 현재 활용 가능한 가장 효과적인 단일 통제 수단이며, MCP(Model Context Protocol)가 언어 모델과 외부 도구를 연결하는 보편적 방식이 됨에 따라 빠른 도입과 함께 공격</p><br><hr><br><h2>에디터 코멘트</h2><br><p>AI의 민주화가 가속화되는 2026년, 비용 효율성과 보안이 동시에 부상하면서 AI 도입의 '실행 격차'가 광고 산업 전체에 영향을 미치고 있다. 오픈 웨이트 모델의 저가 혁명으로 중소 광고주도 프런티어급 AI 활용이 가능해진 반면, 프롬프트 인젝션 같은 보안 위협이 확대되면서 기업들이 AI 에이전트 배포에 신중해지고 있다. 광고 기술에서 가장 흥미로운 현상은 단순한 도구 채택을 넘어 게이미파이드 크리에이터 프로그램이나 의사결정 자동화 같은 '깊은 내재화' 단계로 이동하고 있다는 점이다. 즉, AI 광고의 미래는 저가 모델 접근성과 보안 기반의 신뢰성을 동시에 확보한 기업들이 주도권을 잡게 될 것이며, 이들은 AI를 단순 자동화 도구가 아닌 브랜드-크리에이터 관계, 의사결정 구조 자체를 재편하는 전략적 자산으로 운용할 것이다.</p>
+        <p class="updated">마지막 업데이트: 2026년 06월 02일</p>
+    </div>
 </body>
 </html>
