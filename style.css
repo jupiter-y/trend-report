@@ -1,0 +1,286 @@
+/* ============================
+   AI 트렌드 리포트 스타일시트
+   ============================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #0f1117;
+    color: #e0e0e0;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ============================
+   사이드바
+   ============================ */
+.sidebar {
+    width: 280px;
+    min-width: 280px;
+    background-color: #1a1d27;
+    border-right: 1px solid #2a2d3a;
+    padding: 30px 20px;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar-title {
+    font-size: 0.75em;
+    font-weight: 700;
+    color: #6b7280;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.archive-item {
+    padding: 12px 14px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: 1px solid transparent;
+}
+
+.archive-item:hover { background-color: #252836; border-color: #3a3d4a; }
+.archive-item.active { background-color: #252836; border-color: #4f46e5; }
+
+.archive-headline {
+    font-size: 0.85em;
+    font-weight: 500;
+    color: #c0c4d0;
+    line-height: 1.5;
+    margin-bottom: 4px;
+}
+
+.archive-date { font-size: 0.75em; color: #6b7280; }
+
+/* ============================
+   메인 콘텐츠
+   ============================ */
+.main {
+    margin-left: 280px;
+    flex: 1;
+    padding: 50px 60px 50px 107px;
+    max-width: 860px;
+}
+
+.report-date {
+    font-size: 0.85em;
+    color: #6b7280;
+    margin-bottom: 8px;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: 700;
+    color: #f0f0f0;
+    line-height: 1.4;
+    margin-bottom: 90px;
+}
+
+/* ============================
+   섹션 라벨 & 키워드 태그
+   ============================ */
+.section-label {
+    font-size: 0.85em;
+    color: #6b7280;
+    font-weight: 500;
+    margin-bottom: 12px;
+    margin-top: 5px;
+}
+
+.keyword-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 0px;
+    padding-left: 0px;
+}
+
+.tag {
+    background-color: #252836;
+    border: 1px solid #3a3d4a;
+    color: #a78bfa;
+    font-size: 0.8em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* ============================
+   트렌드 콘텐츠
+   ============================ */
+.trend-content {
+    padding-left: 24px;
+    border-left: 1px solid #2a2d3a;
+    margin-top: 20px;
+    margin-left: 0px;
+}
+
+.trend-title {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #c0c4d0;
+    margin-top: 64px;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+p {
+    font-size: 0.95em;
+    line-height: 1.9;
+    color: #9ca3af;
+    margin-bottom: 12px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #2a2d3a;
+    margin: 53px 0 495px 0;
+}
+
+.source {
+    font-size: 0.82em;
+    color: #6b7280;
+    margin-top: 8px;
+    margin-bottom: 24px;
+}
+
+/* ============================
+   툴팁
+   ============================ */
+.tooltip {
+    position: relative;
+    border-bottom: 1px dashed #a78bfa;
+    color: #c0c4d0;
+    cursor: help;
+}
+
+.tooltip:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #252836;
+    border: 1px solid #4f46e5;
+    color: #e0e0e0;
+    font-size: 0.8em;
+    padding: 8px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 100;
+    line-height: 1.5;
+}
+
+.tooltip:hover::before {
+    content: '';
+    position: absolute;
+    bottom: 115%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #4f46e5;
+    z-index: 100;
+}
+
+/* ============================
+   에디터 코멘트
+   ============================ */
+.editor-comment-title {
+    font-size: 0.85em;
+    color: #6b7280;
+    font-weight: 500;
+    margin-top: 495px;
+    margin-bottom: 12px;
+}
+
+.editor-comment-box {
+    border-left: 3px solid #a78bfa;
+    background-color: #16182a;
+    padding: 24px 28px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 40px;
+}
+
+.editor-comment-box p {
+    font-style: italic;
+    color: #c0c4d0;
+    line-height: 2;
+    margin-bottom: 0;
+}
+
+/* ============================
+   용어사전
+   ============================ */
+.glossary {
+    margin-top: 470px;
+    padding-top: 30px;
+    border-top: 1px solid #2a2d3a;
+}
+
+.glossary-title {
+    font-size: 0.85em;
+    color: #6b7280;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.glossary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.glossary-item {
+    background-color: #1a1d27;
+    border: 1px solid #2a2d3a;
+    border-radius: 8px;
+    padding: 16px 18px;
+    transition: border-color 0.2s;
+}
+
+.glossary-item:hover { border-color: #4f46e5; }
+
+.glossary-term {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #c0c4d0;
+    margin-bottom: 6px;
+    display: inline-block;
+    border-bottom: 1px dashed #a78bfa;
+    padding-bottom: 2px;
+}
+
+.glossary-desc {
+    font-size: 0.82em;
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* ============================
+   하단
+   ============================ */
+.updated {
+    font-size: 0.8em;
+    color: #4b5563;
+    text-align: right;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #2a2d3a;
+}
+
+/* ============================
+   반응형 (나중에 작업 예정)
+   ============================ */
+@media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 30px 20px; }
+    .glossary-grid { grid-template-columns: 1fr; }
+}
