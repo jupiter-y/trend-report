@@ -149,6 +149,16 @@ hr {
     margin-bottom: 24px;
 }
 
+.source a {
+    color: #6b7280;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.source a:hover {
+    color: #a78bfa;
+}
+
 /* ============================
    툴팁
    ============================ */
