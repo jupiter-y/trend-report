@@ -129,7 +129,7 @@
     </div>
 
     <script>
-        const GITHUB_USERNAME = "jupiter-y";
+        const GITHUB_USERNAME = "여기에-GitHub-사용자명";
         const GITHUB_REPO = "trend-report";
         const REPORTS_PATH = "reports";
 
@@ -158,7 +158,7 @@
                 }
 
                 // 첫 번째 파일 자동 로드
-                renderArchive(htmlFiles);
+                await renderArchive(htmlFiles);
                 loadReport(htmlFiles[0].name, htmlFiles[0].download_url);
 
             } catch (e) {
@@ -168,25 +168,38 @@
         }
 
         // 아카이브 리스트 렌더링
-        function renderArchive(files) {
+        async function renderArchive(files) {
             const list = document.getElementById("archive-list");
             list.innerHTML = "";
 
-            files.forEach((file, index) => {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
                 const date = fileNameToDate(file.name);
+
+                // HTML 파일에서 title 태그 추출
+                let headline = "AI 트렌드 리포트";
+                try {
+                    const res = await fetch(file.download_url);
+                    const html = await res.text();
+                    const titleMatch = html.match(/<title>(.*?)<\/title>/i);
+                    if (titleMatch) headline = titleMatch[1].trim();
+                } catch (e) {
+                    // title 가져오기 실패 시 기본값 사용
+                }
+
                 const item = document.createElement("div");
-                item.className = "archive-item" + (index === 0 ? " active" : "");
+                item.className = "archive-item" + (i === 0 ? " active" : "");
                 item.id = `archive-${file.name}`;
                 item.onclick = () => {
                     loadReport(file.name, file.download_url);
                     closeSidebar();
                 };
                 item.innerHTML = `
-                    <div class="archive-headline">AI 트렌드 리포트</div>
+                    <div class="archive-headline">${headline}</div>
                     <div class="archive-date">${date}</div>
                 `;
                 list.appendChild(item);
-            });
+            }
         }
 
         // 리포트 로드
