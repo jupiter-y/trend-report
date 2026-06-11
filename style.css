@@ -78,7 +78,7 @@ h1 {
     font-weight: 700;
     color: #f0f0f0;
     line-height: 1.4;
-    margin-bottom: 90px;
+    margin-bottom: 30px;
 }
 
 /* ============================
@@ -200,7 +200,6 @@ hr {
 /* ============================
    에디터 코멘트
    ============================ */
-.editor-comment-title {
     font-size: 0.85em;
     color: #6b7280;
     font-weight: 500;
@@ -223,14 +222,6 @@ hr {
     margin-bottom: 0;
 }
 
-/* ============================
-   용어사전
-   ============================ */
-.glossary {
-    margin-top: 90px;
-    padding-top: 30px;
-    border-top: 1px solid #2a2d3a;
-}
 
 .glossary-title {
     font-size: 0.85em;
@@ -342,7 +333,6 @@ hr {
 
     hr { margin: 30px 0 60px 0; }
 
-    .editor-comment-title { margin-top: 60px; }
 
     .glossary { margin-top: 60px; }
 
