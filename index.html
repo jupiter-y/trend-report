@@ -6,30 +6,34 @@
 <title>AI 트렌드 리포트</title>
 <link rel="stylesheet" href="style.css">
 <style>
-  /* ── iframe 뷰어 ── */
-  #report-viewer { width:100%; height:100vh; border:none; display:none; }
+  #report-viewer {
+    width: 100%; height: 100vh;
+    border: none; display: none;
+  }
   .scrim {
-    position:fixed; inset:0; z-index:55;
-    background:rgba(5,9,18,.5); opacity:0; pointer-events:none;
-    transition:opacity 220ms cubic-bezier(0.22,1,0.36,1);
+    position: fixed; inset: 0; z-index: 55;
+    background: rgba(5,9,18,.5); opacity: 0; pointer-events: none;
+    transition: opacity 220ms cubic-bezier(0.22,1,0.36,1);
   }
-  .app.nav-open .scrim { opacity:1; pointer-events:auto; }
-  .app.nav-open .sidebar { transform:translateX(0); }
-  /* welcome */
+  .app.nav-open .scrim  { opacity: 1; pointer-events: auto; }
+  .app.nav-open .sidebar { transform: translateX(0) !important; }
   .welcome {
-    display:flex; align-items:center; justify-content:center;
-    height:100vh; flex-direction:column; gap:12px;
-    color:var(--fg-subtle); text-align:center;
+    display: flex; align-items: center; justify-content: center;
+    height: 100vh; flex-direction: column; gap: 12px; text-align: center;
   }
-  .welcome-icon { font-size:2.4rem; }
-  .welcome-title { font-size:1rem; font-weight:700; color:var(--fg); }
-  .welcome-desc { font-size:.85rem; color:var(--fg-subtle); }
+  .welcome-icon  { font-size: 2.4rem; }
+  .welcome-title { font-size: 1rem; font-weight: 700; color: var(--fg); }
+  .welcome-desc  { font-size: .85rem; color: var(--fg-subtle); }
+  /* 아카이브 로딩 */
+  .arc-loading {
+    padding: 12px 16px; color: var(--fg-subtle);
+    font-size: .82rem; font-family: var(--font-sans);
+  }
 </style>
 </head>
 <body>
-<div class="app" id="app" data-variant="indexed" data-header="masthead">
+<div class="app" id="app">
 
-  <!-- 사이드바 -->
   <aside class="sidebar" id="sidebar">
     <div class="side-head">
       <div class="side-brand">
@@ -44,13 +48,12 @@
     </div>
     <div class="side-label eyebrow">리포트 아카이브</div>
     <nav class="archive" id="archive">
-      <div style="padding:12px 8px;color:var(--fg-subtle);font-size:.82rem;">불러오는 중…</div>
+      <div class="arc-loading">불러오는 중…</div>
     </nav>
   </aside>
 
   <div class="scrim" id="scrim"></div>
 
-  <!-- 메인 -->
   <main class="main">
     <div class="topbar">
       <button class="menu-btn" id="menuBtn" aria-label="메뉴">
@@ -68,7 +71,6 @@
       </button>
     </div>
 
-    <!-- iframe 뷰어 -->
     <iframe id="report-viewer" title="리포트 뷰어"></iframe>
     <div class="welcome" id="welcome-screen">
       <div class="welcome-icon">📊</div>
@@ -81,13 +83,15 @@
 <script>
 (function () {
   var GITHUB_USERNAME = "jupiter-y";
-  var GITHUB_REPO = "trend-report";
-  var REPORTS_PATH = "reports";
+  var GITHUB_REPO     = "trend-report";
+  var REPORTS_PATH    = "reports";
   var LOGO_INK   = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMy4xNjUgMTAuMzg4IiB3aWR0aD0iMzMyIiBoZWlnaHQ9IjEwNCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTg2LjM1OTMzNSwtMTkxLjEzMjI4KSI+PHBhdGggZD0ibSAxMDguMTY0ODYsMTkzLjcxMzU1IGMgLTIuMzE0OTMsMCAtMy44MzcxNiwxLjcyNjg1IC0zLjgzNzE2LDMuODQ1NjMgMCwyLjMyOTM5IDEuNjM0MDYsMy44MDM2NSA0LjAxNjcyLDMuODAzNjUgMS41MDAwMSwwIDMuMDY5MTcsLTAuODc0ODkgMy41MzIzNywtMi40MzQ1MiBoIC0yLjM2MjU2IGMgLTAuMTczMjEsMC4zOTg2NCAtMC42ODA1LDAuNjgyMjcgLTEuMjIyMzcsMC42ODIyNyAtMC44MTk4NiwwIC0xLjMyMDgsLTAuNTk1ODQgLTEuMzkzNDcsLTEuNDcxNzkgaCA1LjEyOTAzIGMgMC4wNDM4LC0wLjE4NzY3IDAuMDYsLTAuMzg0MTcgMC4wNiwtMC41Nzk2MSAwLC0xLjk3NDg1IC0xLjIzNTA4LC0zLjg0NTYzIC0zLjkyMjU0LC0zLjg0NTYzIG0gLTEuMjUzNDIsMy4wMDMyIGMgMC4xMjUyNCwtMC44MDM2MyAwLjU5NDA4LC0xLjI0OTU0IDEuNDA3NTgsLTEuMjQ5NTQgMC43MDQ4NSwwIDEuMjAxNTYsMC41NjEyNyAxLjIwMTU2LDEuMjQ5NTQgeiBtIC01LjUxNjAzLC0yLjc1ODM3IGMgLTAuOTY1OTEsMCAtMS42MzIzMDMsMC4zMTI5MSAtMi4xMzI1NDIsMC43NjA5NCB2IC0zLjIyNDM5IGggLTIuNjgwMDUzIHYgOS42NjI5NCBoIDIuNjgwMDUzIHYgLTMuNjY5OTUgYyAwLC0xLjA4NDc5IDAuNTY3NjE5LC0xLjM5MSAxLjAxNDk0MiwtMS4zOTEgMC43ODQ5MywwIDAuOTMzNDUsMC41NjcyNiAwLjkzMzQ1LDEuMzc5NzEgdiAzLjY4MTI0IGggMi42ODAwNSB2IC00LjgxNjgzIGMgMCwtMS42MTE0OSAtMS4xNzYxNiwtMi4zODI2NiAtMi40OTU5LC0yLjM4MjY2IG0gLTkuOTY4NDQyLDUuMDIwMzggYyAtMS40ODMwNzgsMCAtMS45NTgyNjksLTEuMzUzNjEgLTEuOTU4MjY5LC0yLjY1MTQ4IDAsLTEuMjk5OTkgMC40NzUxOTEsLTIuNjUyMTggMS45NTgyNjksLTIuNjUyMTggMS4zMDk1MTEsMCAxLjYyNDU0MiwxLjA2Nzg2IDEuNjgyMzk3LDEuNDE5NTcgaCAyLjk1NjI3OCBjIC0wLjI2Nzc1OSwtMi40MjI1MiAtMi4wNjEyODEsLTMuODMwMSAtNC41NTUwNjcsLTMuODMwMSAtMi45NjU4MDIsMCAtNS4wMTg5NjksMi4xMjA5IC01LjAxODk2OSw1LjA2MjcxIDAsMi44NTQzMyAxLjg3NzEzLDUuMDYwMjQgNS4wMTg5NjksNS4wNjAyNCAyLjc2NjQ4NCwwIDQuNTk3NCwtMi4wNzA0NSA0LjU5NzQsLTQuMDE4NDkgaCAtMi45ODM0NDEgYyAtMC4xOTAxNDgsMC45MDU1OCAtMC42MzIxNzgsMS42MDk3MyAtMS42OTc1NjcsMS42MDk3MyBtIDIxLjE3NzI1MiwyLjE3OTExIGggMi42NzkzNCB2IC03LjAyMzQ2IGggLTIuNjc5MzQgeiBtIDQuMTA4MDksMCBoIDIuNjc5NyB2IC05LjY2MjU5IGggLTIuNjc5NyB6IG0gLTQuMTA4MDksLTcuMjgwOTggMi43OTU0MSwtMi4zODE5NiBoIC0yLjc5NTQxIHoiIGZpbGw9IiMwQjFBMzYiPjwvcGF0aD48L2c+PC9zdmc+";
   var LOGO_WHITE = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMy4xNjUgMTAuMzg4IiB3aWR0aD0iMzMyIiBoZWlnaHQ9IjEwNCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTg2LjM1OTMzNSwtMTkxLjEzMjI4KSI+PHBhdGggZD0ibSAxMDguMTY0ODYsMTkzLjcxMzU1IGMgLTIuMzE0OTMsMCAtMy44MzcxNiwxLjcyNjg1IC0zLjgzNzE2LDMuODQ1NjMgMCwyLjMyOTM5IDEuNjM0MDYsMy44MDM2NSA0LjAxNjcyLDMuODAzNjUgMS41MDAwMSwwIDMuMDY5MTcsLTAuODc0ODkgMy41MzIzNywtMi40MzQ1MiBoIC0yLjM2MjU2IGMgLTAuMTczMjEsMC4zOTg2NCAtMC42ODA1LDAuNjgyMjcgLTEuMjIyMzcsMC42ODIyNyAtMC44MTk4NiwwIC0xLjMyMDgsLTAuNTk1ODQgLTEuMzkzNDcsLTEuNDcxNzkgaCA1LjEyOTAzIGMgMC4wNDM4LC0wLjE4NzY3IDAuMDYsLTAuMzg0MTcgMC4wNiwtMC41Nzk2MSAwLC0xLjk3NDg1IC0xLjIzNTA4LC0zLjg0NTYzIC0zLjkyMjU0LC0zLjg0NTYzIG0gLTEuMjUzNDIsMy4wMDMyIGMgMC4xMjUyNCwtMC44MDM2MyAwLjU5NDA4LC0xLjI0OTU0IDEuNDA3NTgsLTEuMjQ5NTQgMC43MDQ4NSwwIDEuMjAxNTYsMC41NjEyNyAxLjIwMTU2LDEuMjQ5NTQgeiBtIC01LjUxNjAzLC0yLjc1ODM3IGMgLTAuOTY1OTEsMCAtMS42MzIzMDMsMC4zMTI5MSAtMi4xMzI1NDIsMC43NjA5NCB2IC0zLjIyNDM5IGggLTIuNjgwMDUzIHYgOS42NjI5NCBoIDIuNjgwMDUzIHYgLTMuNjY5OTUgYyAwLC0xLjA4NDc5IDAuNTY3NjE5LC0xLjM5MSAxLjAxNDk0MiwtMS4zOTEgMC43ODQ5MywwIDAuOTMzNDUsMC41NjcyNiAwLjkzMzQ1LDEuMzc5NzEgdiAzLjY4MTI0IGggMi42ODAwNSB2IC00LjgxNjgzIGMgMCwtMS42MTE0OSAtMS4xNzYxNiwtMi4zODI2NiAtMi40OTU5LC0yLjM4MjY2IG0gLTkuOTY4NDQyLDUuMDIwMzggYyAtMS40ODMwNzgsMCAtMS45NTgyNjksLTEuMzUzNjEgLTEuOTU4MjY5LC0yLjY1MTQ4IDAsLTEuMjk5OTkgMC40NzUxOTEsLTIuNjUyMTggMS45NTgyNjksLTIuNjUyMTggMS4zMDk1MTEsMCAxLjYyNDU0MiwxLjA2Nzg2IDEuNjgyMzk3LDEuNDE5NTcgaCAyLjk1NjI3OCBjIC0wLjI2Nzc1OSwtMi40MjI1MiAtMi4wNjEyODEsLTMuODMwMSAtNC41NTUwNjcsLTMuODMwMSAtMi45NjU4MDIsMCAtNS4wMTg5NjksMi4xMjA5IC01LjAxODk2OSw1LjA2MjcxIDAsMi44NTQzMyAxLjg3NzEzLDUuMDYwMjQgNS4wMTg5NjksNS4wNjAyNCAyLjc2NjQ4NCwwIDQuNTk3NCwtMi4wNzA0NSA0LjU5NzQsLTQuMDE4NDkgaCAtMi45ODM0NDEgYyAtMC4xOTAxNDgsMC45MDU1OCAtMC42MzIxNzgsMS42MDk3MyAtMS42OTc1NjcsMS42MDk3MyBtIDIxLjE3NzI1MiwyLjE3OTExIGggMi42NzkzNCB2IC03LjAyMzQ2IGggLTIuNjc5MzQgeiBtIDQuMTA4MDksMCBoIDIuNjc5NyB2IC05LjY2MjU5IGggLTIuNjc5NyB6IG0gLTQuMTA4MDksLTcuMjgwOTggMi43OTU0MSwtMi4zODE5NiBoIC0yLjc5NTQxIHoiIGZpbGw9IiNGRkZGRkYiPjwvcGF0aD48L2c+PC9zdmc+";
 
   var SUN  = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
   var MOON = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+
+  var app = document.getElementById("app");
 
   /* ── 에디션 라벨 ── */
   function setEdition(dateStr) {
@@ -104,9 +108,11 @@
     document.getElementById("themeLbl").textContent = (t === "dark") ? "라이트" : "다크";
     document.getElementById("sideLogo").src = (t === "dark") ? LOGO_WHITE : LOGO_INK;
     localStorage.setItem("cheil-report-theme", t);
-    // iframe 동기화
+    syncIframeTheme(t);
+  }
+  function syncIframeTheme(t) {
     var fr = document.getElementById("report-viewer");
-    try { fr.contentDocument && fr.contentDocument.documentElement.setAttribute("data-theme", t); } catch(e){}
+    try { if (fr.contentDocument) fr.contentDocument.documentElement.setAttribute("data-theme", t); } catch(e){}
   }
   var theme = localStorage.getItem("cheil-report-theme") || "light";
   applyTheme(theme);
@@ -115,51 +121,91 @@
   });
 
   /* ── 모바일 드로어 ── */
-  var app = document.getElementById("app");
-  document.getElementById("menuBtn").addEventListener("click", function(){ app.classList.add("nav-open"); });
+  document.getElementById("menuBtn").addEventListener("click",  function(){ app.classList.add("nav-open"); });
   document.getElementById("sideClose").addEventListener("click", function(){ app.classList.remove("nav-open"); });
-  document.getElementById("scrim").addEventListener("click", function(){ app.classList.remove("nav-open"); });
+  document.getElementById("scrim").addEventListener("click",     function(){ app.classList.remove("nav-open"); });
+
+  /* ── 파일명 → 날짜 변환 ── */
+  function fileToKorDate(name) {
+    var p = name.replace(".html","").split("-");
+    return p.length === 3 ? p[0]+"년 "+p[1]+"월 "+p[2]+"일" : name;
+  }
+  function fileToIso(name) {
+    var p = name.replace(".html","").split("-");
+    return p.length === 3 ? p[0]+"."+p[1]+"."+p[2] : name;
+  }
+
+  /* ── 리포트 헤드라인 가져오기 ── */
+  // 각 HTML 파일을 fetch해서 <meta name="report-headline"> 또는 <title> 읽기
+  async function fetchHeadline(filename) {
+    try {
+      var res = await fetch(REPORTS_PATH + "/" + filename);
+      var text = await res.text();
+      // <meta name="report-headline" content="..."> 우선
+      var m = text.match(/<meta[^>]+name=["']report-headline["'][^>]+content=["']([^"']+)["']/i);
+      if (m) return m[1];
+      // fallback: <title>
+      var t = text.match(/<title>([^<]+)<\/title>/i);
+      if (t) return t[1];
+    } catch(e) {}
+    return "AI 트렌드 리포트";
+  }
 
   /* ── 아카이브 로드 ── */
   async function loadArchive() {
-    try {
-      var res = await fetch("https://api.github.com/repos/" + GITHUB_USERNAME + "/" + GITHUB_REPO + "/contents/" + REPORTS_PATH);
-      var files = await res.json();
-      if (!Array.isArray(files)) { showEmpty(); return; }
-      var htmlFiles = files.filter(function(f){ return f.name.endsWith(".html"); })
-                          .sort(function(a,b){ return b.name.localeCompare(a.name); });
-      if (!htmlFiles.length) { showEmpty(); return; }
-      renderArchive(htmlFiles);
-      setEdition(fileNameToDate(htmlFiles[0].name));
-      loadReport(htmlFiles[0].name);
-    } catch(e) { showEmpty(); }
-  }
-
-  function showEmpty() {
-    document.getElementById("archive").innerHTML =
-      '<div style="padding:12px 8px;color:var(--fg-subtle);font-size:.82rem;">리포트가 없습니다.</div>';
-  }
-
-  function renderArchive(files) {
     var nav = document.getElementById("archive");
-    nav.innerHTML = "";
-    files.forEach(function(f, i) {
-      var btn = document.createElement("button");
-      btn.className = "arc-item" + (i === 0 ? " active" : "");
-      btn.setAttribute("data-name", f.name);
-      var dateStr = fileNameToDate(f.name);
-      var isoStr  = isoDate(f.name);
-      btn.innerHTML =
-        '<span class="arc-title">AI 트렌드 리포트</span>' +
-        '<span class="arc-date">' + isoStr + '</span>';
-      btn.addEventListener("click", function(){
-        loadReport(f.name);
-        app.classList.remove("nav-open");
+    try {
+      var res   = await fetch("https://api.github.com/repos/" + GITHUB_USERNAME + "/" + GITHUB_REPO + "/contents/" + REPORTS_PATH);
+      var files = await res.json();
+      if (!Array.isArray(files)) { nav.innerHTML = '<div class="arc-loading">리포트가 없습니다.</div>'; return; }
+
+      var htmlFiles = files
+        .filter(function(f){ return f.name.endsWith(".html"); })
+        .sort(function(a,b){ return b.name.localeCompare(a.name); });
+
+      if (!htmlFiles.length) { nav.innerHTML = '<div class="arc-loading">리포트가 없습니다.</div>'; return; }
+
+      // 에디션 라벨을 최신 파일 날짜로 업데이트
+      setEdition(fileToKorDate(htmlFiles[0].name));
+
+      // 아카이브 아이템 렌더 (일단 날짜만, 헤드라인은 비동기 로드)
+      nav.innerHTML = "";
+      htmlFiles.forEach(function(f, i) {
+        var btn = document.createElement("button");
+        btn.className = "arc-item" + (i === 0 ? " active" : "");
+        btn.setAttribute("data-name", f.name);
+        btn.innerHTML =
+          '<span class="arc-title">AI 트렌드 리포트</span>' +
+          '<span class="arc-date">' + fileToIso(f.name) + '</span>';
+        btn.addEventListener("click", function(){
+          loadReport(f.name);
+          app.classList.remove("nav-open");
+        });
+        nav.appendChild(btn);
       });
-      nav.appendChild(btn);
-    });
+
+      // 헤드라인 비동기 로드 (순서대로, 너무 빠른 fetch 방지)
+      for (var i = 0; i < htmlFiles.length; i++) {
+        (function(idx, filename) {
+          setTimeout(async function() {
+            var headline = await fetchHeadline(filename);
+            var btn = nav.querySelector('[data-name="' + filename + '"]');
+            if (btn) {
+              btn.querySelector(".arc-title").textContent = headline;
+            }
+          }, idx * 150); // 150ms 간격으로 순차 fetch
+        })(i, htmlFiles[i].name);
+      }
+
+      // 첫 번째 리포트 자동 로드
+      loadReport(htmlFiles[0].name);
+
+    } catch(e) {
+      nav.innerHTML = '<div class="arc-loading">아카이브를 불러오지 못했습니다.</div>';
+    }
   }
 
+  /* ── 리포트 로드 ── */
   function loadReport(filename) {
     document.querySelectorAll(".arc-item").forEach(function(el){
       el.classList.toggle("active", el.getAttribute("data-name") === filename);
@@ -170,19 +216,8 @@
     viewer.style.display = "block";
     welcome.style.display = "none";
     viewer.onload = function(){
-      try { viewer.contentDocument.documentElement.setAttribute("data-theme",
-        document.documentElement.getAttribute("data-theme")); } catch(e){}
+      syncIframeTheme(document.documentElement.getAttribute("data-theme") || "light");
     };
-  }
-
-  function fileNameToDate(filename) {
-    var n = filename.replace(".html","").split("-");
-    return n.length === 3 ? n[0]+"년 "+n[1]+"월 "+n[2]+"일" : filename;
-  }
-
-  function isoDate(filename) {
-    var n = filename.replace(".html","").split("-");
-    return n.length === 3 ? n[0]+"."+n[1]+"."+n[2] : filename;
   }
 
   loadArchive();
