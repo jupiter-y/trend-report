@@ -29,10 +29,14 @@
     padding: 12px 16px; color: var(--fg-subtle);
     font-size: .82rem; font-family: var(--font-sans);
   }
+  /* 로고 크기 강제 고정 */
+  .side-logo { height: 18px !important; width: auto !important; max-width: 80px !important; }
+  /* 아카이브 빈 상태 */
+  .arc-loading { padding: 12px 16px; color: var(--fg-subtle); font-size: .82rem; }
 </style>
 </head>
 <body>
-<div class="app" id="app">
+<div class="app" id="app" data-header="masthead" data-variant="indexed">
 
   <aside class="sidebar" id="sidebar">
     <div class="side-head">
@@ -160,7 +164,7 @@
       if (!Array.isArray(files)) { nav.innerHTML = '<div class="arc-loading">리포트가 없습니다.</div>'; return; }
 
       var htmlFiles = files
-        .filter(function(f){ return f.name.endsWith(".html"); })
+        .filter(function(f){ return /^\d{4}-\d{2}-\d{2}\.html$/.test(f.name); })
         .sort(function(a,b){ return b.name.localeCompare(a.name); });
 
       if (!htmlFiles.length) { nav.innerHTML = '<div class="arc-loading">리포트가 없습니다.</div>'; return; }
