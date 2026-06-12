@@ -338,11 +338,11 @@ a { color: var(--accent); text-decoration: none; }
   margin-left: 300px; flex: 1; min-width: 0;
   display: flex; flex-direction: column;
   align-items: center;
-  padding: 0 64px 96px;
+  padding: 0 80px 96px;
 }
 .topbar {
   position: sticky; top: 0; z-index: 40;
-  width: 100%; max-width: 760px;
+  width: 100%; max-width: 960px;
   display: flex; align-items: center; gap: 12px;
   padding: 18px 0 14px;
   background: linear-gradient(var(--bg) 72%, transparent);
@@ -383,7 +383,7 @@ a { color: var(--accent); text-decoration: none; }
 .app[data-header="sidebar"] .tb-brand { display: none; }
 
 /* ---------- 리포트 본문 ---------- */
-.report { width: 100%; max-width: 760px; }
+.report { width: 100%; max-width: 960px; }
 
 .rpt-head { padding: 16px 0 0; }
 .rpt-date {
@@ -574,7 +574,7 @@ a { color: var(--accent); text-decoration: none; }
    다크 히어로 마스트헤드 + 대형 디스플레이 타이포 + 풀쿼트
    ============================================================ */
 .app[data-variant="cinematic"] .main { padding-top: 0; }
-.app[data-variant="cinematic"] .report { max-width: 820px; }
+.app[data-variant="cinematic"] .report { max-width: 1000px; }
 .app[data-variant="cinematic"] .topbar { background: transparent; }
 .app[data-variant="cinematic"] .rpt-head {
   position: relative;
@@ -646,7 +646,7 @@ a { color: var(--accent); text-decoration: none; }
   .app.nav-open .sidebar { transform: translateX(0); }
   .side-close { display: block; }
   .main { margin-left: 0; padding: 0 28px 72px; }
-  .topbar, .report { max-width: 680px; }
+  .topbar, .report { max-width: 860px; }
   .menu-btn { display: inline-flex; }
   .scrim {
     position: fixed; inset: 0; z-index: 55;
