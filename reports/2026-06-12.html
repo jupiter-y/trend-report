@@ -1,87 +1,100 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI 코딩전쟁, 4강 대결 시작</title>
+  <title>SpaceX 750억달러 IPO, AI인프라 베팅 본격화</title>
+  <!-- 헤드라인 메타 — index.html 아카이브에서 읽는 용도 -->
+  <meta name="report-headline" content="SpaceX 750억달러 IPO, AI인프라 베팅 본격화">
   <link rel="stylesheet" href="https://jupiter-y.github.io/trend-report/style.css">
   <style>
-    /* iframe 내부 오버라이드 */
-    body { margin: 0; }
-    .app-inner { max-width: 760px; margin: 0 auto; padding: 0 40px 96px; }
+    /* iframe 내부 독립 레이아웃 */
+    html, body { margin:0; padding:0; background:var(--bg); }
+    .rpt-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 40px 96px;
+    }
+    /* indexed 스타일 직접 적용 (iframe 내부 .app 클래스 없으므로) */
+    .rpt-lead { border-left:0; padding-left:0; }
+    .rpt-head { border-bottom:1px solid var(--border); padding-bottom:32px; }
+    .rpt-toc {
+      display:block; margin-top:28px;
+      border:1px solid var(--border); border-radius:var(--radius-md);
+      padding:20px 22px; background:var(--bg-subtle);
+    }
+    .toc-label {
+      font-size:11px; font-weight:600;
+      letter-spacing:0.14em; text-transform:uppercase;
+      color:var(--fg-faint); margin-bottom:14px;
+    }
+    .toc-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+    .toc-link {
+      display:flex; gap:14px; align-items:baseline;
+      padding:9px 0; border-top:1px solid var(--border-muted);
+      font-size:14.5px; color:var(--fg-muted); line-height:1.45;
+      text-decoration:none;
+    }
+    .toc-list li:first-child .toc-link { border-top:0; }
+    .toc-link:hover { color:var(--accent); }
+    .toc-num {
+      font-family:var(--font-mono); font-size:12px;
+      color:var(--accent); flex:none; min-width:22px;
+    }
+    .item { position:relative; padding-left:46px; margin-top:40px; max-width:68ch; }
+    .item-title {
+      display:block; font-size:23px; font-weight:700;
+      line-height:1.4; letter-spacing:-0.01em;
+      color:var(--fg); margin:0 0 16px;
+    }
+    .item-num {
+      display:block; position:absolute; left:0; top:0;
+      width:34px; text-align:left;
+      font-family:var(--font-mono); font-size:14px;
+      font-weight:500; color:var(--accent); line-height:33px;
+    }
+    .item-body {
+      font-size:17px; line-height:1.85;
+      color:var(--fg-muted); margin:0;
+    }
+    .tag {
+      background:transparent; border:1px solid var(--border-strong);
+      color:var(--fg-muted); border-radius:var(--radius-sm);
+      font-size:12.5px; font-weight:500;
+      padding:6px 13px;
+    }
+    .tag:hover { color:var(--accent); border-color:var(--accent); }
+    .divider { border:0; border-top:1px solid var(--border); margin:60px 0; }
+    @media (max-width: 600px) {
+      .rpt-wrap { padding:32px 20px 72px; }
+      .rpt-title { font-size:28px !important; }
+      .item { padding-left:34px; }
+      .item-title { font-size:19px; }
+      .item-body { font-size:16px; }
+      .gloss-grid { grid-template-columns:1fr !important; }
+    }
   </style>
 </head>
-<body data-theme="light">
-<div class="app" data-variant="indexed" data-header="masthead" style="display:block;">
-  <div class="app-inner">
-    <article class="report" data-readable>
-      <header class="rpt-head">
-        <div class="rpt-date">2026년 06월 12일</div>
-        <h1 class="rpt-title">AI 코딩전쟁, 4강 대결 시작</h1>
-        <p class="rpt-lead">AI 코딩 모델 시장의 경쟁이 심화되고 있는 가운데 Microsoft, Google, Anthropic, OpenAI 등 빅테크 기업들의 패권 싸움이 본격화되고 있습니다. 동시에 스페이스X의 역대 최대 IPO 성공과 OpenAI, Anthropic의 상장 준비는 AI 산업이 얼마나 빠르게 성숙 단계에 접어들었는지를 보여주는 신호입니다. 코딩부터 우주 통신까지 AI 기술이 전방위적으로 확장되며 새로운 가치 창출에 나서고 있으며, 이는 향후 기술 혁신과 투자의 흐름을 크게 좌우할 것으로 예상됩니다. 결국 AI 에이전트와 GPU 컴퓨팅을 중심으로 한 생성형 AI 시장의 구조 재편이 진행되는 가운데, 어느 기업이 실질적 우위를 확보하느냐가 향후 2년을 결정할 핵심 변수가 될 것입니다.</p>
-      </header>
+<body>
+<div class="rpt-wrap">
+  <article class="report" data-readable>
+    <header class="rpt-head">
+      <div class="rpt-date">2026년 06월 12일</div>
+      <h1 class="rpt-title" style="font-size:clamp(30px,4.4vw,46px);font-weight:700;line-height:1.16;letter-spacing:-0.02em;color:var(--fg);margin:16px 0 0;">SpaceX 750억달러 IPO, AI인프라 베팅 본격화</h1>
+      <p class="rpt-lead" style="font-size:18px;line-height:1.75;color:var(--fg-muted);margin:24px 0 0;max-width:68ch;">OpenAI의 ChatGPT 슈퍼앱 전환과 SpaceX의 역사적 IPO는 AI 산업의 패러다임 전환을 동시에 보여줍니다. 대화형 챗봇에서 실행 중심의 AI 에이전트로의 진화, 그리고 이를 지탱하기 위한 인프라 투자 경쟁이 동전의 양면이 되어 가속화되고 있습니다. SpaceX의 거대한 자본 조달이 AI 컴퓨팅 인프라에 집중되는 현실은 기술 기업들이 단순한 소프트웨어 혁신이 아닌 물리적 인프라 지배권을 두고 벌이는 경쟁이 얼마나 심각한지를 드러냅니다. 이제 AI의 진정한 경쟁력은 모델의 성능을 넘어 그 모델을 구동할 수 있는 막대한 에너지와 컴퓨팅 자원을 확보하는 능력으로 결정되는 시대가 도래했습니다.</p>
+    </header>
 
-      
-<nav class="rpt-toc">
-  <div class="toc-label">이 리포트의 구성</div>
-  <ul class="toc-list"><li><a class="toc-link" href="#item-1"><span class="toc-num">01</span><span>AI 코딩 시장 '4파전' — Microsoft·Google, Anthropic·OpenAI에 정면 도전</span></a></li><li><a class="toc-link" href="#item-2"><span class="toc-num">02</span><span>Google I/O 2026: Gemini 3.5 Flash·Gemini Spark로 '에이전트 AI 시대' 선언</span></a></li><li><a class="toc-link" href="#item-3"><span class="toc-num">03</span><span>AI 컴퓨트 전쟁 — Google·Anthropic, SpaceX에 수조 원 규모 GPU 계약 체결</span></a></li><li><a class="toc-link" href="#item-4"><span class="toc-num">04</span><span>사상 최대 IPO — 스페이스X, 나스닥 상장으로 1.77조 달러 기업 등극</span></a></li><li><a class="toc-link" href="#item-5"><span class="toc-num">05</span><span>Anthropic의 클로드 군단 — $1.5억 AI 펠로우십으로 비영리 생태계 공략</span></a></li><li><a class="toc-link" href="#item-6"><span class="toc-num">06</span><span>월드컵이 리테일 미디어의 실전 시험대 — 쇼퍼블 광고의 새 기준 세우나</span></a></li></ul>
-</nav>
+    <nav class="rpt-toc"><div class="toc-label">이 리포트의 구성</div><ul class="toc-list"><li><a class="toc-link" href="#item-1"><span class="toc-num">01</span><span>OpenAI, ChatGPT를 '슈퍼앱'으로 전면 개편 — 에이전트 시대 선언</span></a></li><li><a class="toc-link" href="#item-2"><span class="toc-num">02</span><span>Google I/O 2026: Gemini Omni·3.5 공개 — '에이전트 플랫폼'으로의 전환</span></a></li><li><a class="toc-link" href="#item-3"><span class="toc-num">03</span><span>Anthropic, Claude Fable 5 출시 — '안전장치가 곧 경쟁력'의 새 패러다임</span></a></li><li><a class="toc-link" href="#item-4"><span class="toc-num">04</span><span>SpaceX, 역사상 최대 IPO로 나스닥 상장 — AI 인프라 베팅의 실체</span></a></li><li><a class="toc-link" href="#item-5"><span class="toc-num">05</span><span>Accenture의 Whalar 인수 — 크리에이터 마케팅의 엔터프라이즈화</span></a></li><li><a class="toc-link" href="#item-6"><span class="toc-num">06</span><span>월드컵, 소매 미디어의 전국 단위 효과 증명 무대로</span></a></li></ul></nav>
 
-      <div class="rpt-body">
-        
-<section class="grp">
-  <div class="grp-label eyebrow">What&#39;s New</div>
-  <div class="tags"><span class="tag">AI 코딩 모델</span><span class="tag">Gemini 3.5 Flash</span><span class="tag">AI 에이전트</span><span class="tag">GPU 컴퓨팅</span><span class="tag">생성형 AI 시장</span></div>
-  
-<article class="item" id="item-1">
-  <h2 class="item-title"><span class="item-num">01</span><span>AI 코딩 시장 '4파전' — Microsoft·Google, Anthropic·OpenAI에 정면 도전</span></h2>
-  <p class="item-body">생성형 AI 시장에서 Anthropic이 Claude Code로 급부상한 가운데, OpenAI도 소비자 시장에서 기업 시장으로 전략을 전환하며 Codex로 대응하고 있다. 여기에 Microsoft는 Build 2026에서 자체 AI 코딩 모델 'MAI-Code-1-Flash'를 공개하며, 텍스트 설명을 받아 소스코드를 생성하는 방식으로 시장에 진입했다. 블라인드 평가에서 MAI-Thinking-1은 Anthropic의 Claude Sonnet 4.6보다 선호도가 높았으며, Claude Opus 4.6과 코딩 <span class="tooltip" data-tip="AI 성능 측정 기준">벤치마크</span>에서 동등한 성능을 보였다고 Microsoft는 주장했다. 한편, Anthropic은 9,650억 달러 밸류에이션으로 자금 조달을 마감해 OpenAI를 넘어섰고, <span class="tooltip" data-tip="기업 공개, 주식 상장">IPO</span>도 비공개 신청한 상태다.</p>
-  <p class="source">출처: <a href="https://www.cnbc.com/2026/06/01/microsoft-and-google-take-on-anthropic-and-openai-in-ai-coding-models.html" target="_blank">Microsoft and Google take on Anthropic and OpenAI in AI coding models</a></p>
-</article>
-<article class="item" id="item-2">
-  <h2 class="item-title"><span class="item-num">02</span><span>Google I/O 2026: Gemini 3.5 Flash·Gemini Spark로 '에이전트 AI 시대' 선언</span></h2>
-  <p class="item-body">Google은 Gemini 3.5 Flash를 출시하며 에이전트·코딩에서 최고 성능을 발휘한다고 밝혔다. Terminal-Bench 2.1 76.2%, MCP Atlas 83.6%를 기록하며 비교 모델 대비 절반 이하 비용으로 장기 <span class="tooltip" data-tip="여러 단계 자율 수행 AI">에이전틱 태스크</span>를 처리한다. 특히 Gemini Spark는 기존 LLM 어시스턴트와 가장 다른 지점으로, 기기가 꺼진 상태에서도 클라우드에서 계속 작업을 수행하는 상시 자율형 개인 에이전트이며, Gmail·Docs·Calendar 등 Google Workspace와 <span class="tooltip" data-tip="AI 도구 연결 표준 프로토콜">MCP</span>를 통해 연동된다. Gemini 앱의 월간 활성 사용자는 1년 전 4억 명에서 9억 명으로 급증하며 성장 모멘텀을 입증했다.</p>
-  <p class="source">출처: <a href="https://www.cnbc.com/2026/05/19/google-ai-ultra-gemini-spark-omni.html" target="_blank">Google unveils AI model Gemini 3.5 and AI agent Gemini Spark</a></p>
-</article>
-<article class="item" id="item-3">
-  <h2 class="item-title"><span class="item-num">03</span><span>AI 컴퓨트 전쟁 — Google·Anthropic, SpaceX에 수조 원 규모 GPU 계약 체결</span></h2>
-  <p class="item-body">Google은 2026년 10월부터 2029년 6월까지 약 11만 개의 NVIDIA GPU 등 컴퓨팅 자원에 월 9억 2,000만 달러를 지급하는 계약을 SpaceX와 체결했으며, 계약 총액은 약 300억 달러에 달한다. 이 계약은 Anthropic이 5월에 SpaceX와 맺은 딜과 유사한 구조로, Anthropic은 xAI가 테네시주 멤피스 인근에 구축한 Colossus 1 데이터센터의 <span class="tooltip" data-tip="AI 연산 처리 핵심 하드웨어">GPU</span> 컴퓨팅 자원을 2029년까지 월 12억 5,000만 달러에 임대한다. 두 계약의 합산 규모가 700억 달러를 넘어서며, SpaceX의 <span class="tooltip" data-tip="기업 주식 시장 최초 상장">IPO</span> 가치 평가에도 직접적인 영향을 주고 있다. AI 컴퓨트 확보 경쟁이 단순 인프라 투자를 넘어 기업 생존 전략의 핵심 변수로 부상하고 있음을 보여주는 신호탄이다.</p>
-  <p class="source">출처: <a href="https://techcrunch.com/2026/06/05/google-will-pay-spacex-920m-per-month-for-compute/" target="_blank">Google will pay SpaceX $920M per month for compute</a></p>
-</article>
-</section>
-        <hr class="divider">
-        
-<section class="grp">
-  <div class="grp-label eyebrow">How to Use</div>
-  <div class="tags"><span class="tag">AI 파트너</span><span class="tag">스페이스X IPO</span><span class="tag">AI 펠로우십</span><span class="tag">창작자 경제</span><span class="tag">리테일 미디어</span></div>
-  
-<article class="item" id="item-4">
-  <h2 class="item-title"><span class="item-num">04</span><span>사상 최대 IPO — 스페이스X, 나스닥 상장으로 1.77조 달러 기업 등극</span></h2>
-  <p class="item-body">스페이스X는 2026년 6월 12일, 티커 SPCX로 나스닥에 상장하며 750억 달러를 조달해 역대 최대 <span class="tooltip" data-tip="기업 공개, 주식 상장">IPO</span> 기록을 세웠다. 스페이스X는 위성 인터넷 서비스 <span class="tooltip" data-tip="저궤도 위성 인터넷망">스타링크</span>와 xAI를 함께 보유한 복합 기업으로, 스타링크가 유일한 흑자 사업부다. 소매 투자자들이 로빈후드·피델리티·소파이 등을 통해 약 1,000억 달러에 달하는 주문을 넣는 등 개인 투자자 수요가 폭발적이었다. OpenAI와 Anthropic도 자체 IPO 서류를 제출한 상태로, AI 메가 IPO 3연타가 시장 판도를 바꿀 것이라는 분석이 나온다.</p>
-  <p class="source">출처: <a href="https://www.indexbox.io/blog/spacex-ipo-largest-stock-market-debut-in-history-begins-trading-on-nasdaq/" target="_blank">SpaceX IPO 2026: $75 Billion Raised, $1.75 Trillion Valuation</a></p>
-</article>
-<article class="item" id="item-5">
-  <h2 class="item-title"><span class="item-num">05</span><span>Anthropic의 클로드 군단 — $1.5억 AI 펠로우십으로 비영리 생태계 공략</span></h2>
-  <p class="item-body">Anthropic은 1억 5,000만 달러를 들여 미국 전역 비영리 단체에 1,000명의 AI 펠로우를 파견하는 'Claude Corps' 프로그램을 발표했다. 펠로우들은 연 8만 5,000달러의 급여를 받으며 1년간 <span class="tooltip" data-tip="AI 어시스턴트 클로드 활용 지원">Claude</span> 도입을 돕는다. 대학 학위는 필수가 아니며 만 18세 이상, 2년 미만의 경력자면 지원 가능하다. IPO를 앞둔 Anthropic이 '책임 있는 AI 기업' 이미지를 구축하는 <span class="tooltip" data-tip="브랜드 이미지 관리 전략">내러티브 플레이</span>라는 분석도 있으며, 비영리 단체를 Anthropic 생태계에 묶어두는 배포 전략이라는 비판도 존재한다.</p>
-  <p class="source">출처: <a href="https://thenextweb.com/news/anthropic-claude-corps-150m-nonprofit-fellowship" target="_blank">Anthropic is spending $150 million to embed 1,000 AI fellows inside nonprofits</a></p>
-</article>
-<article class="item" id="item-6">
-  <h2 class="item-title"><span class="item-num">06</span><span>월드컵이 리테일 미디어의 실전 시험대 — 쇼퍼블 광고의 새 기준 세우나</span></h2>
-  <p class="item-body">이번 월드컵은 <span class="tooltip" data-tip="유통사 데이터 기반 광고 플랫폼">리테일 미디어 네트워크</span>가 급성장한 이후 단순 하단 퍼널 솔루션을 넘어선 효과를 증명할 핵심 기회로 평가받는다. 미국 득점 시 즉시 할인을 제공하는 실시간 <span class="tooltip" data-tip="이벤트 연동 즉시 구매 광고">쇼퍼블 광고</span>, Amazon Ads·Walmart Connect·Instacart 등이 영상 광고와 리테일 미디어를 직접 연결하는 방식이 대거 도입됐다. 월드컵은 타 스포츠 이벤트보다 기간이 길어 캠페인 기회가 많으며, 향후 리테일 미디어 활성화의 케이스 스터디가 될 전망이다.</p>
-  <p class="source">출처: <a href="https://digiday.com/media/the-world-cup-is-a-big-chance-for-retail-media-to-prove-itself-to-advertisers/" target="_blank">The World Cup is a big chance for retail media to prove itself to advertisers</a></p>
-</article>
-</section>
-        
-<hr class="divider">
-<section class="glossary">
-  <div class="grp-label eyebrow">용어사전</div>
-  <div class="gloss-grid"><div class="gloss"><div class="gloss-term">생성형 AI</div><div class="gloss-desc">텍스트 설명으로 새로운 콘텐츠를 자동 생성하는 AI 기술</div></div><div class="gloss"><div class="gloss-term">AI 코딩 모델</div><div class="gloss-desc">소스코드 작성을 자동화하는 인공지능 모델</div></div><div class="gloss"><div class="gloss-term">IPO</div><div class="gloss-desc">기업이 주식을 공개 상장하여 자금을 조달하는 것</div></div><div class="gloss"><div class="gloss-term">스타링크</div><div class="gloss-desc">저궤도 위성을 이용한 글로벌 인터넷 서비스</div></div><div class="gloss"><div class="gloss-term">AI 에이전트</div><div class="gloss-desc">자율적으로 작업을 수행하는 인공지능 시스템</div></div><div class="gloss"><div class="gloss-term">GPU 컴퓨팅</div><div class="gloss-desc">그래픽 처리기를 활용한 고속 병렬 연산 기술</div></div></div>
-</section>
-      </div>
+    <div class="rpt-body" style="margin-top:8px;">
+      <section class="grp"><div class="grp-label eyebrow">What&#39;s New</div><div class="tags"><span class="tag">ChatGPT 슈퍼앱</span><span class="tag">Gemini 멀티모달</span><span class="tag">Claude 안전장치</span><span class="tag">엔터프라이즈 AI</span><span class="tag">AI 에이전트</span></div><article class="item" id="item-1"><h2 class="item-title"><span class="item-num">01</span><span>OpenAI, ChatGPT를 '슈퍼앱'으로 전면 개편 — 에이전트 시대 선언</span></h2><p class="item-body">OpenAI가 ChatGPT, Codex, AI 에이전트, Canva·Booking.com 등 파트너 서비스를 단일 통합 인터페이스로 묶는 '슈퍼앱' 개편을 추진하고 있습니다. 이미 내부에서는 "Chat is dead"라는 말이 나올 정도로, 대화형 챗봇보다 실행 중심의 <span class="tooltip" data-tip="복잡한 다단계 작업 자율 수행 AI">AI 에이전트</span>가 핵심 전략으로 자리잡았습니다. 현재 비즈니스 고객이 전체 매출의 약 40%를 차지하며, 연말까지 50%로 끌어올리는 것이 목표입니다. 이번 개편은 단순한 제품 출시가 아닌 <span class="tooltip" data-tip="하나의 앱으로 모든 서비스 제공">슈퍼앱</span> 전략 선언으로, "AI의 Google Workspace"를 목표로 하는 생태계 구축 선언으로 해석됩니다.</p><p class="source">출처: <a href="https://letsdatascience.com/news/openai-overhauls-chatgpt-into-superapp-ahead-of-listing-148228e5" target="_blank">OpenAI Overhauls ChatGPT Into 'Superapp' Ahead of Listing</a></p></article><article class="item" id="item-2"><h2 class="item-title"><span class="item-num">02</span><span>Google I/O 2026: Gemini Omni·3.5 공개 — '에이전트 플랫폼'으로의 전환</span></h2><p class="item-body">Google I/O 2026에서 공개된 Gemini Omni는 어떤 입력에서도 콘텐츠를 생성할 수 있으며, Gemini 3.5 Flash는 <span class="tooltip" data-tip="프론티어 수준 지능과 실행 결합">프론티어 인텔리전스</span>와 액션을 결합한 최신 모델 패밀리의 첫 번째입니다. Gemini Omni는 텍스트·이미지·동영상·오디오 레퍼런스를 동시에 입력받아 하나의 결과물로 합성하는 진정한 <span class="tooltip" data-tip="여러 데이터 형식 동시 처리">멀티모달</span> 모델입니다. AI 모드는 Gemini 3.5 Flash를 기본 모델로 채택해 전 세계 월간 사용자 10억 명을 돌파했습니다. Google I/O 2026의 핵심 메시지는 Gemini를 모델·앱·시스템·개발자 도구·하드웨어를 아우르는 에이전트 플랫폼으로 전환하겠다는 것입니다.</p><p class="source">출처: <a href="https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-collection/" target="_blank">Google I/O 2026: News and announcements</a></p></article><article class="item" id="item-3"><h2 class="item-title"><span class="item-num">03</span><span>Anthropic, Claude Fable 5 출시 — '안전장치가 곧 경쟁력'의 새 패러다임</span></h2><p class="item-body">Anthropic은 Mythos급 모델인 Claude Fable 5를 엔터프라이즈 고객 및 유료 구독자에게 공개했으며, 사이버보안·생물학 등 고위험 영역에서 응답을 차단하는 새로운 안전장치를 통해 광범위한 배포가 가능해졌습니다. Fable 5는 사이버보안·생물학·화학 관련 요청이 감지되면 자동으로 Claude Opus 4.8로 <span class="tooltip" data-tip="안전한 하위 모델로 자동 전환">폴백(fallback)</span>하는 구조입니다. Anthropic은 Fable 5·Mythos 5 사용에 30일 데이터 보존 정책을 의무화하며, 이는 강력한 모델 접근에 안전 모니터링이 수반된다는 업계 선례가 될 수 있습니다. 다만 출시 직후 무해한 요청에도 <span class="tooltip" data-tip="오탐지로 인한 안전필터 발동">오탐(False Positive)</span>이 빈번하다는 사용자 불만이 쏟아지며, 안전장치 민감도 조정이 과제로 남아 있습니다.</p><p class="source">출처: <a href="https://www.cnbc.com/2026/06/09/anthropic-mythos-claude-fable-5.html" target="_blank">Anthropic Releases Claude Fable 5, Its Most Powerful AI Yet, With Cyber Safeguards</a></p></article></section><hr class="divider"><section class="grp"><div class="grp-label eyebrow">How to Use</div><div class="tags"><span class="tag">AI 사고 파트너</span><span class="tag">SpaceX IPO</span><span class="tag">AI 음성 클론</span><span class="tag">크리에이터 마케팅</span><span class="tag">소매 미디어</span></div><article class="item" id="item-4"><h2 class="item-title"><span class="item-num">04</span><span>SpaceX, 역사상 최대 IPO로 나스닥 상장 — AI 인프라 베팅의 실체</span></h2><p class="item-body">일론 머스크의 SpaceX가 주당 $135에 5억 5,560만 주를 매각해 총 750억 달러를 조달하며, 기업 가치 1.77조 달러로 나스닥에 상장했다. 이는 사우디 아람코의 2019년 IPO($294억)를 압도하는 사상 최대 규모다. SpaceX는 Starlink와 <span class="tooltip" data-tip="머스크의 AI 연구 자회사">xAI</span>를 보유하며, 1분기 설비투자 $101억 중 무려 $77억이 AI에 집중되었다. 구글이 xAI 데이터센터 컴퓨팅 용량에 월 $9.2억, Anthropic이 Colossus 1 데이터센터 전체 출력에 월 $12.5억을 지불하는 계약을 체결해 연간 약 $260억의 <span class="tooltip" data-tip="클라우드 서버 임대 수익">컴퓨트 수익</span>이 확보됐다. 다만, Morningstar는 공정 가치를 $7,800억으로 산정하며 xAI의 2026년 예상 손실 $100억을 우려 요인으로 지목했다.</p><p class="source">출처: <a href="https://thenextweb.com/news/spacex-raised-75-billion-in-the-largest-ipo-in-history-japanese-retail-investors-got-2-2-billion-of-it" target="_blank">SpaceX raised $75 billion in the largest IPO in history</a></p></article><article class="item" id="item-5"><h2 class="item-title"><span class="item-num">05</span><span>Accenture의 Whalar 인수 — 크리에이터 마케팅의 엔터프라이즈화</span></h2><p class="item-body">Accenture가 크리에이터·소셜 에이전시 Whalar를 인수했다. IAB에 따르면, 2026년 미국 <span class="tooltip" data-tip="크리에이터 기반 광고 생태계">크리에이터 이코노미</span> 광고비는 $439억에 달할 전망이다. Accenture Song은 Whalar의 인플루언서 전문성에 자사의 데이터·커머스·AI 툴을 결합해, 일회성 인플루언서 캠페인을 지속적인 크리에이터 프로그램으로 발전시키는 것을 목표로 한다. 현재 브랜드-크리에이터 관계의 63%가 일회성에 그치는 상황에서, 이를 TV나 퍼포먼스 광고 수준의 ROI를 증명하는 <span class="tooltip" data-tip="항상 켜진 상시 프로그램">올웨이즈-온</span> 프로그램으로 전환하는 것이 핵심 과제다. Whalar Group 공동창업자는 이번 거래를 업계 "최대 크리에이터 이코노미 딜"이라고 평가했다.</p><p class="source">출처: <a href="https://digiday.com/marketing/future-of-marketing-briefing-accentures-whalar-bet-own-the-room-when-creator-marketing-gets-complicated/" target="_blank">Future of Marketing Briefing: Accenture's Whalar bet</a></p></article><article class="item" id="item-6"><h2 class="item-title"><span class="item-num">06</span><span>월드컵, 소매 미디어의 전국 단위 효과 증명 무대로</span></h2><p class="item-body">소매 미디어 네트워크, 에이전시, 테크 플랫폼 전체가 월드컵을 계기로 광고주에게 섹터의 효과성을 증명하기 위해 총출동했다. 이 대회는 <span class="tooltip" data-tip="유통사 기반 광고 네트워크">소매 미디어</span>가 단순한 하위 퍼널 솔루션 이상임을 입증할 절호의 기회다. 매치 이벤트에 반응하는 실시간 쇼퍼블 광고와 함께, Amazon Ads·Walmart Connect·Instacart 등이 월드컵 <span class="tooltip" data-tip="스트리밍 TV 광고">CTV</span> 상단 퍼널 영상 지출과 소매 미디어를 직접 연결해 경기 주간 전환을 유도하고 있다. 설문 결과 응답자의 62%가 매장 내 스크린 광고를 본 직후 제품을 구매한 경험이 있다고 답했으며, 월드컵은 타 스포츠 이벤트 대비 기간이 길어 향후 소매 미디어 활성화의 핵심 케이스 스터디가 될 전망이다.</p><p class="source">출처: <a href="https://digiday.com/media/the-world-cup-is-a-big-chance-for-retail-media-to-prove-itself-to-advertisers/" target="_blank">The World Cup is a big chance for retail media to prove itself to advertisers</a></p></article></section>
+      <hr class="divider"><section class="glossary"><div class="grp-label eyebrow">용어사전</div><div class="gloss-grid"><div class="gloss"><div class="gloss-term">슈퍼앱</div><div class="gloss-desc">여러 서비스를 단일 통합 인터페이스로 묶은 통합 플랫폼</div></div><div class="gloss"><div class="gloss-term">AI 에이전트</div><div class="gloss-desc">복잡한 다단계 작업을 자율적으로 수행하는 실행 중심 AI</div></div><div class="gloss"><div class="gloss-term">멀티모달</div><div class="gloss-desc">텍스트, 이미지, 음성 등 다양한 입력 형식을 처리하는 AI</div></div><div class="gloss"><div class="gloss-term">엔터프라이즈 AI</div><div class="gloss-desc">기업 비즈니스 환경에 최적화된 AI 솔루션</div></div><div class="gloss"><div class="gloss-term">xAI</div><div class="gloss-desc">일론 머스크의 AI 연구 자회사</div></div><div class="gloss"><div class="gloss-term">데이터센터</div><div class="gloss-desc">대규모 AI 학습에 필요한 컴퓨팅 인프라 시설</div></div></div></section>
+    </div>
 
-      <footer class="rpt-foot">마지막 업데이트 · 2026년 06월 12일</footer>
-    </article>
-  </div>
+    <footer class="rpt-foot" style="margin-top:64px;padding-top:22px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:12px;color:var(--fg-faint);text-align:right;">
+      마지막 업데이트 · 2026년 06월 12일
+    </footer>
+  </article>
 </div>
 </body>
 </html>
