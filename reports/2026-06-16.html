@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI가 브랜드 서사를 좌우한다</title>
+  <!-- 헤드라인 메타 — index.html 아카이브에서 읽는 용도 -->
+  <meta name="report-headline" content="AI가 브랜드 서사를 좌우한다">
+  <link rel="stylesheet" href="https://jupiter-y.github.io/trend-report/style.css">
+  <style>
+    /* iframe 내부 독립 레이아웃 */
+    html, body { margin:0; padding:0; background:var(--bg); }
+    .rpt-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 40px 96px;
+    }
+    /* indexed 스타일 직접 적용 (iframe 내부 .app 클래스 없으므로) */
+    .rpt-lead { border-left:0; padding-left:0; }
+    .rpt-head { border-bottom:1px solid var(--border); padding-bottom:32px; }
+    .rpt-toc {
+      display:block; margin-top:28px;
+      border:1px solid var(--border); border-radius:var(--radius-md);
+      padding:20px 22px; background:var(--bg-subtle);
+    }
+    .toc-label {
+      font-size:11px; font-weight:600;
+      letter-spacing:0.14em; text-transform:uppercase;
+      color:var(--fg-faint); margin-bottom:14px;
+    }
+    .toc-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+    .toc-link {
+      display:flex; gap:14px; align-items:baseline;
+      padding:9px 0; border-top:1px solid var(--border-muted);
+      font-size:14.5px; color:var(--fg-muted); line-height:1.45;
+      text-decoration:none;
+    }
+    .toc-list li:first-child .toc-link { border-top:0; }
+    .toc-link:hover { color:var(--accent); }
+    .toc-num {
+      font-family:var(--font-mono); font-size:12px;
+      color:var(--accent); flex:none; min-width:22px;
+    }
+    .item { position:relative; padding-left:46px; margin-top:40px; max-width:none; }
+    .item-title {
+      display:block; font-size:23px; font-weight:700;
+      line-height:1.4; letter-spacing:-0.01em;
+      color:var(--fg); margin:0 0 16px;
+    }
+    .item-num {
+      display:block; position:absolute; left:0; top:0;
+      width:34px; text-align:left;
+      font-family:var(--font-mono); font-size:14px;
+      font-weight:500; color:var(--accent); line-height:33px;
+    }
+    .item-body {
+      font-size:17px; line-height:1.85;
+      color:var(--fg-muted); margin:0;
+    }
+    .tag {
+      background:transparent; border:1px solid var(--border-strong);
+      color:var(--fg-muted); border-radius:var(--radius-sm);
+      font-size:12.5px; font-weight:500;
+      padding:6px 13px;
+    }
+    .tag:hover { color:var(--accent); border-color:var(--accent); }
+    .divider { border:0; border-top:1px solid var(--border); margin:60px 0; }
+    /* 툴팁 */
+    .tip {
+      position:relative; cursor:help;
+      color:var(--accent);
+      border-bottom:1px dashed color-mix(in oklab, var(--accent) 60%, transparent);
+      font-weight:500;
+    }
+    .tip:hover::after {
+      content:attr(data-tip);
+      position:absolute; bottom:calc(100% + 10px); left:50%;
+      transform:translateX(-50%);
+      background:#0B1220; color:#FFFFFF;
+      font-size:12.5px; line-height:1.5;
+      padding:9px 13px; border-radius:8px;
+      white-space:nowrap; max-width:280px;
+      box-shadow:0 10px 24px -10px rgba(11,31,84,.22);
+      z-index:100; pointer-events:none;
+    }
+    .tip:hover::before {
+      content:""; position:absolute; bottom:calc(100% + 4px); left:50%;
+      transform:translateX(-50%);
+      border:6px solid transparent; border-top-color:#0B1220;
+      z-index:100;
+    }
+    @media (max-width: 600px) {
+      .rpt-wrap { padding:32px 20px 72px; }
+      .rpt-title { font-size:28px !important; }
+      .item { padding-left:34px; }
+      .item-title { font-size:19px; }
+      .item-body { font-size:16px; }
+      .gloss-grid { grid-template-columns:1fr !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="rpt-wrap">
+  <article class="report" data-readable>
+    <header class="rpt-head">
+      <div class="rpt-date">2026년 06월 16일</div>
+      <h1 class="rpt-title" style="font-size:clamp(30px,4.4vw,46px);font-weight:700;line-height:1.16;letter-spacing:-0.02em;color:var(--fg);margin:16px 0 0;">AI가 브랜드 서사를 좌우한다</h1>
+      <p class="rpt-lead" style="font-size:18px;line-height:1.75;color:var(--fg-muted);margin:24px 0 0;max-width:none;">AI 산업의 경쟁 축이 모델 성능에서 구현 생태계로 이동하는 가운데, 기업들이 직면한 또 다른 도전은 AI가 자동으로 형성하는 브랜드 서사를 관리하는 것입니다. OpenAI의 파트너 네트워크가 기업의 AI 도입 장벽을 낮추려 한다면, 마케터들은 AI 시스템이 과거 데이터로부터 만들어낸 '내러티브 그래비티'를 능동적으로 통제해야 하는 새로운 책임을 갖게 된 것입니다. 결국 2026년의 AI 성공 요건은 기술 도입뿐 아니라 AI가 만드는 기업 이미지까지 포괄하는 총체적 전략 설계에 있으며, 이는 컨설팅 파트너와 마케팅 팀의 더욱 긴밀한 협력을 요구하고 있습니다.</p>
+    </header>
+
+    <nav class="rpt-toc"><div class="toc-label">이 리포트의 구성</div><ul class="toc-list"><li><a class="toc-link" href="#item-1"><span class="toc-num">01</span><span>AI 전쟁의 새 전선 — '모델'이 아닌 '구현 생태계'를 잡아라</span></a></li><li><a class="toc-link" href="#item-2"><span class="toc-num">02</span><span>Google I/O 2026 — Gemini, '검색 도우미'에서 '행동하는 에이전트'로 진화</span></a></li><li><a class="toc-link" href="#item-3"><span class="toc-num">03</span><span>AI 코딩 어시스턴트 양강 구도 — 'Claude Code vs GitHub Copilot', 무엇이 다른가</span></a></li><li><a class="toc-link" href="#item-4"><span class="toc-num">04</span><span>AI가 브랜드 서사를 '완성'한다 — 마케터가 통제해야 할 새 전장</span></a></li><li><a class="toc-link" href="#item-5"><span class="toc-num">05</span><span>캐나다, '서베일런스 프라이싱' 규제 법안 상정 — 글로벌 데이터 프라이버시 입법 신호탄</span></a></li><li><a class="toc-link" href="#item-6"><span class="toc-num">06</span><span>전기차 자동 충전 로봇 팔 현실화 & 자율주행 경쟁 본격 점화</span></a></li></ul></nav>
+
+    <div class="rpt-body" style="margin-top:8px;">
+      <section class="grp"><div class="grp-label eyebrow">What&#39;s New</div><div class="tags"><span class="tag">AI 에이전트</span><span class="tag">파트너 네트워크</span><span class="tag">Gemini 모델</span><span class="tag">AI 코딩 어시스턴트</span><span class="tag">멀티모달 AI</span></div><article class="item" id="item-1"><h2 class="item-title"><span class="item-num">01</span><span>AI 전쟁의 새 전선 — '모델'이 아닌 '구현 생태계'를 잡아라</span></h2><p class="item-body">OpenAI는 이제 모델 성능 자체보다 기업이 AI를 실제 현장에 도입하는 과정—고가치 유스케이스 발굴, 워크플로우 재설계, 시스템 통합—이 더 큰 장벽이라고 공개적으로 인정했습니다. 이에 2026년 6월 14일 공식 출범한 'OpenAI 파트너 네트워크'는 1억 5천만 달러 투자를 바탕으로 Select·Advanced·Elite 3단계 <span class="tip" data-tip="성과 기반 등급 체계">티어 구조</span>를 도입했습니다. BCG, Accenture, Bain 등 글로벌 컨설팅 대형사가 런칭 파트너로 참여했으며, 경쟁사인 Anthropic 역시 1억 달러 투자로 3개월 먼저 <span class="tip" data-tip="AI 구현 전문가 인증">클로드 파트너 네트워크</span>를 출범해 이미 4만여 개사를 유치한 상태로, AI <span class="tip" data-tip="구축·배포 전문 생태계">구현 레이어</span> 선점 경쟁이 치열합니다.</p><p class="source">출처: <a href="https://www.techtimes.com/articles/318436/20260615/openai-launches-partner-network-150m-bet-that-implementation-beats-model-power.htm" target="_blank">OpenAI Launches Partner Network: $150M Bet That Implementation Beats Model Power</a></p></article><article class="item" id="item-2"><h2 class="item-title"><span class="item-num">02</span><span>Google I/O 2026 — Gemini, '검색 도우미'에서 '행동하는 에이전트'로 진화</span></h2><p class="item-body">Google I/O 2026의 핵심 메시지는 명확합니다. AI가 질문에 답하는 수동적 챗봇에서 다단계 장기 과제를 완수하는 능동적 파트너로 전환된다는 것입니다. 이를 위해 Google은 속도와 비용 효율을 높인 Gemini 3.5 Flash와, 텍스트·이미지·오디오·영상을 모두 입력받아 물리 환경을 시뮬레이션하는 <span class="tip" data-tip="물리 세계 이해 AI 모델">Gemini Omni</span>를 동시에 공개했습니다. 월 10억 명 이상이 사용하는 AI Mode 검색에는 Gemini 3.5 Flash가 전 세계 기본 모델로 탑재됐으며, 관련 쿼리는 매 분기 2배씩 증가하는 추세입니다. <span class="tip" data-tip="자율 다단계 작업 수행 AI">에이전틱 AI</span>가 Google 전 서비스에 이식되며 검색·업무·미디어 소비 방식이 근본적으로 바뀔 전망입니다.</p><p class="source">출처: <a href="https://blockchain.news/news/google-gemini-3-5-ai-updates-io-2026" target="_blank">Google I/O 2026: Gemini 3.5 Flash 및 Gemini Omni 공개</a></p></article><article class="item" id="item-3"><h2 class="item-title"><span class="item-num">03</span><span>AI 코딩 어시스턴트 양강 구도 — 'Claude Code vs GitHub Copilot', 무엇이 다른가</span></h2><p class="item-body">Claude Code는 전체 리포지토리를 추론하며 다단계 작업을 자율 수행하는 <span class="tip" data-tip="터미널 기반 자율 코딩 도구">터미널 에이전트</span>이고, GitHub Copilot은 IDE에 내장된 실시간 코드 제안 도구로, 두 제품은 근본적으로 다른 문제를 해결하기 때문에 많은 팀이 병행 사용합니다. Claude Code는 2026년 2월 기준 연간 환산 매출 25억 달러를 돌파했으며, Anthropic 엔지니어 내부 PR 처리량이 67% 증가했을 정도로 생산성 효과가 입증됐습니다. SWE-bench Verified 기준 Claude Code가 80.8%를 기록한 반면, GitHub Copilot은 월 10달러부터 시작하는 가격 경쟁력과 <span class="tip" data-tip="코드 자동완성 플러그인">IDE 통합</span> 편의성으로 대응합니다.</p><p class="source">출처: <a href="https://tech-insider.org/claude-code-vs-github-copilot-2026/" target="_blank">Claude Code vs GitHub Copilot 2026: SWE-bench, Pricing [Tested]</a></p></article></section><hr class="divider"><section class="grp"><div class="grp-label eyebrow">How to Use</div><div class="tags"><span class="tag">AI브랜드평판</span><span class="tag">개인데이터프라이버시</span><span class="tag">전기차자동충전</span><span class="tag">자율주행기술</span><span class="tag">창의성마케팅투자</span></div><article class="item" id="item-4"><h2 class="item-title"><span class="item-num">04</span><span>AI가 브랜드 서사를 '완성'한다 — 마케터가 통제해야 할 새 전장</span></h2><p class="item-body">2026 동계올림픽 데이터 270만 건을 분석한 연구에서, AI 시스템이 브랜드·인물·조직에 대한 서사를 스스로 형성하고 유지한다는 사실이 밝혀졌다. Seer Interactive는 이를 <span class="tip" data-tip="AI가 기존 서사를 자동 완성">'내러티브 그래비티(Narrative Gravity)'</span>라고 명명했다. 수개월 또는 수년 전 Glassdoor 리뷰, 뉴스 기사, 애널리스트 보고서 등으로 형성된 지배적 서사를 AI는 실제 변화와 무관하게 반복 재생산한다. 실제로 ChatGPT는 하프파이프 결승 6일 전 Chloé Kim의 3연패 성공을 기정사실로 선언했으나, 막상 대회에서 그녀는 2위에 그쳤다. 이제 브랜드 평판 관리의 핵심은 <span class="tip" data-tip="AI 학습 데이터 내 브랜드 노출 전략">GEO(생성형 엔진 최적화)</span> 관점에서 권위 있는 <span class="tip" data-tip="기존 서사를 반박하는 콘텐츠">카운터-내러티브 콘텐츠</span>를 지속적으로 쌓는 것이다.</p><p class="source">출처: <a href="https://www.marketingaiinstitute.com/blog/brand-reputation-ai-b2b-marketers-summit" target="_blank">Your Brand Reputation Precedes You With AI, Whether You Like It or Not</a></p></article><article class="item" id="item-5"><h2 class="item-title"><span class="item-num">05</span><span>캐나다, '서베일런스 프라이싱' 규제 법안 상정 — 글로벌 데이터 프라이버시 입법 신호탄</span></h2><p class="item-body">캐나다 혁신기술부 장관이 하원에 제출한 'Protecting Privacy and Consumer Data Act(Bill C-36)'는 1998년 제정된 기존 민간부문 개인정보보호법 PIPEDA를 전면 대체하는 법안이다. 이 법안은 개인 데이터를 활용해 소비자별로 다른 가격을 부과하는 <span class="tip" data-tip="개인 데이터로 차별 가격 적용">'서베일런스 프라이싱'</span>의 규칙을 명확히 하지만, 완전 금지보다는 타겟 할인 등 잠재적 이점을 인정하며 규제 범위를 조율 중이다. 새로 설립될 <span class="tip" data-tip="디지털 안전·데이터 보호 통합 규제기관">디지털안전위원회</span>는 위반 기업에 글로벌 매출의 3% 또는 1,000만 달러 중 더 큰 금액을 과태료로 부과할 수 있다. 글로벌 플랫폼 기업들은 데이터 활용 기반 동적 가격 전략 전반을 재검토해야 할 시점이다.</p><p class="source">출처: <a href="https://thenextweb.com/news/canada-surveillance-pricing-privacy-bill-carney-pipeda-replacement" target="_blank">Canada wants to stop companies from using your data to charge you more</a></p></article><article class="item" id="item-6"><h2 class="item-title"><span class="item-num">06</span><span>전기차 자동 충전 로봇 팔 현실화 & 자율주행 경쟁 본격 점화</span></h2><p class="item-body">샤오미가 가정용 <span class="tip" data-tip="자동으로 EV 충전 연결·해제">로봇 충전 팔</span>을 공개했다. 이는 테슬라가 10년 전 프로토타입만 남기고 포기한 개념을 처음으로 상용화 단계까지 끌어올린 것이다. 이 장치는 AI 비전 인식으로 서브밀리미터 정밀도를 구현하며, 차량 주차 후 충전 포트를 감지해 자동으로 연결하고 배터리가 설정값에 도달하면 자동 분리된다. 자율주행 영역에서는 리비안 CEO RJ 스카린지가 2026년 중 2세대 차량 전체에 감독형 <span class="tip" data-tip="출발지에서 목적지까지 자동 주행">포인트-투-포인트 자율주행</span>을 탑재하고, 2027년에는 아이즈-오프(눈을 떼도 되는) 자율주행, 장기적으로는 우버와 로보택시 서비스를 추진하는 로드맵을 공개했다. EV 인프라와 자율주행 소프트웨어 경쟁이 동시에 가속화되며 차량 경험의 패러다임이 전환되고 있다.</p><p class="source">출처: <a href="https://thenextweb.com/news/xiaomi-robotic-charging-arm-ev-home-garage-tesla-snake" target="_blank">Xiaomi built a robotic arm that plugs in your EV / Rivian CEO says supervised self-driving will arrive this year</a></p></article></section>
+      <hr class="divider"><section class="glossary"><div class="grp-label eyebrow">용어사전</div><div class="gloss-grid"><div class="gloss"><div class="gloss-term">AI 에이전트</div><div class="gloss-desc">사용자 지시를 자동으로 수행하는 독립적 AI 시스템</div></div><div class="gloss"><div class="gloss-term">파트너 네트워크</div><div class="gloss-desc">OpenAI의 기업 통합 지원을 위한 계층별 파트너 생태계</div></div><div class="gloss"><div class="gloss-term">멀티모달 AI</div><div class="gloss-desc">텍스트, 이미지, 음성 등 다양한 형식을 처리하는 AI</div></div><div class="gloss"><div class="gloss-term">AI 코딩 어시스턴트</div><div class="gloss-desc">개발자의 코드 작성을 지원하는 AI 도구</div></div><div class="gloss"><div class="gloss-term">내러티브 그래비티</div><div class="gloss-desc">AI가 기존 서사를 자동으로 반복 재생산하는 현상</div></div><div class="gloss"><div class="gloss-term">티어 구조</div><div class="gloss-desc">성과 기반 등급 체계로 Select, Advanced, Elite 3단계</div></div><div class="gloss"><div class="gloss-term">AI 브랜드 평판</div><div class="gloss-desc">AI가 형성하고 관리하는 브랜드 서사와 이미지</div></div></div></section>
+    </div>
+
+    <footer class="rpt-foot" style="margin-top:64px;padding-top:22px;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:12px;color:var(--fg-faint);text-align:right;">
+      마지막 업데이트 · 2026년 06월 16일
+    </footer>
+  </article>
+</div>
+</body>
+</html>
