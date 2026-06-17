@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="report-headline" content="음향 AI로 드론 방어, 백유로대로 가능해진다">
+  <title>음향 AI로 드론 방어, 백유로대로 가능해진다</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:ital,wght@0,300;0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+<style>
+:root {
+  --bg:          #ffffff;
+  --bg-subtle:   #f8f9fa;
+  --bg-toc:      #f4f5f7;
+  --border:      #e5e7eb;
+  --border-soft: #f0f0f0;
+  --fg:          #0d1117;
+  --fg-muted:    #374151;
+  --fg-subtle:   #6b7280;
+  --fg-faint:    #9ca3af;
+  --accent:      #0057ff;
+  --accent-dim:  rgba(0,87,255,0.07);
+  --tag-bg:      #ffffff;
+  --tag-border:  #d1d5db;
+  --tag-fg:      #374151;
+  --tab-bar-h:   48px;
+  --font-sans:   'Noto Sans KR', -apple-system, system-ui, sans-serif;
+  --font-mono:   'JetBrains Mono', monospace;
+  --r-sm: 6px; --r-md: 10px; --r-pill: 999px;
+}
+[data-theme="dark"] {
+  --bg: #0f1117; --bg-subtle: #151820; --bg-toc: #1a1d27;
+  --border: #2a2d3a; --border-soft: #1e2130;
+  --fg: #f0f0f0; --fg-muted: #c0c4d0; --fg-subtle: #6b7280; --fg-faint: #4b5563;
+  --accent: #4e7fff; --accent-dim: rgba(78,127,255,0.1);
+  --tag-bg: #252836; --tag-border: #3a3d4a; --tag-fg: #c0c4d0;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: var(--font-sans); background: var(--bg); color: var(--fg);
+  line-height: 1.7; -webkit-font-smoothing: antialiased; display: block;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── STICKY TAB BAR ── */
+.tab-bar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  height: var(--tab-bar-h);
+  display: flex; align-items: stretch; justify-content: flex-end;
+  padding: 0 60px; gap: 0;
+  transition: background .2s, border-color .2s;
+}
+.tab-btn {
+  padding: 0 18px; font-family: var(--font-sans); font-size: 13.5px; font-weight: 500;
+  color: var(--fg-subtle); background: none; border: none;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  cursor: pointer; white-space: nowrap;
+  transition: color .15s, border-color .15s;
+}
+.tab-btn:hover { color: var(--fg-muted); }
+.tab-btn.active { color: var(--fg); border-bottom-color: var(--accent); }
+
+/* ── LAYOUT ── */
+.page-wrap { max-width: 860px; margin: 0 auto; padding: 48px 60px 96px; }
+
+/* ── HEADER ── */
+.report-date {
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: .04em; color: var(--fg-subtle); margin-bottom: 16px;
+}
+h1.headline {
+  font-size: clamp(34px, 5vw, 50px); font-weight: 700;
+  line-height: 1.14; letter-spacing: -0.03em; color: var(--fg); margin-bottom: 28px;
+}
+.editor-comment {
+  font-size: 17px; line-height: 1.85; color: var(--fg-muted);
+  margin-bottom: 40px; max-width: 72ch;
+}
+
+/* ── DIVIDER ── */
+hr.div { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+/* ── TOC BOX ── */
+.toc-box {
+  background: var(--bg-toc); border-radius: var(--r-md);
+  padding: 24px 28px; margin-bottom: 48px;
+}
+.toc-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fg-faint); margin-bottom: 16px;
+}
+.toc-list { list-style: none; }
+.toc-item {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 10px 0; border-top: 1px solid var(--border-soft); cursor: pointer;
+}
+.toc-item:first-child { border-top: none; padding-top: 0; }
+.toc-num {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  color: var(--accent); flex-shrink: 0; min-width: 24px;
+}
+.toc-title { font-size: 14.5px; font-weight: 500; color: var(--fg-muted); line-height: 1.5; }
+.toc-item:hover .toc-title { color: var(--fg); }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fg-subtle); margin-bottom: 14px;
+}
+
+/* ── TAGS ── */
+.tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 40px; }
+.tag {
+  font-size: 12.5px; color: var(--tag-fg);
+  background: var(--tag-bg); border: 1px solid var(--tag-border);
+  padding: 5px 13px; border-radius: var(--r-pill);
+}
+
+/* ── TREND ITEMS ── */
+.trend-list { display: flex; flex-direction: column; }
+.trend-item {
+  display: flex; gap: 28px; align-items: flex-start;
+  padding-bottom: 44px; border-bottom: 1px solid var(--border); margin-bottom: 40px;
+}
+.trend-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.trend-num {
+  font-family: var(--font-mono); font-size: 14px; font-weight: 500;
+  color: var(--accent); flex-shrink: 0; padding-top: 5px; min-width: 28px;
+}
+.trend-body { flex: 1; min-width: 0; }
+.trend-title {
+  font-size: 22px; font-weight: 700; line-height: 1.35;
+  letter-spacing: -0.02em; color: var(--fg); margin-bottom: 14px;
+}
+.trend-text { font-size: 15.5px; color: var(--fg-muted); line-height: 1.85; margin-bottom: 12px; }
+.trend-source { font-size: 12.5px; color: var(--fg-faint); }
+.trend-source a {
+  color: var(--fg-faint); text-decoration: underline;
+  text-decoration-color: var(--border); text-underline-offset: 3px;
+}
+.trend-source a:hover { color: var(--fg-subtle); }
+
+/* ── TOOLTIP ── */
+.tooltip { color: var(--accent); border-bottom: 1px dashed currentColor; cursor: help; position: relative; }
+.tooltip::after {
+  content: attr(data-tip); display: none;
+  position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+  background: var(--fg); color: var(--bg); font-size: 12px;
+  padding: 6px 10px; border-radius: var(--r-sm); white-space: nowrap; z-index: 20; pointer-events: none;
+}
+.tooltip:hover::after { display: block; }
+
+.section-sep { border: none; border-top: 1px solid var(--border); margin: 44px 0 40px; }
+
+/* ── GLOSSARY ── */
+.glossary { margin-top: 48px; }
+.glossary-heading {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fg-subtle); margin-bottom: 16px;
+}
+.glossary-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+.glossary-card {
+  background: var(--bg-subtle); border: 1px solid var(--border);
+  border-radius: var(--r-md); padding: 16px 18px; transition: border-color .15s;
+}
+.glossary-card:hover { border-color: var(--accent); }
+.glossary-term { font-size: 13.5px; font-weight: 600; color: var(--fg-muted); margin-bottom: 5px; }
+.glossary-desc { font-size: 12.5px; color: var(--fg-subtle); line-height: 1.6; }
+
+/* ── FOOTER ── */
+.report-foot {
+  margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); text-align: right;
+}
+
+/* ── TAB PANELS ── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .tab-bar { padding: 0 20px; }
+  .tab-btn { padding: 0 12px; font-size: 13px; }
+  .page-wrap { padding: 32px 20px 72px; }
+  h1.headline { font-size: 28px; }
+  .trend-title { font-size: 18px; }
+  .trend-item { gap: 16px; }
+  .glossary-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- ── STICKY TAB BAR (우측 정렬) ── -->
+<nav class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('all',this)">전체</button>
+  <button class="tab-btn" onclick="switchTab('marketer',this)">마케터</button>
+  <button class="tab-btn" onclick="switchTab('developer',this)">개발자</button>
+  <button class="tab-btn" onclick="switchTab('design',this)">디자인</button>
+  <button class="tab-btn" onclick="switchTab('executive',this)">경영자</button>
+</nav>
+
+<!-- ── 전체 탭 ── -->
+<div class="tab-panel active" id="tab-all">
+<div class="page-wrap">
+  <div class="report-date">2026년 06월 17일</div>
+  <h1 class="headline">음향 AI로 드론 방어, 백유로대로 가능해진다</h1>
+  <p class="editor-comment">미국 정부의 AI 모델 수출 통제와 저비용 음향 AI 방어 기술의 등장은 AI 생태계가 안전성과 접근성이라는 두 가지 축으로 재편되고 있음을 보여준다. 한편에서는 대규모 언어모델의 보안 취약점을 이유로 규제가 강화되는 반면, 다른 한편에서는 드론 탐지 같은 실제 위협에 대응하기 위해 경량 음향 AI 모델이 급속도로 상용화되고 있다는 뜻이다. 이러한 이중 기준은 결국 진정한 AI 안전성이란 단순한 모델 폐쇄가 아니라 개방된 검증 체계와 저비용 방어 기술의 민주화에 달려 있다는 산업의 목소리를 반영한다. 향후 정부 규제는 모델 자체보다는 활용 맥락과 투명성에 초점을 맞춰야 한다는 논의가 활발해질 것으로 예상된다.</p>
+  <hr class="div">
+
+  <div class="toc-box">
+    <div class="toc-label">이 리포트의 구성</div>
+    <ul class="toc-list">
+    <li class="toc-item">
+      <span class="toc-num">01</span>
+      <span class="toc-title">美 정부, Anthropic에 수출 통제 발동 — AI 안전성 검증의 새 기준점</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">02</span>
+      <span class="toc-title">Google I/O 2026 — 경량·고성능 모델로 AI 에이전트 시대를 열다</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">03</span>
+      <span class="toc-title">OpenAI·Anthropic, 같은 날 엔터프라이즈 AI 합작법인 출범 — 월가 자본과 손잡다</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">04</span>
+      <span class="toc-title">소리로 드론을 잡는다 — 저비용 음향 AI 방어망의 부상</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">05</span>
+      <span class="toc-title">BCI 실용화의 분수령 — ALS 환자, 연구자 없이 2년간 말하다</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">06</span>
+      <span class="toc-title">AI 에이전트가 쇼핑을 대신하는 시대 — 에이전트 커머스와 미디어 바잉의 재편</span>
+    </li></ul>
+  </div>
+
+  <div class="section-label">WHAT'S NEW</div>
+  <div class="tags"><span class="tag">AI 규제</span><span class="tag">경량 모델</span><span class="tag">AI 에이전트</span><span class="tag">엔터프라이즈 AI</span><span class="tag">안전성 검증</span></div>
+  <div class="trend-list">
+    <div class="trend-item">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">美 정부, Anthropic에 수출 통제 발동 — AI 안전성 검증의 새 기준점</div>
+        <p class="trend-text">미국 정부는 '국가안보 권한'을 근거로 Fable 5 및 Mythos 5에 대한 수출 통제 명령을 발동하며, 외국 국적자의 접근을 전면 차단하라고 지시했다. 이 조치는 Amazon 연구진이 해당 모델의 <span class="tooltip" data-tip="AI 안전장치 우회 시도">안전 가드레일</span>을 우회하는 방법을 발견해 정부에 보고한 것이 직접적인 계기가 됐다. 연방 당국은 금지 해제 여부를 Anthropic이 모델의 장기적 보안을 입증하는 것에 달려 있다고 밝혀, AI 모델의 <span class="tooltip" data-tip="탈옥·취약점 사전 검증">사전 안전성 검증</span>이 출시의 필수 관문으로 자리잡는 분수령이 됐다. Anthropic은 군사 감시 및 자율 무기 시스템 활용을 거부한 이유로 공급망 <span class="tooltip" data-tip="정부 조달 블랙리스트">블랙리스트</span>에 오른 상태에서 이번 사태가 터져 갈등이 더욱 격화되는 양상이다.</p>
+        <div class="trend-source">출처: <a href="https://www.businesstoday.in/technology/artificial-intelligence/story/anthropic-had-90-minutes-to-restrict-claude-fable-5-as-white-house-feared-chinese-access-537095-2026-06-16" target="_blank">Anthropic had 90 minutes to restrict Claude Fable 5 as White House feared Chinese access</a></div>
+      </div>
+    </div>
+    <div class="trend-item">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">Google I/O 2026 — 경량·고성능 모델로 AI 에이전트 시대를 열다</div>
+        <p class="trend-text">Gemini 3.5 Flash는 이전 세대 Gemini 3.1 Pro를 코딩·에이전트 벤치마크에서 앞서면서도, 입력 100만 토큰당 $1.50의 저렴한 가격을 실현한 <span class="tooltip" data-tip="성능·속도·비용 균형 모델">경량 프론티어 모델</span>이다. 에이전트 AI 분야에서는 연결된 앱 전반에서 정보를 추론하고 행동할 수 있는 범용 AI 에이전트 Gemini Spark를 공개했다. Gemini Spark는 Workspace, 커스텀 커넥터, 오픈 웹에 걸쳐 24시간 작동하며, 이메일 발송 등 고위험 행동에는 반드시 사용자의 명시적 승인을 요구하는 <span class="tooltip" data-tip="인간 최종 결정 구조">Human-in-the-Loop</span> 설계를 채택했다. Google은 Gemini 3.5에 사이버 및 CBRN(화학·생물·방사선·핵) <span class="tooltip" data-tip="유해 콘텐츠 생성 차단">안전 가드</span>를 강화했다고 밝혔다.</p>
+        <div class="trend-source">출처: <a href="https://www.cnbc.com/2026/05/19/google-ai-ultra-gemini-spark-omni.html" target="_blank">Google unveils AI model Gemini 3.5 and AI agent Gemini Spark</a></div>
+      </div>
+    </div>
+    <div class="trend-item">
+      <span class="trend-num">03</span>
+      <div class="trend-body">
+        <div class="trend-title">OpenAI·Anthropic, 같은 날 엔터프라이즈 AI 합작법인 출범 — 월가 자본과 손잡다</div>
+        <p class="trend-text">2026년 5월 4일, OpenAI와 Anthropic은 동일한 날 엔터프라이즈 AI <span class="tooltip" data-tip="공동 출자 사업체">합작법인</span>을 각각 발표하며 총 115억 달러 규모의 자본을 결집했다. Anthropic은 Blackstone·Goldman Sachs와 15억 달러 규모를, OpenAI는 TPG·Brookfield·Bain Capital과 100억 달러 평가를 받아 40억 달러를 조성했다. 이는 기업에 AI 구독 상품을 파는 단계를 넘어, 훨씬 더 깊이 개입하는 <span class="tooltip" data-tip="현장 파견 엔지니어 모델">포워드 디플로이먼트</span> 방식으로 패러다임이 전환되고 있음을 보여준다. 두 회사 모두 2026년 하반기 IPO를 준비 중인 것으로 알려져, 기업 매출 실적 확보가 상장 전략의 핵심 변수로 부각되고 있다.</p>
+        <div class="trend-source">출처: <a href="https://techcrunch.com/2026/05/04/anthropic-and-openai-are-both-launching-joint-ventures-for-enterprise-ai-services/" target="_blank">Anthropic and OpenAI are both launching joint ventures for enterprise AI services</a></div>
+      </div>
+    </div></div>
+
+  <hr class="section-sep">
+
+  <div class="section-label">HOW TO USE</div>
+  <div class="tags"><span class="tag">음성 드론 탐지</span><span class="tag">뇌 컴퓨터 인터페이스</span><span class="tag">혼합현실 칩</span><span class="tag">에이전트 커머스</span><span class="tag">AI 미디어 바잉</span></div>
+  <div class="trend-list">
+    <div class="trend-item">
+      <span class="trend-num">04</span>
+      <div class="trend-body">
+        <div class="trend-title">소리로 드론을 잡는다 — 저비용 음향 AI 방어망의 부상</div>
+        <p class="trend-text">체코 스타트업 Neuron Soundware가 센서당 €100~150의 초저비용 마이크로폰으로 드론 엔진 소리를 식별하는 AI 음향 탐지 시스템 'Sound Shield'를 개발했다. 이 시스템은 도시·인프라·군사시설 상공의 저고도 드론을 탐지하는 <span class="tooltip" data-tip="전파를 쏘지 않는 수동형 탐지">패시브 레이더</span> 대체재로 설계됐다. 각 센서(nEdge Mini)는 1W의 전력만 소모하며, Nvidia Jetson 모듈이 탑재된 컴퓨팅 플랫폼이 알려진 드론 <span class="tooltip" data-tip="기체 고유의 음향 패턴">음향 시그니처</span> 라이브러리와 실시간으로 대조·분석한다. 이 기술이 주목받는 이유는 드론 설계의 근본적 한계를 파고들기 때문이다. 레이더 흡수 코팅으로 드론을 스텔스화할 수 있어도, 로터와 엔진의 기계적 소음을 현재 기술로는 완전히 차단할 수 없다. 우크라이나 전쟁이 저비용 드론이 수십억 유로짜리 주요 인프라를 마비시킬 수 있음을 입증한 것이 개발의 직접적인 계기가 됐다.</p>
+        <div class="trend-source">출처: <a href="https://thenextweb.com/news/neuron-soundware-sound-shield-acoustic-drone-detection-czech-ai" target="_blank">A Czech AI startup says it can detect drones by sound for €150 per sensor</a></div>
+      </div>
+    </div>
+    <div class="trend-item">
+      <span class="trend-num">05</span>
+      <div class="trend-body">
+        <div class="trend-title">BCI 실용화의 분수령 — ALS 환자, 연구자 없이 2년간 말하다</div>
+        <p class="trend-text">UC Davis 연구팀이 발표한 새 연구에 따르면, 중증 <span class="tooltip" data-tip="근위축성 측삭경화증">ALS</span> 환자가 연구자 지원 없이 자택에서 뇌-컴퓨터 인터페이스(BCI)를 사용해 소통·업무·디지털 활동을 독립적으로 수행했다. 이 결과는 Nature Medicine에 게재되며 실용 보조 기술의 중요한 이정표로 평가받는다. 시스템은 분당 약 56단어 속도로 <span class="tooltip" data-tip="뇌 신호를 텍스트로 변환">뇌신호 디코딩</span>을 수행하며, 12만 5천 단어 어휘에서 99% 이상의 단어 정확도를 기록했다. 하드웨어는 Blackrock Neurotech의 기존 마이크로전극 배열을 사용하며, 핵심 돌파구는 소프트웨어, 즉 BRAND 플랫폼의 머신러닝 알고리즘이 뇌 신호에서 발화 시도를 실시간으로 해독하는 데 있다. 현재 Neuralink, Synchron, Paradromics 등의 하드웨어 소형화 흐름과 결합하면 향후 훨씬 간편한 형태의 BCI 상용화가 기대된다.</p>
+        <div class="trend-source">출처: <a href="https://thenextweb.com/news/uc-davis-brain-computer-interface-als-speech-casey-harrell-3800-hours" target="_blank">UC Davis brain implant lets ALS patient speak with 99% accuracy and work full time</a></div>
+      </div>
+    </div>
+    <div class="trend-item">
+      <span class="trend-num">06</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 에이전트가 쇼핑을 대신하는 시대 — 에이전트 커머스와 미디어 바잉의 재편</div>
+        <p class="trend-text">에이전트 커머스의 가장 큰 패러다임 전환은 브랜드 경쟁 방식의 변화다. 기존 이커머스에서는 디자인·광고·검색 순위로 소비자 주목을 끌었지만, 에이전트 커머스에서는 <span class="tooltip" data-tip="AI가 제품을 선택하는 기준">데이터 품질·프로토콜 준수·카탈로그 완성도</span>로 AI 에이전트의 선택을 받아야 한다. 맥킨지는 에이전트 커머스가 2030년까지 미국 B2C 소매 매출 최대 1조 달러를, 글로벌로는 3~5조 달러를 매개할 수 있다고 추산했다. 미디어 바잉 영역도 AI가 주도권을 잡고 있다. 2026년 미국 <span class="tooltip" data-tip="알고리즘 기반 자동 광고 구매">프로그래매틱</span> 광고 지출이 2,000억 달러를 돌파하면서, 마케터들은 에이전틱 바잉·파편화된 미디어·채널별 성과 측정이라는 새로운 국면을 맞이하고 있다. AI 기반 툴이 수동 미디어 플래닝의 필요성을 크게 줄이고 있으며, 알고리즘이 방대한 데이터를 분석해 실시간으로 채널별 예산을 자동 배분하고 있다.</p>
+        <div class="trend-source">출처: <a href="https://digiday.com/sponsored/wtf-is-agentic-commerce-loyalty-promotions/" target="_blank">WTF is agentic commerce? / Kepler, Samsung Ads and Kraft Heinz are among the 2026 Digiday Media Buying and Planning Awards winners</a></div>
+      </div>
+    </div></div>
+
+  <hr class="div">
+  <div class="glossary">
+    <div class="glossary-heading">용어사전</div>
+    <div class="glossary-grid">
+      <div class="glossary-card">
+        <div class="glossary-term">AI 에이전트</div>
+        <p class="glossary-desc">자율적으로 작업을 수행하는 인공지능 시스템</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">안전 가드레일</div>
+        <p class="glossary-desc">AI 모델의 악용을 방지하는 안전장치</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">경량 모델</div>
+        <p class="glossary-desc">리소스 효율성을 갖춘 소형 AI 모델</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">음향 탐지</div>
+        <p class="glossary-desc">음파 데이터로 물체를 식별하는 AI 기술</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">패시브 레이더</div>
+        <p class="glossary-desc">전파 방출 없이 신호를 수신하는 탐지 방식</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">AI 규제</div>
+        <p class="glossary-desc">정부의 AI 개발·배포에 대한 통제 조치</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">엔터프라이즈 AI</div>
+        <p class="glossary-desc">기업 운영에 특화된 인공지능 솔루션</p>
+      </div></div>
+  </div>
+
+  <div class="report-foot">마지막 업데이트: 2026년 06월 17일</div>
+</div>
+</div>
+
+
+<div class="tab-panel" id="tab-marketer">
+<div class="page-wrap">
+  <div class="report-date">2026년 06월 17일</div>
+  <h1 class="headline">캠페인 실무자를 위한<br>AI 활용 전략</h1>
+  <p class="editor-comment">같은 뉴스를 마케터·AE·AI 활용 세 관점으로 재구성했습니다. 캠페인 기획, 클라이언트 제안, 툴 활용에 바로 쓸 수 있는 인사이트를 담았습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 규제</span><span class="tag">경량 모델</span><span class="tag">AI 에이전트</span><span class="tag">엔터프라이즈 AI</span><span class="tag">안전성 검증</span><span class="tag">음성 드론 탐지</span><span class="tag">뇌 컴퓨터 인터페이스</span><span class="tag">혼합현실 칩</span><span class="tag">에이전트 커머스</span><span class="tag">AI 미디어 바잉</span></div>
+  <div class="trend-list">
+    <div class="trend-item">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 에이전트가 소비자 대신 쇼핑한다 — 브랜드 로열티 전략을 지금 바꿔야 할 이유</div>
+        <p class="trend-text"><span class="tooltip" data-tip="AI가 소비자 대신 검색·비교·구매까지 자동으로 처리하는 커머스 방식">에이전트 커머스</span>가 이론에서 현실로 빠르게 이동하고 있습니다. 소비자가 직접 앱을 열지 않아도 AI가 상품을 골라 결제까지 완료하는 시대에, 기존의 쿠폰·포인트 중심 프로모션은 AI 에이전트가 인식하지 못하면 무용지물이 됩니다. 지금 당장 해볼 수 있는 것은 자사 프로모션 구조가 AI가 읽을 수 있는 형태로 설계되어 있는지 점검하는 것입니다. 앱 화면이 아니라 데이터 레이어 기준으로 혜택이 전달되는지 확인하고, 로열티 프로그램의 조건과 혜택을 명확한 텍스트로 정리해 AI 에이전트가 비교 판단할 수 있도록 구성하는 것이 선제 대응의 시작입니다.<br><br>캠페인 실무 관점에서는 특히 리타겟팅 배너나 앱 푸시 중심의 리텐션 전략을 재검토할 필요가 있습니다. 소비자 접점이 브라우저나 앱이 아닌 AI 인터페이스로 이동하면, 광고 노출보다 혜택 데이터의 품질이 구매 결정을 좌우합니다.<br><br>AE 제안 관점에서는 클라이언트에게 "우리 브랜드의 프로모션이 AI 검색 결과에 노출될 준비가 되어 있습니까"라는 질문으로 새로운 감사 서비스를 제안할 수 있습니다. 경쟁사가 아직 에이전트 대응 구조를 갖추지 못한 지금이 선점 시점입니다.<br><br>AI 도구 활용 관점에서는 Claude나 ChatGPT에 자사 프로모션 정책 문서를 붙여넣고 "AI 쇼핑 에이전트 입장에서 이 혜택이 명확하게 이해되는가, 개선점을 알려줘"라는 프롬프트로 즉각적인 피드백을 받아볼 수 있습니다.</p>
+        <div class="trend-source">출처: <a href="https://digiday.com/sponsored/wtf-is-agentic-commerce-loyalty-promotions/" target="_blank">WTF is agentic commerce? — How brands can make loyalty and promotions agent-ready</a></div>
+      </div>
+    </div>
+    <div class="trend-item">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">AI가 미디어 바잉을 수상했다 — Kepler·Samsung Ads·Kraft Heinz의 공통점</div>
+        <p class="trend-text">2026 Digiday 미디어 바잉 어워드 수상작들의 핵심 공통점은 AI를 활용한 실시간 캠페인 최적화와 고가치 오디언스 정밀 타겟팅입니다. 단순히 AI 툴을 도입한 것이 아니라, <span class="tooltip" data-tip="TV·디지털·OOH 등 여러 채널을 하나의 전략으로 통합 집행하는 방식">옴니채널</span> 플래닝과 AI를 결합해 플랫폼 간 예산을 실시간으로 재배분한 사례가 수상의 기준이 되었습니다. 지금 당장 해볼 수 있는 것은 현재 집행 중인 캠페인의 매체별 성과 데이터를 AI 툴에 입력해 예산 재배분 시나리오를 받아보는 것입니다.<br><br>캠페인 실무 관점에서는 주간 성과 리포트를 수작업으로 만드는 대신, ChatGPT나 Claude에 원시 데이터를 넣고 "예산 대비 전환율이 가장 낮은 채널과 그 원인을 분석해줘"라고 요청하면 분석 시간을 절반 이하로 줄일 수 있습니다.<br><br>AE 제안 관점에서는 수상 사례를 레퍼런스로 활용해 "글로벌 수상 캠페인이 증명한 AI 미디어 바잉 전략을 우리 브랜드에 적용하겠습니다"라는 제안 구조가 설득력을 높입니다. 특히 Kraft Heinz처럼 전통적인 CPG 브랜드도 AI 바잉으로 성과를 낸 사례는 보수적인 클라이언트 설득에 유효합니다.<br><br>AI 도구 활용 관점에서는 미디어 플랜 초안 작성 시 "아래 예산과 타겟 조건으로 옴니채널 플랜을 짜줘, AI 최적화 포인트를 포함해서"라는 프롬프트로 기획 시간을 단축할 수 있습니다.</p>
+        <div class="trend-source">출처: <a href="https://digiday.com/announcement/kepler-samsung-ads-and-kraft-heinz-are-among-the-2026-digiday-media-buying-and-planning-awards-winners/" target="_blank">Kepler, Samsung Ads and Kraft Heinz are among the 2026 Digiday Media Buying and Planning Awards winners</a></div>
+      </div>
+    </div>
+    <div class="trend-item">
+      <span class="trend-num">03</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 글래스가 다음 광고 플랫폼이 된다 — Qualcomm이 웨어러블 시대의 판을 깔았다</div>
+        <p class="trend-text">Qualcomm이 <span class="tooltip" data-tip="AR과 VR을 현실 환경과 혼합해 보여주는 기술">혼합현실</span> 전용 칩 Snapdragon Reality Elite와 안경 제조사용 화이트라벨 툴킷 START를 동시에 공개했습니다. 이는 스마트폰 이후의 주력 컴퓨팅 기기가 AI 글래스 형태로 수렴될 수 있다는 신호로, 광고 업계 입장에서는 시선 기반 인터랙션과 공간 광고라는 완전히 새로운 인벤토리의 등장을 의미합니다. 지금 당장 해볼 수 있는 것은 자사 브랜드의 로고와 핵심 비주얼이 3D 공간에서 어떻게 보이는지 Midjourney나 Sora로 시뮬레이션해보는 것입니다.<br><br>캠페인 실무 관점에서는 현재 진행 중인 캠페인의 핵심 크리에이티브를 2D 화면이 아닌 공간 배치 형태로 재해석하는 연습을 시작할 수 있습니다. AR 필터나 버추얼 트라이온 경험이 있다면 AI 글래스 포맷으로 확장하는 로드맵을 미리 그려두는 것이 유리합니다.<br><br>AE 제안 관점에서는 "2년 안에 AI 글래스 광고 인벤토리가 본격화될 때, 우리 브랜드의 크리에이티브 에셋이 준비되어 있어야 합니다"라는 미래 준비 프레임으로 선행 기획을 제안할 수 있습니다.<br><br>AI 도구 활용 관점에서는 Midjourney에 "brand logo placed in AR glasses overlay, street environment, natural ambient light"라는 프롬프트로 공간 광고 시안을 즉석에서 만들어 제안 덱에 활용할 수 있습니다.</p>
+        <div class="trend-source">출처: <a href="https://thenextweb.com/news/qualcomm-snapdragon-reality-elite-start-ai-wearables-post-smartphone" target="_blank">Qualcomm launches Snapdragon Reality Elite and a white-label toolkit for AI glasses</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 06월 17일</div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-developer">
+<div class="page-wrap">
+  <div class="report-date">2026년 06월 17일</div>
+  <h1 class="headline">개발·데이터 팀을 위한<br>기술 변화 포인트</h1>
+  <p class="editor-comment">API 변화, 아키텍처 영향, 데이터 파이프라인 관점에서 오늘 뉴스를 재해석했습니다. 지금 당장 확인해야 할 것들을 정리했습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 규제</span><span class="tag">경량 모델</span><span class="tag">AI 에이전트</span><span class="tag">엔터프라이즈 AI</span><span class="tag">안전성 검증</span><span class="tag">음성 드론 탐지</span><span class="tag">뇌 컴퓨터 인터페이스</span><span class="tag">혼합현실 칩</span><span class="tag">에이전트 커머스</span><span class="tag">AI 미디어 바잉</span></div>
+  <div class="trend-list">
+    <div class="trend-item">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">Claude Fable 5 수출 규제 — AI 안전성 취약점이 API 접근 정책을 바꾼다</div>
+        <p class="trend-text">Amazon이 Claude Fable 5의 <span class="tooltip" data-tip="모델이 설정한 윤리적 제한을 우회하는 방법">안전 장치 우회 경로</span>를 발견해 정부에 보고하면서, 백악관이 90분 안에 비미국인 접근 차단을 요구하는 사태가 발생했다. 개발자 관점에서는 Claude API를 사용하는 서비스가 지역 기반 접근 제어 로직을 별도로 구현해야 할 가능성이 생겼고, 엔터프라이즈 계약 조건에 지정학적 규제 조항이 추가될 수 있다. 데이터 애널리스트 관점에서는 모델 응답 로그에서 안전 장치 우회 시도를 탐지하는 이상 징후 분석 파이프라인의 필요성이 부각된다. 지금 당장 확인할 것은 현재 사용 중인 Claude API의 이용 약관 내 지역 제한 조항과, 프롬프트 로그 보관 정책이다.</p>
+        <div class="trend-source">출처: <a href="https://www.businesstoday.in/technology/artificial-intelligence/story/anthropic-had-90-minutes-to-restrict-claude-fable-5-as-white-house-feared-chinese-access-537095-2026-06-16" target="_blank">Anthropic Had 90 Minutes to Restrict Claude Fable 5 as White House Feared Chinese Access</a></div>
+      </div>
+    </div>
+    <div class="trend-item">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">Gemini 3.5 Flash와 에이전트 'Gemini Spark' — 경량화와 자율 실행의 분기점</div>
+        <p class="trend-text">Gemini 3.5 Flash는 기존 프론티어 모델 대비 1/2~1/3 수준의 <span class="tooltip" data-tip="API 호출당 토큰 처리 비용">추론 비용</span>을 목표로 설계됐으며, 비용 민감한 배치 처리나 고빈도 호출 파이프라인에서 즉시 대체 검토가 가능하다. Gemini Spark는 연결된 앱 전반에서 추론과 행동을 수행하는 <span class="tooltip" data-tip="단순 답변 생성을 넘어 외부 시스템을 직접 조작하는 AI">에이전틱 AI</span> 구조로, 기존 단방향 API 호출 아키텍처에서 도구 호출과 상태 관리를 포함한 멀티스텝 실행 구조로의 전환을 요구한다. 데이터 애널리스트 입장에서는 에이전트가 자동 생성한 쿼리와 사람이 작성한 쿼리를 구분해 추적하는 새로운 로깅 체계가 필요해진다. Flash 모델의 실제 벤치마크 수치는 베타 종료 후 독립 검증이 필요하다.</p>
+        <div class="trend-source">출처: <a href="https://www.cnbc.com/2026/05/19/google-ai-ultra-gemini-spark-omni.html" target="_blank">Google AI Ultra, Gemini Spark, Omni — Google I/O 2026 주요 발표</a></div>
+      </div>
+    </div>
+    <div class="trend-item">
+      <span class="trend-num">03</span>
+      <div class="trend-body">
+        <div class="trend-title">Qualcomm Snapdragon Reality Elite — 온디바이스 AI 추론이 웨어러블로 이동한다</div>
+        <p class="trend-text">Qualcomm이 발표한 Snapdragon Reality Elite는 혼합현실 헤드셋과 안경형 기기를 겨냥한 칩으로, 향상된 <span class="tooltip" data-tip="클라우드 없이 기기 자체에서 AI 연산을 처리하는 방식">온디바이스 NPU</span> 성능을 탑재했다. 개발자 관점에서는 기존 클라우드 API 호출 기반 앱 구조를 로컬 모델 추론으로 재설계해야 하는 경우가 생기며, START 화이트라벨 툴킷은 안경 제조사가 SDK를 직접 통합하는 방식으로 플랫폼 파편화를 심화시킬 수 있다. 데이터 애널리스트 관점에서는 디바이스 내에서 처리된 데이터는 중앙 수집이 안 되므로, 온디바이스 이벤트를 집계해 분석 스택에 올리는 별도 텔레메트리 설계가 필요해진다. 스마트폰 이후 플랫폼 전환 시나리오에서 가장 먼저 달라지는 레이어는 추론 위치다.</p>
+        <div class="trend-source">출처: <a href="https://thenextweb.com/news/qualcomm-snapdragon-reality-elite-start-ai-wearables-post-smartphone" target="_blank">Qualcomm launches Snapdragon Reality Elite and a white-label toolkit for AI glasses</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 06월 17일</div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-design">
+<div class="page-wrap">
+  <div class="report-date">2026년 06월 17일</div>
+  <h1 class="headline">크리에이티브 팀을 위한<br>AI 활용 포인트</h1>
+  <p class="editor-comment">크리에이티브 워크플로우 변화, 브랜드 아이덴티티 유지, 실제 활용 가능한 AI 디자인 툴을 중심으로 정리했습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 규제</span><span class="tag">경량 모델</span><span class="tag">AI 에이전트</span><span class="tag">엔터프라이즈 AI</span><span class="tag">안전성 검증</span><span class="tag">음성 드론 탐지</span><span class="tag">뇌 컴퓨터 인터페이스</span><span class="tag">혼합현실 칩</span><span class="tag">에이전트 커머스</span><span class="tag">AI 미디어 바잉</span></div>
+  <div class="trend-list">
+    <div class="trend-item">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">혼합현실 시대의 크리에이티브 새 판이 열린다</div>
+        <p class="trend-text">Qualcomm의 <span class="tooltip" data-tip="AR·VR을 결합해 현실과 디지털을 동시에 구현하는 기술">혼합현실 칩</span> Snapdragon Reality Elite와 화이트라벨 안경 제작 툴킷 START의 등장은, 아트 디렉터에게 새로운 공간 디자인 문법을 요구하는 신호탄이다. 기존 Figma나 Photoshop 기반의 평면 작업물이 3D 공간 안에서 어떻게 경험되는지를 고려한 레이아웃 설계가 필수가 된다.<br><br>브랜드 아이덴티티 측면에서는 로고, 타이포그래피, 색상이 실제 공간 조도와 맥락 속에서 어떻게 변하는지 검수하는 과정이 새롭게 추가된다. 사람이 반드시 해야 할 것은 공간 안에서의 시선 흐름과 감성 톤 설계이며, AI는 해상도 최적화나 다양한 착용 각도별 렌더링 변환에 활용할 수 있다.<br><br>지금 당장은 Adobe Substance 3D나 Spline 같은 툴로 공간 비주얼 시안을 만들어볼 수 있다. 단, 실제 디바이스 없이 제작한 결과물은 착용 환경과 괴리가 생길 수 있어 클라이언트 납품 전 반드시 실기기 테스트가 필요하다.</p>
+        <div class="trend-source">출처: <a href="https://thenextweb.com/news/qualcomm-snapdragon-reality-elite-start-ai-wearables-post-smartphone" target="_blank">Qualcomm launches Snapdragon Reality Elite and a white-label toolkit for AI glasses</a></div>
+      </div>
+    </div>
+    <div class="trend-item">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 에이전트가 쇼핑을 대신하는 시대, 브랜드 비주얼의 역할이 바뀐다</div>
+        <p class="trend-text"><span class="tooltip" data-tip="AI 에이전트가 검색부터 결제까지 소비자 대신 쇼핑 전 과정을 처리하는 방식">에이전트 커머스</span>가 실용 단계에 접어들면서, 브랜드의 비주얼 자산이 사람 눈이 아닌 AI 에이전트에 의해 먼저 '읽히는' 상황이 현실화되고 있다. 이미지 메타데이터, 알트텍스트, 비주얼 구조화 방식이 곧 브랜드의 경쟁력이 된다는 뜻이다.<br><br>크리에이티브 워크플로우 관점에서 기존에는 최종 소비자의 시각 경험 중심으로 디자인했다면, 이제는 AI가 파악하기 쉬운 구조적 비주얼 설계가 병행되어야 한다. 브랜드 톤앤매너는 사람이 직접 정의하고, AI에게는 그 기준에 맞는 배너·썸네일·상품 이미지의 반복 생성과 포맷 최적화를 맡기는 역할 분리가 효율적이다.<br><br>Canva AI, Adobe Firefly 기반의 배치 생성 기능이 실무에 바로 적용 가능하다. 다만 에이전트가 선택하는 비주얼이 브랜드 가이드라인과 일치하는지 정기적인 크리에이티브 감수 프로세스를 반드시 유지해야 한다.</p>
+        <div class="trend-source">출처: <a href="https://digiday.com/sponsored/wtf-is-agentic-commerce-loyalty-promotions/" target="_blank">WTF is agentic commerce? | How brands can make loyalty and promotions agent-ready</a></div>
+      </div>
+    </div>
+    <div class="trend-item">
+      <span class="trend-num">03</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 미디어 바잉의 수상 사례가 말해주는 크리에이티브의 새 기준</div>
+        <p class="trend-text">Kepler, Samsung Ads, Kraft Heinz가 수상한 2026 Digiday 미디어 바잉 어워즈는 AI 기반 <span class="tooltip" data-tip="데이터를 분석해 광고 노출 대상과 타이밍을 자동으로 최적화하는 방식">실시간 캠페인 최적화</span>가 업계 표준으로 자리잡고 있음을 보여준다. 주목할 점은 단순한 성과 자동화가 아니라, 옴니채널 전략 안에서 크리에이티브 소재의 일관성을 유지한 브랜드가 높은 평가를 받았다는 것이다.<br><br>아트 디렉터 입장에서 이는 단일 마스터 비주얼을 다양한 포맷과 플랫폼에 맞게 신속하게 파생시키는 능력이 더욱 중요해졌다는 신호다. Photoshop의 생성형 채우기나 Figma의 Auto Layout을 활용하면 플랫폼별 소재 파생 작업 시간을 대폭 단축할 수 있다.<br><br>AI에게 맡길 수 있는 것은 사이즈별 리사이징과 배경 변환이며, 브랜드 컬러와 메시지 계층 구조 결정은 반드시 사람의 판단이 필요하다. 클라이언트 결과물 품질을 위해서는 AI 생성 소재도 최종 브랜드 가이드라인 체크리스트를 통과해야 한다.</p>
+        <div class="trend-source">출처: <a href="https://digiday.com/announcement/kepler-samsung-ads-and-kraft-heinz-are-among-the-2026-digiday-media-buying-and-planning-awards-winners/" target="_blank">Kepler, Samsung Ads and Kraft Heinz are among the 2026 Digiday Media Buying and Planning Awards winners</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 06월 17일</div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-executive">
+<div class="page-wrap">
+  <div class="report-date">2026년 06월 17일</div>
+  <h1 class="headline">의사결정자를 위한<br>전략 브리핑</h1>
+  <p class="editor-comment">시장 포지션, 비용·리스크, 지금 결정해야 할 것. 기술 세부사항 없이 경영 판단에 필요한 핵심만 정리했습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 규제</span><span class="tag">경량 모델</span><span class="tag">AI 에이전트</span><span class="tag">엔터프라이즈 AI</span><span class="tag">안전성 검증</span><span class="tag">음성 드론 탐지</span><span class="tag">뇌 컴퓨터 인터페이스</span><span class="tag">혼합현실 칩</span><span class="tag">에이전트 커머스</span><span class="tag">AI 미디어 바잉</span></div>
+  <div class="trend-list">
+    <div class="trend-item">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">정부가 AI 모델을 90분 안에 차단할 수 있다 — 안전성 검증이 사업 연속성 문제가 됐다</div>
+        <p class="trend-text">백악관은 Anthropic의 Claude Fable 5에 대해 사전 경고 없이 외국인 접근 차단을 명령했고, Anthropic은 임원진을 즉각 워싱턴으로 파견해 협상에 나섰지만 합의에 실패했습니다. 이 사건의 핵심은 Amazon이 자사 플랫폼에서 AI 안전 장치 우회 방법을 발견해 정부에 직접 보고했다는 점입니다. 경쟁사가 동종 모델의 취약점을 규제 당국에 제보하는 구도가 현실화됐다는 뜻입니다.<br><br>시장 포지션 관점에서, 국내외 AI 모델을 엔터프라이즈 서비스에 탑재하고 있는 기업은 지금 당장 도입 모델의 안전성 검증 이력을 확인해야 합니다. 규제 리스크가 현실화되면 서비스 중단이 아니라 계약 이행 불가 수준의 사업 중단으로 이어집니다. 공급망 다변화 차원에서 단일 모델 의존도를 낮추는 것이 6개월 내 최우선 의사결정 사항입니다.<br><br>비용 측면에서는 안전성 감사 및 공급사 다변화 비용보다, 서비스 중단 시 발생하는 계약 위반 손실이 훨씬 큽니다. 지금은 법무팀과 기술팀이 함께 AI 공급 계약의 불가항력 조항을 재검토해야 할 시점입니다.</p>
+        <div class="trend-source">출처: <a href="https://www.businesstoday.in/technology/artificial-intelligence/story/anthropic-had-90-minutes-to-restrict-claude-fable-5-as-white-house-feared-chinese-access-537095-2026-06-16" target="_blank">Anthropic Had 90 Minutes to Restrict Claude Fable 5 as White House Feared Chinese Access</a></div>
+      </div>
+    </div>
+    <div class="trend-item">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 에이전트가 쇼핑 전 과정을 대신한다 — 브랜드 로열티 전략을 지금 바꿔야 한다</div>
+        <p class="trend-text"><span class="tooltip" data-tip="AI가 사용자를 대신해 상품 검색, 비교, 결제까지 자동으로 수행하는 쇼핑 방식">에이전트 커머스</span>가 개념에서 실제 적용 단계로 진입했습니다. AI 에이전트가 소비자를 대신해 구매 결정을 내리는 구조에서는, 기존 브랜드 인지도나 비주얼 마케팅보다 AI가 읽을 수 있는 프로모션 구조와 로열티 데이터가 구매를 결정합니다.<br><br>시장 포지션 관점에서, 이미 일부 글로벌 브랜드는 자사 프로모션과 멤버십 혜택을 AI 에이전트가 인식하고 처리할 수 있는 형태로 전환하는 작업에 착수했습니다. 이 준비가 없는 브랜드는 에이전트 추천 목록에서 구조적으로 배제될 수 있습니다.<br><br>의사결정 포인트로, 지금 당장 자사 프로모션 및 쿠폰 데이터가 외부 AI 시스템에 노출 가능한 형태인지 점검해야 합니다. 6개월 내에는 로열티 프로그램을 에이전트 친화적 구조로 재설계하는 프로젝트를 마케팅팀과 IT팀 공동 과제로 올려야 합니다. 이 작업을 미루면 AI 에이전트가 시장 점유율을 높여가는 시점에 채널 접근 자체를 잃게 됩니다.</p>
+        <div class="trend-source">출처: <a href="https://digiday.com/sponsored/wtf-is-agentic-commerce-loyalty-promotions/" target="_blank">WTF is agentic commerce? How brands can make loyalty and promotions agent-ready</a></div>
+      </div>
+    </div>
+    <div class="trend-item">
+      <span class="trend-num">03</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 미디어 바잉이 수상 기준이 됐다 — 광고 예산 집행 방식을 바꾸지 않으면 성과 격차가 벌어진다</div>
+        <p class="trend-text">2026 Digiday Media Buying and Planning Awards 수상 기업들의 공통점은 AI를 활용해 고가치 고객군을 실시간으로 식별하고 캠페인을 즉각 조정한 것입니다. Kepler, Samsung Ads, Kraft Heinz가 수상한 이 평가 기준은 이제 업계의 기본 기대치가 되고 있습니다.<br><br>경쟁사 관점에서, 수동으로 미디어 예산을 집행하는 기업과 AI 기반 실시간 최적화를 운용하는 기업 간의 성과 차이는 이미 수치로 증명되고 있습니다. 같은 예산으로 도달 효율과 전환율에서 격차가 발생하면 이는 시간이 지날수록 복리로 누적됩니다.<br><br>의사결정 포인트로, CMO는 지금 미디어 에이전시와의 계약에 AI 기반 실시간 최적화 의무 조항이 포함되어 있는지 확인해야 합니다. 없다면 다음 계약 갱신 시 이를 성과 지표와 연동된 조건으로 명문화해야 합니다. 1년 내 이 기준을 도입하지 않은 기업은 동일 예산 대비 경쟁사보다 낮은 광고 효율을 구조적으로 감수하게 됩니다.</p>
+        <div class="trend-source">출처: <a href="https://digiday.com/announcement/kepler-samsung-ads-and-kraft-heinz-are-among-the-2026-digiday-media-buying-and-planning-awards-winners/" target="_blank">Kepler, Samsung Ads and Kraft Heinz are among the 2026 Digiday Media Buying and Planning Awards winners</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 06월 17일</div>
+</div>
+</div>
+
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>
