@@ -674,7 +674,7 @@ function ttsToggle() {
     tts.active = true;
     tts.paused = false;
     tts.synth.cancel();
-ttsBtnState('playing');
+    ttsBtnState('playing');
     if (tts.synth.getVoices().length === 0) {
       tts.synth.addEventListener('voiceschanged', function onVoices() {
         tts.synth.removeEventListener('voiceschanged', onVoices);
