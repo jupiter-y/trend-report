@@ -674,8 +674,15 @@ function ttsToggle() {
     tts.active = true;
     tts.paused = false;
     tts.synth.cancel();
-    ttsBtnState('playing');
-    ttsSpeak(0);
+ttsBtnState('playing');
+    if (tts.synth.getVoices().length === 0) {
+      tts.synth.addEventListener('voiceschanged', function onVoices() {
+        tts.synth.removeEventListener('voiceschanged', onVoices);
+        ttsSpeak(0);
+      });
+    } else {
+      ttsSpeak(0);
+    }
 
   } else if (tts.paused) {
     /* 일시정지 → 재개 */
