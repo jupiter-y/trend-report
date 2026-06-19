@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="report-headline" content="AI 코딩 모델로 시장 주도권 쟁탈전">
+  <title>AI 코딩 모델로 시장 주도권 쟁탈전</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:ital,wght@0,300;0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+<style>
+:root {
+  --bg:          #ffffff;
+  --bg-subtle:   #f8f9fa;
+  --bg-toc:      #f4f5f7;
+  --border:      #e5e7eb;
+  --border-soft: #f0f0f0;
+  --fg:          #0d1117;
+  --fg-muted:    #374151;
+  --fg-subtle:   #6b7280;
+  --fg-faint:    #9ca3af;
+  --accent:      #0057ff;
+  --accent-dim:  rgba(0,87,255,0.07);
+  --tag-bg:      #ffffff;
+  --tag-border:  #d1d5db;
+  --tag-fg:      #374151;
+  --tab-bar-h:   48px;
+  --font-sans:   'Noto Sans KR', -apple-system, system-ui, sans-serif;
+  --font-mono:   'JetBrains Mono', monospace;
+  --r-sm: 6px; --r-md: 10px; --r-pill: 999px;
+}
+[data-theme="dark"] {
+  --bg: #0f1117; --bg-subtle: #151820; --bg-toc: #1a1d27;
+  --border: #2a2d3a; --border-soft: #1e2130;
+  --fg: #f0f0f0; --fg-muted: #c0c4d0; --fg-subtle: #6b7280; --fg-faint: #4b5563;
+  --accent: #4e7fff; --accent-dim: rgba(78,127,255,0.1);
+  --tag-bg: #252836; --tag-border: #3a3d4a; --tag-fg: #c0c4d0;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: var(--font-sans); background: var(--bg); color: var(--fg);
+  line-height: 1.7; -webkit-font-smoothing: antialiased; display: block;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── STICKY TAB BAR ── */
+.tab-bar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  height: var(--tab-bar-h);
+  display: flex; align-items: stretch; justify-content: flex-end;
+  padding: 0 60px; gap: 0;
+  transition: background .2s, border-color .2s;
+}
+.tab-btn {
+  padding: 0 18px; font-family: var(--font-sans); font-size: 13.5px; font-weight: 500;
+  color: var(--fg-subtle); background: none; border: none;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  cursor: pointer; white-space: nowrap;
+  transition: color .15s, border-color .15s;
+}
+.tab-btn:hover { color: var(--fg-muted); }
+.tab-btn.active { color: var(--fg); border-bottom-color: var(--accent); }
+
+/* ── TTS 버튼 ── */
+.tts-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-left: 6px; margin-right: 0;
+  padding: 0 14px; height: 30px; align-self: center;
+  font-family: var(--font-sans); font-size: 12.5px; font-weight: 500;
+  color: var(--fg-subtle);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  cursor: pointer; white-space: nowrap;
+  transition: color .15s, border-color .15s, background .15s;
+  flex-shrink: 0;
+}
+.tts-btn:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+.tts-btn.playing { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+.tts-btn.paused  { color: var(--fg-muted); border-color: var(--border); }
+.tts-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+/* 읽는 중인 트렌드 아이템 하이라이트 */
+.trend-item.tts-active {
+  background: var(--accent-dim);
+  border-radius: var(--r-md);
+  padding-left: 16px; padding-right: 16px;
+  margin-left: -16px; margin-right: -16px;
+  transition: background .3s;
+}
+
+/* ── LAYOUT ── */
+.page-wrap { max-width: 860px; margin: 0 auto; padding: 48px 60px 96px; }
+
+/* ── HEADER ── */
+.report-date {
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: .04em; color: var(--fg-subtle); margin-bottom: 16px;
+}
+h1.headline {
+  font-size: clamp(34px, 5vw, 50px); font-weight: 700;
+  line-height: 1.14; letter-spacing: -0.03em; color: var(--fg); margin-bottom: 28px;
+}
+.editor-comment {
+  font-size: 17px; line-height: 1.85; color: var(--fg-muted);
+  margin-bottom: 40px; max-width: 72ch;
+}
+
+/* ── DIVIDER ── */
+hr.div { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+/* ── TOC BOX ── */
+.toc-box {
+  background: var(--bg-toc); border-radius: var(--r-md);
+  padding: 24px 28px; margin-bottom: 48px;
+}
+.toc-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fg-faint); margin-bottom: 16px;
+}
+.toc-list { list-style: none; }
+.toc-item {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 10px 0; border-top: 1px solid var(--border-soft); cursor: pointer;
+}
+.toc-item:first-child { border-top: none; padding-top: 0; }
+.toc-num {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  color: var(--accent); flex-shrink: 0; min-width: 24px;
+}
+.toc-title { font-size: 14.5px; font-weight: 500; color: var(--fg-muted); line-height: 1.5; }
+.toc-item:hover .toc-title { color: var(--fg); }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fg-subtle); margin-bottom: 14px;
+}
+
+/* ── TAGS ── */
+.tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 40px; }
+.tag {
+  font-size: 12.5px; color: var(--tag-fg);
+  background: var(--tag-bg); border: 1px solid var(--tag-border);
+  padding: 5px 13px; border-radius: var(--r-pill);
+}
+
+/* ── TREND ITEMS ── */
+.trend-list { display: flex; flex-direction: column; }
+.trend-item {
+  display: flex; gap: 28px; align-items: flex-start;
+  padding-bottom: 44px; border-bottom: 1px solid var(--border); margin-bottom: 40px;
+  transition: background .3s, padding .3s, margin .3s;
+}
+.trend-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.trend-num {
+  font-family: var(--font-mono); font-size: 14px; font-weight: 500;
+  color: var(--accent); flex-shrink: 0; padding-top: 5px; min-width: 28px;
+}
+.trend-body { flex: 1; min-width: 0; }
+.trend-title {
+  font-size: 22px; font-weight: 700; line-height: 1.35;
+  letter-spacing: -0.02em; color: var(--fg); margin-bottom: 14px;
+}
+.trend-text { font-size: 15.5px; color: var(--fg-muted); line-height: 1.85; margin-bottom: 12px; }
+.trend-source { font-size: 12.5px; color: var(--fg-faint); }
+.trend-source a {
+  color: var(--fg-faint); text-decoration: underline;
+  text-decoration-color: var(--border); text-underline-offset: 3px;
+}
+.trend-source a:hover { color: var(--fg-subtle); }
+
+/* ── TOOLTIP ── */
+.tooltip { color: var(--accent); border-bottom: 1px dashed currentColor; cursor: help; position: relative; }
+.tooltip::after {
+  content: attr(data-tip); display: none;
+  position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+  background: var(--fg); color: var(--bg); font-size: 12px;
+  padding: 6px 10px; border-radius: var(--r-sm); white-space: nowrap; z-index: 20; pointer-events: none;
+}
+.tooltip:hover::after { display: block; }
+
+.section-sep { border: none; border-top: 1px solid var(--border); margin: 44px 0 40px; }
+
+/* ── GLOSSARY ── */
+.glossary { margin-top: 48px; }
+.glossary-heading {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fg-subtle); margin-bottom: 16px;
+}
+.glossary-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+.glossary-card {
+  background: var(--bg-subtle); border: 1px solid var(--border);
+  border-radius: var(--r-md); padding: 16px 18px; transition: border-color .15s;
+}
+.glossary-card:hover { border-color: var(--accent); }
+.glossary-term { font-size: 13.5px; font-weight: 600; color: var(--fg-muted); margin-bottom: 5px; }
+.glossary-desc { font-size: 12.5px; color: var(--fg-subtle); line-height: 1.6; }
+
+/* ── FOOTER ── */
+.report-foot {
+  margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); text-align: right;
+}
+
+/* ── TAB PANELS ── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .tab-bar { padding: 0 16px; gap: 0; }
+  .tab-btn { padding: 0 10px; font-size: 12.5px; }
+  .tts-btn { padding: 0 10px; font-size: 12px; margin-left: 6px; }
+  .page-wrap { padding: 32px 20px 72px; }
+  h1.headline { font-size: 28px; }
+  .trend-title { font-size: 18px; }
+  .trend-item { gap: 16px; }
+  .glossary-grid { grid-template-columns: 1fr; }
+  .trend-item.tts-active { padding-left: 10px; padding-right: 10px; margin-left: -10px; margin-right: -10px; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- ── STICKY TAB BAR (우측 정렬) ── -->
+<nav class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('all',this)">전체</button>
+  <button class="tab-btn" onclick="switchTab('marketer',this)">마케터</button>
+  <button class="tab-btn" onclick="switchTab('developer',this)">개발자</button>
+  <button class="tab-btn" onclick="switchTab('design',this)">디자인</button>
+  <button class="tab-btn" onclick="switchTab('executive',this)">경영자</button>
+  <button class="tts-btn" id="ttsBtn" onclick="ttsToggle()" title="리포트 읽어주기">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    <span>읽어주기</span>
+  </button>
+</nav>
+
+<!-- ── 전체 탭 ── -->
+<div class="tab-panel active" id="tab-all">
+<div class="page-wrap">
+  <div class="report-date">2026년 06월 19일</div>
+  <h1 class="headline">AI 코딩 모델로 시장 주도권 쟁탈전</h1>
+  <p class="editor-comment">2026년은 AI 도입 경쟁에서 '활용의 깊이' 경쟁으로 전환되는 분기점이 될 것 같습니다. Microsoft와 Google이 자체 AI 코딩 모델로 승부를 거는 것처럼, B2B 마케팅 분야도 단순 AI 도구 도입을 넘어 에이전틱 AI로의 진화가 핵심 과제가 되고 있습니다. 96%의 기업이 이미 AI를 채택했지만 고성과는 6%에 불과한 현실은, 단순 도입이 아닌 자사의 워크플로우에 맞게 AI를 심화 통합하는 기업들이 진정한 경쟁 우위를 확보할 것임을 시사합니다. 따라서 2026년 주목할 핵심은 기술의 신기함이 아니라, 그 기술을 비즈니스 오퍼레이션에 얼마나 전략적으로 녹여내느냐의 문제가 될 것입니다.</p>
+  <hr class="div">
+
+  <div class="toc-box">
+    <div class="toc-label">이 리포트의 구성</div>
+    <ul class="toc-list">
+    <li class="toc-item">
+      <span class="toc-num">01</span>
+      <span class="toc-title">AI 코딩 시장의 패권 전쟁 — Microsoft·Google의 자체 모델 승부수</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">02</span>
+      <span class="toc-title">Gemini Spark의 등장 — AI 에이전트가 '상시 대기' 시대로 진입하다</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">03</span>
+      <span class="toc-title">Karpathy, OpenAI에서 Anthropic으로 — AI 인재 전쟁의 새 분수령</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">04</span>
+      <span class="toc-title">B2B 마케터 96%, AI 도입 완료 — 이제 경쟁은 '활용의 깊이'로 결판난다</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">05</span>
+      <span class="toc-title">UPS, 10분마다 갱신되는 AI 디지털 트윈으로 물류 네트워크 '자가 치유' 구현</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">06</span>
+      <span class="toc-title">AI가 프로그래매틱 광고의 '구조적 낭비'를 수면 위로 끌어올린다</span>
+    </li></ul>
+  </div>
+
+  <div class="section-label">WHAT'S NEW</div>
+  <div class="tags"><span class="tag">AI 코딩 모델</span><span class="tag">Gemini Spark</span><span class="tag">AI 에이전트</span><span class="tag">인재 확보</span><span class="tag">사전 학습</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="AI 코딩 시장의 패권 전쟁 — Microsoft·Google의 자체 모델 승부수" data-tts-content="Microsoft는 Anthropic의 Claude Code에 밀린 GitHub Copilot의 경쟁력을 끌어올리기 위해 자체 AI 코딩 모델을 공개했다. 추론 특화 플래그십 모델 MAI-Thinking-1과 함께, 빠르고 저비용의 코딩 모델 MAI-Code-1-Flash를 GitHub Copilot 및 VS Code에 탑재했다. 이는 OpenAI와의 파트너십 조건을 재협상한 후 자체 인하우스 모델 포트폴리오를 확장하려는 전략적 움직임이다. 이번 경쟁의 본질은 하나의 챗봇이 다른 챗봇을 이기는 것이 아니라, 개발자가 매일 사용하는 소프트웨어 안에 자리잡는 인비저블 모델 레이어를 누가 선점하느냐의 싸움으로 번지고 있다.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 코딩 시장의 패권 전쟁 — Microsoft·Google의 자체 모델 승부수</div>
+        <p class="trend-text">Microsoft는 Anthropic의 Claude Code에 밀린 GitHub Copilot의 경쟁력을 끌어올리기 위해 자체 AI 코딩 모델을 공개했다. 추론 특화 플래그십 모델 MAI-Thinking-1과 함께, 빠르고 저비용의 <span class="tooltip" data-tip="코드 생성 특화 AI 모델">코딩 모델</span> MAI-Code-1-Flash를 GitHub Copilot 및 VS Code에 탑재했다. 이는 OpenAI와의 파트너십 조건을 재협상한 후 자체 <span class="tooltip" data-tip="기업 내부 개발 AI 모델">인하우스 모델</span> 포트폴리오를 확장하려는 전략적 움직임이다. 이번 경쟁의 본질은 하나의 챗봇이 다른 챗봇을 이기는 것이 아니라, 개발자가 매일 사용하는 소프트웨어 안에 자리잡는 <span class="tooltip" data-tip="눈에 보이지 않는 핵심 AI 계층">인비저블 모델 레이어</span>를 누가 선점하느냐의 싸움으로 번지고 있다.</p>
+        <div class="trend-source">출처: <a href="https://cybernews.com/ai-news/microsoft-new-homegrown-ai-models-copilot-github/" target="_blank">Microsoft to unveil new AI coding model as it reduces reliance on OpenAI</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="Gemini Spark의 등장 — AI 에이전트가 '상시 대기' 시대로 진입하다" data-tts-content="Google은 Google I/O 2026에서 Gemini Spark를 발표했다. 전용 클라우드 가상 머신 위에서 24시간 실행되며, 사용자의 기기가 꺼진 상태에서도 복잡한 멀티앱 작업을 백그라운드에서 처리한다. 사용자는 전용 Gmail 주소로 Spark에게 이메일을 보내듯 지시할 수 있으며, Gmail·Google Docs 등 Workspace 앱의 맥락을 자동으로 끌어온다. 안전을 최우선으로 신뢰 테스터와 Google AI Ultra 구독자 대상 베타 출시를 우선 진행한다. 이는 Apple과 AI 스타트업이 주도권을 잡기 전에 앰비언트 컴퓨팅 레이어를 먼저 장악하려는 Google의 전략적 포석으로 풀이된다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">Gemini Spark의 등장 — AI 에이전트가 '상시 대기' 시대로 진입하다</div>
+        <p class="trend-text">Google은 Google I/O 2026에서 Gemini Spark를 발표했다. 전용 클라우드 가상 머신 위에서 24시간 실행되며, 사용자의 기기가 꺼진 상태에서도 복잡한 멀티앱 작업을 백그라운드에서 처리한다. 사용자는 전용 Gmail 주소로 Spark에게 이메일을 보내듯 지시할 수 있으며, Gmail·Google Docs 등 <span class="tooltip" data-tip="업무용 구글 서비스 통합 플랫폼">Workspace</span> 앱의 맥락을 자동으로 끌어온다. 안전을 최우선으로 신뢰 테스터와 <span class="tooltip" data-tip="월 100달러 구글 최상위 구독 플랜">Google AI Ultra</span> 구독자 대상 베타 출시를 우선 진행한다. 이는 Apple과 AI 스타트업이 주도권을 잡기 전에 <span class="tooltip" data-tip="항상 연결된 컴퓨팅 환경">앰비언트 컴퓨팅</span> 레이어를 먼저 장악하려는 Google의 전략적 포석으로 풀이된다.</p>
+        <div class="trend-source">출처: <a href="https://thenextweb.com/news/google-gemini-spark-agentic-assistant-gmail-io-2026" target="_blank">Google launches Gemini Spark agentic AI assistant at I/O 2026</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="Karpathy, OpenAI에서 Anthropic으로 — AI 인재 전쟁의 새 분수령" data-tts-content="OpenAI 공동 창업자이자 Tesla AI 전 리더인 Andrej Karpathy가 2026년 5월 19일, Claude를 활용해 사전 학습(pre-training) 연구를 가속화하는 팀을 구축하기 위해 Anthropic 합류를 발표했다. 그의 역할은 단순한 학습 관리가 아니라, Claude 자체를 루프에 넣어 다음 세대 Claude를 더 빠르고 스마트하게 훈련하는 프로세스를 구축하는 것이다. 이 소식은 Anthropic이 400억 달러 기업 가치를 기반으로 AI 안전성·성능 스케일링에 가장 강력하게 베팅하는 시점에 전해졌다. AI 업계에서 가장 존경받는 연구자가 Anthropic을 선택했다는 사실 자체가, OpenAI 측이 보도자료로는 쉽게 반박할 수 없는 상징적 메시지로 받아들여지고 있다.">
+      <span class="trend-num">03</span>
+      <div class="trend-body">
+        <div class="trend-title">Karpathy, OpenAI에서 Anthropic으로 — AI 인재 전쟁의 새 분수령</div>
+        <p class="trend-text">OpenAI 공동 창업자이자 Tesla AI 전 리더인 Andrej Karpathy가 2026년 5월 19일, Claude를 활용해 <span class="tooltip" data-tip="AI 모델의 핵심 초기 학습 단계">사전 학습(pre-training)</span> 연구를 가속화하는 팀을 구축하기 위해 Anthropic 합류를 발표했다. 그의 역할은 단순한 학습 관리가 아니라, Claude 자체를 루프에 넣어 다음 세대 Claude를 더 빠르고 스마트하게 훈련하는 프로세스를 구축하는 것이다. 이 소식은 Anthropic이 400억 달러 기업 가치를 기반으로 <span class="tooltip" data-tip="AI 안전성과 성능을 동시 추구">AI 안전성·성능 스케일링</span>에 가장 강력하게 베팅하는 시점에 전해졌다. AI 업계에서 가장 존경받는 연구자가 Anthropic을 선택했다는 사실 자체가, OpenAI 측이 보도자료로는 쉽게 반박할 수 없는 상징적 메시지로 받아들여지고 있다.</p>
+        <div class="trend-source">출처: <a href="https://techcrunch.com/2026/05/19/openai-co-founder-andrej-karpathy-joins-anthropics-pre-training-team/" target="_blank">OpenAI co-founder Andrej Karpathy joins Anthropic's pre-training team</a></div>
+      </div>
+    </div></div>
+
+  <hr class="section-sep">
+
+  <div class="section-label">HOW TO USE</div>
+  <div class="tags"><span class="tag">AI 전략</span><span class="tag">B2B 마케팅</span><span class="tag">디지털 전환</span><span class="tag">로지스틱스 자동화</span><span class="tag">프로그래매틱 광고</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="B2B 마케터 96%, AI 도입 완료 — 이제 경쟁은 '활용의 깊이'로 결판난다" data-tts-content="300명 이상의 B2B 마케터를 대상으로 한 조사에서 96%가 AI를 업무에 활용 중이며, 이 중 45%는 AI의 핵심 가치로 '팀 효율성 향상'을 꼽았다. 하지만 단순 도입이 곧 경쟁 우위를 의미하지 않는다. 고성과 기업은 전체의 6%에 불과하며, 대부분의 팀은 단편적인 실험 단계에 머물러 있다. 2026년의 진짜 변화는 분석 도구를 넘어, 캠페인을 오케스트레이션하고 리드를 자율 자격심사하는 에이전틱 AI로의 전환이다. 특히 B2B 마케터의 23%는 AI를 메시지 퍼스널라이제이션에 활용하며 구매자 접점을 정밀 설계하고 있다.">
+      <span class="trend-num">04</span>
+      <div class="trend-body">
+        <div class="trend-title">B2B 마케터 96%, AI 도입 완료 — 이제 경쟁은 '활용의 깊이'로 결판난다</div>
+        <p class="trend-text">300명 이상의 B2B 마케터를 대상으로 한 조사에서 96%가 AI를 업무에 활용 중이며, 이 중 45%는 AI의 핵심 가치로 '팀 효율성 향상'을 꼽았다. 하지만 단순 도입이 곧 경쟁 우위를 의미하지 않는다. 고성과 기업은 전체의 6%에 불과하며, 대부분의 팀은 단편적인 실험 단계에 머물러 있다. 2026년의 진짜 변화는 분석 도구를 넘어, 캠페인을 오케스트레이션하고 리드를 자율 자격심사하는 <span class="tooltip" data-tip="자율 실행 AI 에이전트">에이전틱 AI</span>로의 전환이다. 특히 B2B 마케터의 23%는 AI를 <span class="tooltip" data-tip="개인화 메시지 고도화">메시지 퍼스널라이제이션</span>에 활용하며 구매자 접점을 정밀 설계하고 있다.</p>
+        <div class="trend-source">출처: <a href="https://www.marketingaiinstitute.com/blog/future-of-work-b2b-marketers-summit" target="_blank">This Is What B2B Marketers Need to Know About the Future of Work</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="UPS, 10분마다 갱신되는 AI 디지털 트윈으로 물류 네트워크 '자가 치유' 구현" data-tts-content="UPS는 10분마다 업데이트되는 전 세계 물류 네트워크의 실시간 디지털 트윈을 구축했으며, 이는 시설·항공·지상망·패키지 흐름 전체를 포괄한다. AI 기반 네트워크 플래닝 도구는 수개월이 걸리던 분석을 단 하루 오후 만에 완료하며, 수요 예측 정확도는 최대 40% 향상됐고 미국 내 인건비는 9.9% 절감됐다. 이 'Network of the Future' 이니셔티브에는 5년간 90억 달러가 투자되며, 연간 30억 달러의 반복 절감 효과가 기대된다. UPS는 디지털 트윈 시뮬레이션으로 라우팅 변경의 영향을 실제 현장 적용 전에 미리 검증한다.">
+      <span class="trend-num">05</span>
+      <div class="trend-body">
+        <div class="trend-title">UPS, 10분마다 갱신되는 AI 디지털 트윈으로 물류 네트워크 '자가 치유' 구현</div>
+        <p class="trend-text">UPS는 10분마다 업데이트되는 전 세계 물류 네트워크의 실시간 <span class="tooltip" data-tip="현실의 디지털 복제본">디지털 트윈</span>을 구축했으며, 이는 시설·항공·지상망·패키지 흐름 전체를 포괄한다. AI 기반 네트워크 플래닝 도구는 수개월이 걸리던 분석을 단 하루 오후 만에 완료하며, 수요 예측 정확도는 최대 40% 향상됐고 미국 내 인건비는 9.9% 절감됐다. 이 'Network of the Future' 이니셔티브에는 5년간 90억 달러가 투자되며, 연간 30억 달러의 반복 절감 효과가 기대된다. UPS는 <span class="tooltip" data-tip="실제 적용 전 가상 시뮬레이션">디지털 트윈 시뮬레이션</span>으로 라우팅 변경의 영향을 실제 현장 적용 전에 미리 검증한다.</p>
+        <div class="trend-source">출처: <a href="https://thenextweb.com/news/ups-ai-digital-twin-agentic-logistics-network" target="_blank">UPS is building a real-time digital twin of its entire logistics network, updated every 10 minutes</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="AI가 프로그래매틱 광고의 '구조적 낭비'를 수면 위로 끌어올린다" data-tts-content="AI 자동화가 미디어 바잉의 수동 실행 레이어를 걷어낼수록, 기존에 묻혀 있던 '구조적 낭비(structural waste)'라는 더 근본적인 문제가 드러나고 있다. DSP·SSP·데이터 공급사·검증 벤더가 각각 마진을 가져가는 구조 속에서, 광고주의 1달러 중 상당 부분이 실제 소비자에게 도달하기도 전에 소모된다. 2025년 기준 프로그래매틱 낭비 규모는 약 268억 달러로 추산되며, 광고주의 54%는 생성형 AI가 오히려 미디어 품질 저하에 기여했다고 답했다. 2026년 AI의 역할은 실험적 수준을 넘어 구조적 자동화로 진화하며, 동적 가격 최적화와 성과 예측에 깊숙이 내재되고 있다.">
+      <span class="trend-num">06</span>
+      <div class="trend-body">
+        <div class="trend-title">AI가 프로그래매틱 광고의 '구조적 낭비'를 수면 위로 끌어올린다</div>
+        <p class="trend-text">AI 자동화가 미디어 바잉의 수동 실행 레이어를 걷어낼수록, 기존에 묻혀 있던 '구조적 낭비(structural waste)'라는 더 근본적인 문제가 드러나고 있다. <span class="tooltip" data-tip="수요측 플랫폼">DSP</span>·SSP·데이터 공급사·검증 벤더가 각각 마진을 가져가는 구조 속에서, 광고주의 1달러 중 상당 부분이 실제 소비자에게 도달하기도 전에 소모된다. 2025년 기준 프로그래매틱 낭비 규모는 약 268억 달러로 추산되며, 광고주의 54%는 생성형 AI가 오히려 미디어 품질 저하에 기여했다고 답했다. 2026년 AI의 역할은 실험적 수준을 넘어 <span class="tooltip" data-tip="동적 가격·수요 관리 자동화">구조적 자동화</span>로 진화하며, 동적 가격 최적화와 성과 예측에 깊숙이 내재되고 있다.</p>
+        <div class="trend-source">출처: <a href="https://digiday.com/sponsored/what-ai-is-about-to-expose-about-programmatic-advertising/" target="_blank">What AI is about to expose about programmatic advertising</a></div>
+      </div>
+    </div></div>
+
+  <hr class="div">
+  <div class="glossary">
+    <div class="glossary-heading">용어사전</div>
+    <div class="glossary-grid">
+      <div class="glossary-card">
+        <div class="glossary-term">AI 코딩 모델</div>
+        <p class="glossary-desc">코드 생성에 특화된 인공지능 모델</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">인하우스 모델</div>
+        <p class="glossary-desc">기업이 자체 개발한 AI 모델</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">AI 에이전트</div>
+        <p class="glossary-desc">자율적으로 작업을 실행하는 AI 시스템</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">팀 효율성</div>
+        <p class="glossary-desc">AI 도입의 핵심 성과 지표</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">캠페인 오케스트레이션</div>
+        <p class="glossary-desc">마케팅 캠페인 전체를 자동 조율하는 기능</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">리드 자격심사</div>
+        <p class="glossary-desc">판매 가능성 있는 고객을 자동 분류하는 프로세스</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">프로그래매틱 광고</div>
+        <p class="glossary-desc">자동화된 광고 구매 및 배치 시스템</p>
+      </div></div>
+  </div>
+
+  <div class="report-foot">마지막 업데이트: 2026년 06월 19일</div>
+</div>
+</div>
+
+
+<div class="tab-panel" id="tab-marketer">
+<div class="page-wrap">
+  <div class="report-date">2026년 06월 19일</div>
+  <h1 class="headline">캠페인 실무자를 위한<br>AI 활용 전략</h1>
+  <p class="editor-comment">같은 뉴스를 마케터·AE·AI 활용 세 관점으로 재구성했습니다. 캠페인 기획, 클라이언트 제안, 툴 활용에 바로 쓸 수 있는 인사이트를 담았습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 코딩 모델</span><span class="tag">Gemini Spark</span><span class="tag">AI 에이전트</span><span class="tag">인재 확보</span><span class="tag">사전 학습</span><span class="tag">AI 전략</span><span class="tag">B2B 마케팅</span><span class="tag">디지털 전환</span><span class="tag">로지스틱스 자동화</span><span class="tag">프로그래매틱 광고</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="Spotify가 청취 데이터로 콘서트 티켓을 먼저 준다, 팬덤 마케팅의 새 공식" data-tts-content="Spotify가 프리미엄 구독자의 청취 습관을 분석해 콘서트 티켓을 자동으로 선점해주는 'Reserved by Spotify'를 출시했다. 단순한 할인 혜택이 아니라 행동 기반 리워드 모델로, 플랫폼 충성도를 팬덤 경험으로 직접 연결한 점이 핵심이다. 마케터 입장에서는 "데이터를 모으는 것"을 넘어 "데이터가 고객에게 체감되는 순간"을 설계해야 한다는 신호다. 브랜드 멤버십, 앱 구독, 포인트 제도를 운영 중이라면 지금 보유한 데이터로 어떤 선제적 경험을 줄 수 있는지 재점검할 타이밍이다.
+
+캠페인 실무 관점에서는 자사 CRM 데이터를 활용해 구매 이력 상위 고객에게 신제품 출시 전 얼리 액세스를 제공하는 시나리오를 바로 기획해볼 수 있다. Claude나 ChatGPT에 "우리 고객 행동 데이터 유형과 이를 리워드로 전환하는 캠페인 아이디어 10가지 제안해줘"라고 입력하면 기획 시간을 절반 이하로 줄일 수 있다. 클라이언트 제안서에는 "Spotify처럼 데이터를 혜택으로 가시화하는 로열티 캠페인"이라는 레퍼런스 프레임으로 설득력을 높이자.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">Spotify가 청취 데이터로 콘서트 티켓을 먼저 준다, 팬덤 마케팅의 새 공식</div>
+        <p class="trend-text">Spotify가 프리미엄 구독자의 청취 습관을 분석해 콘서트 티켓을 자동으로 선점해주는 'Reserved by Spotify'를 출시했다. 단순한 할인 혜택이 아니라 <span class="tooltip" data-tip="소비자 행동 데이터를 기반으로 개인에게 맞춤화된 경험을 제공하는 방식">행동 기반 리워드</span> 모델로, 플랫폼 충성도를 팬덤 경험으로 직접 연결한 점이 핵심이다. 마케터 입장에서는 "데이터를 모으는 것"을 넘어 "데이터가 고객에게 체감되는 순간"을 설계해야 한다는 신호다. 브랜드 멤버십, 앱 구독, 포인트 제도를 운영 중이라면 지금 보유한 데이터로 어떤 선제적 경험을 줄 수 있는지 재점검할 타이밍이다.<br><br>캠페인 실무 관점에서는 자사 CRM 데이터를 활용해 구매 이력 상위 고객에게 신제품 출시 전 얼리 액세스를 제공하는 시나리오를 바로 기획해볼 수 있다. Claude나 ChatGPT에 "우리 고객 행동 데이터 유형과 이를 리워드로 전환하는 캠페인 아이디어 10가지 제안해줘"라고 입력하면 기획 시간을 절반 이하로 줄일 수 있다. 클라이언트 제안서에는 "Spotify처럼 데이터를 혜택으로 가시화하는 로열티 캠페인"이라는 레퍼런스 프레임으로 설득력을 높이자.</p>
+        <div class="trend-source">출처: <a href="https://thenextweb.com/news/spotify-reserved-ticketing-superfans-live-concert-access" target="_blank">Spotify launches Reserved, a ticketing feature that rewards superfans with early concert access</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="AI가 프로그래매틱 광고의 구조적 낭비를 정면으로 들춰내고 있다" data-tts-content="그동안 광고 업계는 집행 예산 손실을 광고 사기(Ad Fraud) 탓으로 돌려왔지만, AI 자동화가 미디어 바잉 구조를 투명하게 드러내면서 진짜 문제인 '구조적 낭비'가 수면 위로 올라오고 있다. 수십 개의 DSP·SSP 레이어를 거치며 발생하는 수수료 중복, 비효율 지면 노출이 실제 도달 비용을 수십 퍼센트 높인다는 것이다. 마케터라면 지금 집행 중인 프로그래매틱 캠페인의 실제 도달 효율을 숫자로 검증해볼 필요가 있다.
+
+캠페인 실무에서는 현재 사용 중인 DSP 리포트를 ChatGPT에 붙여넣고 "이 중 중복 타겟팅이나 낮은 뷰어빌리티 지면을 추려서 예산 재배분 시나리오를 만들어줘"라고 요청하면 빠른 인사이트를 얻을 수 있다. 클라이언트에게는 "AI 기반 미디어 감사로 기존 예산 대비 실질 도달률을 높이는 캠페인"으로 제안하면 비용 효율화 관점에서 강력한 차별점이 된다. 경쟁 대행사가 여전히 집행량 KPI에 집중하는 동안, 구조적 효율 진단을 먼저 제시하는 것이 선제적 포지셔닝이다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">AI가 프로그래매틱 광고의 구조적 낭비를 정면으로 들춰내고 있다</div>
+        <p class="trend-text">그동안 광고 업계는 집행 예산 손실을 <span class="tooltip" data-tip="봇이나 가짜 트래픽으로 인해 광고비가 허비되는 현상">광고 사기(Ad Fraud)</span> 탓으로 돌려왔지만, AI 자동화가 미디어 바잉 구조를 투명하게 드러내면서 진짜 문제인 '구조적 낭비'가 수면 위로 올라오고 있다. 수십 개의 <span class="tooltip" data-tip="광고 인벤토리를 거래하는 디지털 중개 플랫폼">DSP·SSP 레이어</span>를 거치며 발생하는 수수료 중복, 비효율 지면 노출이 실제 도달 비용을 수십 퍼센트 높인다는 것이다. 마케터라면 지금 집행 중인 프로그래매틱 캠페인의 실제 도달 효율을 숫자로 검증해볼 필요가 있다.<br><br>캠페인 실무에서는 현재 사용 중인 DSP 리포트를 ChatGPT에 붙여넣고 "이 중 중복 타겟팅이나 낮은 뷰어빌리티 지면을 추려서 예산 재배분 시나리오를 만들어줘"라고 요청하면 빠른 인사이트를 얻을 수 있다. 클라이언트에게는 "AI 기반 미디어 감사로 기존 예산 대비 실질 도달률을 높이는 캠페인"으로 제안하면 비용 효율화 관점에서 강력한 차별점이 된다. 경쟁 대행사가 여전히 집행량 KPI에 집중하는 동안, 구조적 효율 진단을 먼저 제시하는 것이 선제적 포지셔닝이다.</p>
+        <div class="trend-source">출처: <a href="https://digiday.com/sponsored/what-ai-is-about-to-expose-about-programmatic-advertising/" target="_blank">What AI is about to expose about programmatic advertising</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="B2B 마케터 84%가 AI를 쓰지만, 전략적으로 쓰는 사람은 극소수다" data-tts-content="2026 State of AI for Business 리포트에 따르면 2,100명 이상의 전문가 중 84%가 B2B 조직에 속해 있으며 AI 도입률은 높지만, 실제로 비즈니스 성과와 연결된 전략적 활용은 여전히 소수에 머물고 있다. AI 내재화 조직과 단순 도구 활용 조직 간의 격차가 빠르게 벌어지는 국면이다. 마케터에게는 "AI를 쓰냐"보다 "AI로 무엇을 측정하고 개선하냐"가 이제 핵심 역량 기준이 된다.
+
+캠페인 실무에서는 Claude를 활용해 월간 캠페인 성과 데이터를 입력하고 "다음 분기 예산 배분 우선순위와 그 근거를 B2B 마케팅 관점에서 분석해줘"라고 요청하면 보고서 초안 작성 시간을 70% 이상 단축할 수 있다. 클라이언트 제안 시에는 단순 AI 도구 도입이 아닌 "AI 기반 성과 측정 체계 구축"을 패키지로 제안하면 경쟁사 대비 격이 다른 제안서가 된다. 지금 당장 자사 마케팅 팀의 AI 활용이 어느 단계에 있는지 체크리스트를 만들어 점검하는 것이 첫 번째 액션이다.">
+      <span class="trend-num">03</span>
+      <div class="trend-body">
+        <div class="trend-title">B2B 마케터 84%가 AI를 쓰지만, 전략적으로 쓰는 사람은 극소수다</div>
+        <p class="trend-text">2026 State of AI for Business 리포트에 따르면 2,100명 이상의 전문가 중 84%가 B2B 조직에 속해 있으며 AI 도입률은 높지만, 실제로 비즈니스 성과와 연결된 전략적 활용은 여전히 소수에 머물고 있다. <span class="tooltip" data-tip="AI를 단순 보조 도구가 아닌 의사결정 구조에 내재화한 조직">AI 내재화 조직</span>과 단순 도구 활용 조직 간의 격차가 빠르게 벌어지는 국면이다. 마케터에게는 "AI를 쓰냐"보다 "AI로 무엇을 측정하고 개선하냐"가 이제 핵심 역량 기준이 된다.<br><br>캠페인 실무에서는 Claude를 활용해 월간 캠페인 성과 데이터를 입력하고 "다음 분기 예산 배분 우선순위와 그 근거를 B2B 마케팅 관점에서 분석해줘"라고 요청하면 보고서 초안 작성 시간을 70% 이상 단축할 수 있다. 클라이언트 제안 시에는 단순 AI 도구 도입이 아닌 "AI 기반 성과 측정 체계 구축"을 패키지로 제안하면 경쟁사 대비 격이 다른 제안서가 된다. 지금 당장 자사 마케팅 팀의 AI 활용이 어느 단계에 있는지 체크리스트를 만들어 점검하는 것이 첫 번째 액션이다.</p>
+        <div class="trend-source">출처: <a href="https://www.marketingaiinstitute.com/blog/future-of-work-b2b-marketers-summit" target="_blank">This Is What B2B Marketers Need to Know About the Future of Work</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 06월 19일</div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-developer">
+<div class="page-wrap">
+  <div class="report-date">2026년 06월 19일</div>
+  <h1 class="headline">개발·데이터 팀을 위한<br>기술 변화 포인트</h1>
+  <p class="editor-comment">API 변화, 아키텍처 영향, 데이터 파이프라인 관점에서 오늘 뉴스를 재해석했습니다. 지금 당장 확인해야 할 것들을 정리했습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 코딩 모델</span><span class="tag">Gemini Spark</span><span class="tag">AI 에이전트</span><span class="tag">인재 확보</span><span class="tag">사전 학습</span><span class="tag">AI 전략</span><span class="tag">B2B 마케팅</span><span class="tag">디지털 전환</span><span class="tag">로지스틱스 자동화</span><span class="tag">프로그래매틱 광고</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="AI 코딩 도구 전쟁: GitHub Copilot 멀티모델 지원이 개발 스택에 미치는 영향" data-tts-content="GitHub Copilot이 Anthropic Claude, Google Gemini, OpenAI GPT를 동시에 지원하면서 개발자는 단일 IDE 안에서 모델을 교체할 수 있는 환경을 갖추게 됐다. 기존에 특정 모델 API에 의존해 빌드된 코딩 어시스턴트 파이프라인은 모델 추상화 레이어를 새로 고려해야 하며, 벤더 종속성 설계 재검토가 필요하다. 애널리스트 관점에서는 모델별 코드 완성률, 오류 수정 속도, 사용자 채택률 같은 비교 지표를 처음으로 동일 환경에서 수집할 수 있게 됐다. 지금 당장 확인할 것은 GitHub Copilot의 모델 선택 API 스펙과 각 모델의 컨텍스트 윈도우 차이가 기존 프롬프트 템플릿에 영향을 주는지 여부다.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 코딩 도구 전쟁: GitHub Copilot 멀티모델 지원이 개발 스택에 미치는 영향</div>
+        <p class="trend-text">GitHub Copilot이 Anthropic Claude, Google Gemini, OpenAI GPT를 동시에 지원하면서 개발자는 단일 IDE 안에서 모델을 교체할 수 있는 환경을 갖추게 됐다. 기존에 특정 모델 API에 의존해 빌드된 코딩 어시스턴트 파이프라인은 모델 추상화 레이어를 새로 고려해야 하며, 벤더 종속성 설계 재검토가 필요하다. 애널리스트 관점에서는 모델별 코드 완성률, 오류 수정 속도, 사용자 채택률 같은 비교 지표를 처음으로 동일 환경에서 수집할 수 있게 됐다. 지금 당장 확인할 것은 GitHub Copilot의 모델 선택 API 스펙과 각 모델의 컨텍스트 윈도우 차이가 기존 프롬프트 템플릿에 영향을 주는지 여부다.</p>
+        <div class="trend-source">출처: <a href="https://www.cnbc.com/2026/06/01/microsoft-and-google-take-on-anthropic-and-openai-in-ai-coding-models.html" target="_blank">Microsoft and Google take on Anthropic and OpenAI in AI coding models</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="UPS 물류 디지털 트윈: 10분 주기 실시간 갱신 아키텍처가 보여주는 것" data-tts-content="UPS가 전체 글로벌 물류 네트워크를 10분 단위로 갱신하는 디지털 트윈을 구축했다. 시설, 항공·지상 네트워크, 패키지 흐름 전체를 하나의 데이터 모델로 연결하고 이상 발생 시 네트워크가 자율 조정하는 구조다. 개발 관점에서는 이 수준의 실시간 동기화를 위해 스트림 처리 엔진, 엣지 센서 데이터 수집, 에이전틱 AI 의사결정 레이어가 어떻게 연결되는지가 핵심 설계 참조점이 된다. 애널리스트 관점에서는 배치성 리포트 기반 물류 분석이 스트리밍 지표 모니터링으로 전환될 때 기존 SQL 배치 쿼리 워크플로우와 어떻게 병존시킬지 설계 결정이 필요하다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">UPS 물류 디지털 트윈: 10분 주기 실시간 갱신 아키텍처가 보여주는 것</div>
+        <p class="trend-text">UPS가 전체 글로벌 물류 네트워크를 10분 단위로 갱신하는 <span class="tooltip" data-tip="물리적 시스템을 실시간으로 반영하는 가상 복제본">디지털 트윈</span>을 구축했다. 시설, 항공·지상 네트워크, 패키지 흐름 전체를 하나의 데이터 모델로 연결하고 이상 발생 시 네트워크가 자율 조정하는 구조다. 개발 관점에서는 이 수준의 실시간 동기화를 위해 스트림 처리 엔진, 엣지 센서 데이터 수집, <span class="tooltip" data-tip="자율적으로 목표를 수행하는 AI 시스템">에이전틱 AI</span> 의사결정 레이어가 어떻게 연결되는지가 핵심 설계 참조점이 된다. 애널리스트 관점에서는 배치성 리포트 기반 물류 분석이 스트리밍 지표 모니터링으로 전환될 때 기존 SQL 배치 쿼리 워크플로우와 어떻게 병존시킬지 설계 결정이 필요하다.</p>
+        <div class="trend-source">출처: <a href="https://thenextweb.com/news/ups-ai-digital-twin-agentic-logistics-network" target="_blank">UPS is building a real-time digital twin of its entire logistics network, updated every 10 minutes</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="AI가 드러내는 프로그래매틱 광고의 구조적 낭비: 데이터 파이프라인 재점검 시점" data-tts-content="AI 기반 미디어 바잉 자동화가 확산되면서 기존 프로그래매틱 파이프라인 내 수동 처리 레이어에 숨어 있던 구조적 낭비가 가시화되고 있다. 개발 관점에서는 DSP·SSP 연동 로그 데이터를 AI가 직접 분석할 수 있도록 데이터 포맷 표준화와 실시간 피드 구조 전환이 선행 과제가 된다. 애널리스트 관점에서는 클릭률·CPM 같은 단일 지표 중심 리포트에서 노출 경로별 실질 전환 기여도를 추적하는 멀티터치 어트리뷰션 모델로 측정 체계를 전환해야 하며, 기존 Python 기반 광고 성과 집계 스크립트의 컬럼 구조 재설계가 필요할 수 있다.">
+      <span class="trend-num">03</span>
+      <div class="trend-body">
+        <div class="trend-title">AI가 드러내는 프로그래매틱 광고의 구조적 낭비: 데이터 파이프라인 재점검 시점</div>
+        <p class="trend-text">AI 기반 미디어 바잉 자동화가 확산되면서 기존 <span class="tooltip" data-tip="자동화된 광고 구매·판매 시스템">프로그래매틱</span> 파이프라인 내 수동 처리 레이어에 숨어 있던 구조적 낭비가 가시화되고 있다. 개발 관점에서는 DSP·SSP 연동 로그 데이터를 AI가 직접 분석할 수 있도록 데이터 포맷 표준화와 실시간 피드 구조 전환이 선행 과제가 된다. 애널리스트 관점에서는 클릭률·CPM 같은 단일 지표 중심 리포트에서 노출 경로별 실질 전환 기여도를 추적하는 멀티터치 어트리뷰션 모델로 측정 체계를 전환해야 하며, 기존 Python 기반 광고 성과 집계 스크립트의 컬럼 구조 재설계가 필요할 수 있다.</p>
+        <div class="trend-source">출처: <a href="https://digiday.com/sponsored/what-ai-is-about-to-expose-about-programmatic-advertising/" target="_blank">What AI is about to expose about programmatic advertising</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 06월 19일</div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-design">
+<div class="page-wrap">
+  <div class="report-date">2026년 06월 19일</div>
+  <h1 class="headline">크리에이티브 팀을 위한<br>AI 활용 포인트</h1>
+  <p class="editor-comment">크리에이티브 워크플로우 변화, 브랜드 아이덴티티 유지, 실제 활용 가능한 AI 디자인 툴을 중심으로 정리했습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 코딩 모델</span><span class="tag">Gemini Spark</span><span class="tag">AI 에이전트</span><span class="tag">인재 확보</span><span class="tag">사전 학습</span><span class="tag">AI 전략</span><span class="tag">B2B 마케팅</span><span class="tag">디지털 전환</span><span class="tag">로지스틱스 자동화</span><span class="tag">프로그래매틱 광고</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="AI 에이전트 시대, 비주얼 워크플로우가 다층 구조로 진화한다" data-tts-content="Google의 Gemini Spark 공개는 단순한 생성 도구의 등장이 아니라, 크리에이티브 워크플로우 자체가 에이전트 기반으로 재편될 수 있다는 신호다. 아트 디렉터 입장에서는 레퍼런스 수집부터 시안 변형까지 반복적 시각 작업을 에이전트에 위임하고, 디렉션과 최종 검수에 집중하는 구조가 현실화된다.
+
+브랜드 톤앤매너 유지를 위해서는 에이전트에게 넘기기 전 스타일 가이드를 텍스트와 비주얼 레퍼런스로 명확히 구조화하는 작업이 선행되어야 한다. 현재 Adobe Firefly, Canva AI처럼 브랜드 키트를 내장한 툴을 에이전트 연동 전 단계에서 병행 활용하면 일관성 리스크를 줄일 수 있다. 다만 감성적 뉘앙스 판단과 클라이언트 맥락 해석은 여전히 사람 디렉터의 고유 영역으로 남는다.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 에이전트 시대, 비주얼 워크플로우가 다층 구조로 진화한다</div>
+        <p class="trend-text">Google의 <span class="tooltip" data-tip="연결된 앱 전반에서 추론하고 사용자 대신 작업을 실행하는 범용 AI">Gemini Spark</span> 공개는 단순한 생성 도구의 등장이 아니라, 크리에이티브 워크플로우 자체가 에이전트 기반으로 재편될 수 있다는 신호다. 아트 디렉터 입장에서는 레퍼런스 수집부터 시안 변형까지 반복적 시각 작업을 에이전트에 위임하고, 디렉션과 최종 검수에 집중하는 구조가 현실화된다.<br><br>브랜드 <span class="tooltip" data-tip="브랜드 고유의 색상, 서체, 톤, 이미지 스타일 등의 시각적 일관성">톤앤매너</span> 유지를 위해서는 에이전트에게 넘기기 전 스타일 가이드를 텍스트와 비주얼 레퍼런스로 명확히 구조화하는 작업이 선행되어야 한다. 현재 Adobe Firefly, Canva AI처럼 브랜드 키트를 내장한 툴을 에이전트 연동 전 단계에서 병행 활용하면 일관성 리스크를 줄일 수 있다. 다만 감성적 뉘앙스 판단과 클라이언트 맥락 해석은 여전히 사람 디렉터의 고유 영역으로 남는다.</p>
+        <div class="trend-source">출처: <a href="https://www.cnbc.com/2026/05/19/google-ai-ultra-gemini-spark-omni.html" target="_blank">Google I/O 2026: 새 AI 모델 및 개인 AI 에이전트 공개</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="UPS 디지털 트윈이 보여주는 것, 브랜드 비주얼도 실시간 대응 체계가 필요하다" data-tts-content="UPS가 10분마다 갱신되는 디지털 트윈으로 물류 네트워크를 운영하기 시작한 것은 크리에이티브 팀에게도 의미 있는 참조점이다. 캠페인 비주얼 역시 데이터 흐름에 맞춰 빠르게 변형되어야 하는 시대가 오고 있으며, 정적인 최종 시안 하나를 완성하는 방식에서 반응형 에셋 시스템을 설계하는 방향으로 작업 패러다임이 이동하고 있다.
+
+Figma의 Variables 기능이나 다이나믹 에셋 시스템과 AI 생성 툴을 조합하면, 채널별 소재 변형 작업 시간을 실질적으로 단축할 수 있다. 브랜드 아이덴티티 유지 측면에서는 자동화 범위를 레이아웃 변형과 리사이징에 한정하고, 핵심 비주얼 컨셉과 감성 방향은 디렉터가 직접 정의하는 역할 분리가 필수다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">UPS 디지털 트윈이 보여주는 것, 브랜드 비주얼도 실시간 대응 체계가 필요하다</div>
+        <p class="trend-text">UPS가 10분마다 갱신되는 <span class="tooltip" data-tip="물리적 시스템을 실시간으로 반영하는 가상 복제 모델">디지털 트윈</span>으로 물류 네트워크를 운영하기 시작한 것은 크리에이티브 팀에게도 의미 있는 참조점이다. 캠페인 비주얼 역시 데이터 흐름에 맞춰 빠르게 변형되어야 하는 시대가 오고 있으며, 정적인 최종 시안 하나를 완성하는 방식에서 반응형 에셋 시스템을 설계하는 방향으로 작업 패러다임이 이동하고 있다.<br><br>Figma의 Variables 기능이나 <span class="tooltip" data-tip="하나의 마스터 디자인에서 다양한 사이즈와 포맷을 자동 생성하는 방식">다이나믹 에셋 시스템</span>과 AI 생성 툴을 조합하면, 채널별 소재 변형 작업 시간을 실질적으로 단축할 수 있다. 브랜드 아이덴티티 유지 측면에서는 자동화 범위를 레이아웃 변형과 리사이징에 한정하고, 핵심 비주얼 컨셉과 감성 방향은 디렉터가 직접 정의하는 역할 분리가 필수다.</p>
+        <div class="trend-source">출처: <a href="https://thenextweb.com/news/ups-ai-digital-twin-agentic-logistics-network" target="_blank">UPS is building a real-time digital twin of its entire logistics network, updated every 10 minutes</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="프로그래매틱 광고의 구조적 낭비, 크리에이티브 품질 기준을 다시 세울 기회" data-tts-content="AI가 프로그래매틱 미디어 바잉의 비효율을 가시화하면서, 광고 크리에이티브 자체의 퀄리티가 성과를 가르는 핵심 변수로 부각되고 있다. 자동화가 미디어 집행의 낭비를 걷어낼수록, 실제 비주얼과 메시지의 완성도가 브랜드 결과물에 미치는 영향은 더욱 직접적으로 드러난다.
+
+크리에이티브 팀 입장에서는 AI가 생성한 배너와 소재 변형물이 실제 노출 환경에서 브랜드 품질 기준을 충족하는지 검수하는 프로세스를 강화할 필요가 있다. 특히 접근성 기준과 소형 포맷에서의 브랜드 가독성은 AI 생성물이 가장 자주 놓치는 지점으로, 사람의 최종 검수가 반드시 필요한 영역이다.">
+      <span class="trend-num">03</span>
+      <div class="trend-body">
+        <div class="trend-title">프로그래매틱 광고의 구조적 낭비, 크리에이티브 품질 기준을 다시 세울 기회</div>
+        <p class="trend-text">AI가 <span class="tooltip" data-tip="데이터와 알고리즘으로 광고 지면을 자동 구매하는 방식">프로그래매틱</span> 미디어 바잉의 비효율을 가시화하면서, 광고 크리에이티브 자체의 퀄리티가 성과를 가르는 핵심 변수로 부각되고 있다. 자동화가 미디어 집행의 낭비를 걷어낼수록, 실제 비주얼과 메시지의 완성도가 브랜드 결과물에 미치는 영향은 더욱 직접적으로 드러난다.<br><br>크리에이티브 팀 입장에서는 AI가 생성한 배너와 소재 변형물이 실제 노출 환경에서 브랜드 품질 기준을 충족하는지 검수하는 프로세스를 강화할 필요가 있다. 특히 <span class="tooltip" data-tip="가독성, 색 대비, 텍스트 크기 등 다양한 사용자가 콘텐츠를 이용할 수 있도록 하는 디자인 기준">접근성 기준</span>과 소형 포맷에서의 브랜드 가독성은 AI 생성물이 가장 자주 놓치는 지점으로, 사람의 최종 검수가 반드시 필요한 영역이다.</p>
+        <div class="trend-source">출처: <a href="https://digiday.com/sponsored/what-ai-is-about-to-expose-about-programmatic-advertising/" target="_blank">What AI is about to expose about programmatic advertising</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 06월 19일</div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-executive">
+<div class="page-wrap">
+  <div class="report-date">2026년 06월 19일</div>
+  <h1 class="headline">의사결정자를 위한<br>전략 브리핑</h1>
+  <p class="editor-comment">시장 포지션, 비용·리스크, 지금 결정해야 할 것. 기술 세부사항 없이 경영 판단에 필요한 핵심만 정리했습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 코딩 모델</span><span class="tag">Gemini Spark</span><span class="tag">AI 에이전트</span><span class="tag">인재 확보</span><span class="tag">사전 학습</span><span class="tag">AI 전략</span><span class="tag">B2B 마케팅</span><span class="tag">디지털 전환</span><span class="tag">로지스틱스 자동화</span><span class="tag">프로그래매틱 광고</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="AI 인재 전쟁, 이제 경쟁사가 내 핵심 인력을 데려간다" data-tts-content="Andrej Karpathy의 OpenAI → Anthropic 이직은 단순한 인사 뉴스가 아니다. 최정상급 AI 인재가 더 나은 연구 환경과 전략적 방향성을 따라 움직이기 시작했다는 신호다. 201년 역사의 Liberty Bank조차 스타트업과 손잡고 AI 센터 오브 엑설런스를 설립한 것은, 더 이상 금융권도 AI 조직 내재화를 미룰 수 없다는 현실을 보여준다. 지금 당장 결정해야 할 것은 AI 전담 조직 신설 여부가 아니라, 외부 인재 유치와 내부 육성 중 어느 쪽에 예산을 먼저 집중할 것인가다. 6개월 내 AI 역할 정의 없이 채용을 시작하면, 이직률만 높아진다. 파트너십 구조는 비용 절감이 아닌 속도 확보 수단으로 접근해야 한다.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 인재 전쟁, 이제 경쟁사가 내 핵심 인력을 데려간다</div>
+        <p class="trend-text">Andrej Karpathy의 OpenAI → Anthropic 이직은 단순한 인사 뉴스가 아니다. 최정상급 AI 인재가 더 나은 연구 환경과 전략적 방향성을 따라 움직이기 시작했다는 신호다. 201년 역사의 Liberty Bank조차 스타트업과 손잡고 <span class="tooltip" data-tip="AI 전략 수립·실행·거버넌스를 전담하는 내부 조직">AI 센터 오브 엑설런스</span>를 설립한 것은, 더 이상 금융권도 AI 조직 내재화를 미룰 수 없다는 현실을 보여준다. 지금 당장 결정해야 할 것은 AI 전담 조직 신설 여부가 아니라, 외부 인재 유치와 내부 육성 중 어느 쪽에 예산을 먼저 집중할 것인가다. 6개월 내 AI 역할 정의 없이 채용을 시작하면, 이직률만 높아진다. 파트너십 구조는 비용 절감이 아닌 속도 확보 수단으로 접근해야 한다.</p>
+        <div class="trend-source">출처: <a href="https://techcrunch.com/2026/05/19/openai-co-founder-andrej-karpathy-joins-anthropics-pre-training-team/" target="_blank">Andrej Karpathy joins Anthropic's pre-training team</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="UPS가 증명한 것, 물류·운영 자동화의 ROI는 이미 측정 가능하다" data-tts-content="UPS는 전체 글로벌 물류 네트워크를 10분 단위로 갱신하는 디지털 트윈을 가동 중이다. 네트워크 이상 발생 시 사람의 개입 없이 자동 복구가 이루어진다. 경쟁사가 이 수준의 운영 가시성을 확보하는 순간, 배송 정확도·비용 구조·고객 대응 속도 모두에서 격차가 벌어진다. 도입 비용은 초기 인프라 투자가 크지만, UPS 사례는 운영 손실 방지와 고객 이탈 감소라는 두 가지 경로로 ROI가 발생함을 보여준다. 1년 내 로드맵으로는 전체 네트워크 디지털화보다 병목 구간 한 곳을 시범 적용하는 것이 현실적이며, 이를 통해 투자 규모와 효과를 내부적으로 검증할 수 있다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">UPS가 증명한 것, 물류·운영 자동화의 ROI는 이미 측정 가능하다</div>
+        <p class="trend-text">UPS는 전체 글로벌 물류 네트워크를 10분 단위로 갱신하는 <span class="tooltip" data-tip="실제 시스템을 가상으로 복제해 실시간 시뮬레이션과 의사결정에 활용하는 기술">디지털 트윈</span>을 가동 중이다. 네트워크 이상 발생 시 사람의 개입 없이 자동 복구가 이루어진다. 경쟁사가 이 수준의 운영 가시성을 확보하는 순간, 배송 정확도·비용 구조·고객 대응 속도 모두에서 격차가 벌어진다. 도입 비용은 초기 인프라 투자가 크지만, UPS 사례는 운영 손실 방지와 고객 이탈 감소라는 두 가지 경로로 ROI가 발생함을 보여준다. 1년 내 로드맵으로는 전체 네트워크 디지털화보다 병목 구간 한 곳을 시범 적용하는 것이 현실적이며, 이를 통해 투자 규모와 효과를 내부적으로 검증할 수 있다.</p>
+        <div class="trend-source">출처: <a href="https://thenextweb.com/news/ups-ai-digital-twin-agentic-logistics-network" target="_blank">UPS is building a real-time digital twin of its entire logistics network, updated every 10 minutes</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="광고 예산의 구조적 낭비, AI가 이제 숫자로 드러낸다" data-tts-content="프로그래매틱 광고 시장에서 AI 자동화가 확대되면서, 그동안 '업계 관행'으로 묻혀 있던 중간 수수료와 허위 트래픽의 실제 규모가 수치로 노출되기 시작했다. B2B 마케터의 84%가 AI 도입을 검토 중인 상황에서, 광고 집행 방식을 바꾸지 않으면 같은 예산으로 경쟁사보다 적은 도달을 얻는 구조가 된다. 지금 결정해야 할 것은 현재 집행 중인 광고 예산의 실제 도달 효율을 측정할 수 있는가 여부다. 측정 체계가 없다면 AI 전환 전에 먼저 데이터 기반 성과 추적 구조를 갖추는 것이 선행 과제다. 6개월 내 채널별 비용 효율 재검토를 통해 예산 재배분 근거를 마련해야 한다.">
+      <span class="trend-num">03</span>
+      <div class="trend-body">
+        <div class="trend-title">광고 예산의 구조적 낭비, AI가 이제 숫자로 드러낸다</div>
+        <p class="trend-text"><span class="tooltip" data-tip="광고 구매·판매 과정을 자동화된 시스템으로 처리하는 디지털 광고 방식">프로그래매틱 광고</span> 시장에서 AI 자동화가 확대되면서, 그동안 '업계 관행'으로 묻혀 있던 중간 수수료와 허위 트래픽의 실제 규모가 수치로 노출되기 시작했다. B2B 마케터의 84%가 AI 도입을 검토 중인 상황에서, 광고 집행 방식을 바꾸지 않으면 같은 예산으로 경쟁사보다 적은 도달을 얻는 구조가 된다. 지금 결정해야 할 것은 현재 집행 중인 광고 예산의 실제 도달 효율을 측정할 수 있는가 여부다. 측정 체계가 없다면 AI 전환 전에 먼저 데이터 기반 성과 추적 구조를 갖추는 것이 선행 과제다. 6개월 내 채널별 비용 효율 재검토를 통해 예산 재배분 근거를 마련해야 한다.</p>
+        <div class="trend-source">출처: <a href="https://digiday.com/sponsored/what-ai-is-about-to-expose-about-programmatic-advertising/" target="_blank">What AI is about to expose about programmatic advertising</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 06월 19일</div>
+</div>
+</div>
+
+
+<script>
+/* ── 탭 전환 ── */
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+  ttsStop(); // 탭 전환 시 TTS 중단
+}
+
+/* ────────────────────────────────────────
+   TTS — Web Speech API
+   읽기 순서: 헤드라인 → 에디터 코멘트 → 트렌드(제목+내용) 순
+   각 트렌드 아이템 읽는 동안 해당 카드 하이라이트
+──────────────────────────────────────── */
+var tts = {
+  synth:    window.speechSynthesis || null,
+  queue:    [],   // {text, el} 배열
+  idx:      0,
+  active:   false,
+  paused:   false,
+  curEl:    null,
+};
+
+var TTS_ICONS = {
+  play:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>',
+  pause: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>',
+  stop:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>',
+};
+
+function ttsBtn() { return document.getElementById('ttsBtn'); }
+
+function ttsBtnState(state) {
+  var btn = ttsBtn(); if (!btn) return;
+  if (state === 'playing') {
+    btn.innerHTML = TTS_ICONS.pause + '<span>일시정지</span>';
+    btn.classList.add('playing'); btn.classList.remove('paused');
+  } else if (state === 'paused') {
+    btn.innerHTML = TTS_ICONS.play + '<span>계속 읽기</span>';
+    btn.classList.remove('playing'); btn.classList.add('paused');
+  } else {
+    btn.innerHTML = TTS_ICONS.play + '<span>읽어주기</span>';
+    btn.classList.remove('playing', 'paused');
+  }
+}
+
+function ttsHighlight(el) {
+  if (tts.curEl) tts.curEl.classList.remove('tts-active');
+  tts.curEl = el;
+  if (el) {
+    el.classList.add('tts-active');
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function ttsBuildQueue() {
+  /* 현재 활성 탭에서 읽을 내용 수집 */
+  var panel = document.querySelector('.tab-panel.active');
+  if (!panel) return [];
+
+  var queue = [];
+
+  /* 1. 헤드라인 */
+  var h1 = panel.querySelector('h1.headline');
+  if (h1) queue.push({ text: h1.innerText, el: null });
+
+  /* 2. 에디터 코멘트 */
+  var ec = panel.querySelector('.editor-comment');
+  if (ec) queue.push({ text: ec.innerText, el: null });
+
+  /* 3. 트렌드 아이템 — data-tts-title / data-tts-content 속성 사용 */
+  var items = panel.querySelectorAll('.trend-item[data-tts-title]');
+  items.forEach(function(item) {
+    var title   = item.getAttribute('data-tts-title')   || '';
+    var content = item.getAttribute('data-tts-content') || '';
+    if (title) queue.push({ text: title + '. ' + content, el: item });
+  });
+
+  return queue;
+}
+
+function ttsSpeak(idx) {
+  if (!tts.synth || idx >= tts.queue.length) {
+    ttsStop(); return;
+  }
+  tts.idx = idx;
+  var item = tts.queue[idx];
+  ttsHighlight(item.el);
+
+  var utt = new SpeechSynthesisUtterance(item.text);
+  utt.lang = 'ko-KR';
+  utt.rate = 0.92;
+  utt.pitch = 1.05;
+
+  /* 고품질 음성 우선 선택: Google > Microsoft > 기타 ko 순 */
+  var voices = tts.synth.getVoices();
+  var koVoice =
+    voices.find(function(v){ return v.lang === 'ko-KR' && v.name.includes('Google'); }) ||
+    voices.find(function(v){ return v.lang === 'ko-KR' && v.name.includes('Microsoft'); }) ||
+    voices.find(function(v){ return v.lang.startsWith('ko'); });
+  if (koVoice) utt.voice = koVoice;
+
+  utt.onend = function() {
+    if (!tts.paused) ttsSpeak(idx + 1);
+  };
+  utt.onerror = function() {
+    ttsSpeak(idx + 1);
+  };
+
+  tts.synth.speak(utt);
+}
+
+function ttsToggle() {
+  if (!tts.synth) {
+    alert('이 브라우저는 음성 읽기를 지원하지 않습니다. Chrome 또는 Edge를 사용해 주세요.');
+    return;
+  }
+
+  if (!tts.active) {
+    /* 처음 시작 */
+    tts.queue  = ttsBuildQueue();
+    tts.idx    = 0;
+    tts.active = true;
+    tts.paused = false;
+    tts.synth.cancel();
+    ttsBtnState('playing');
+    /* Chrome은 getVoices()가 비동기 로드 → voiceschanged 대응 */
+    if (tts.synth.getVoices().length === 0) {
+      tts.synth.addEventListener('voiceschanged', function onVoices() {
+        tts.synth.removeEventListener('voiceschanged', onVoices);
+        ttsSpeak(0);
+      });
+    } else {
+      ttsSpeak(0);
+    }
+
+  } else if (tts.paused) {
+    /* 일시정지 → 재개 */
+    tts.paused = false;
+    ttsBtnState('playing');
+    tts.synth.resume();
+    /* resume이 동작하지 않는 브라우저 대응: 현재 idx부터 재시작 */
+    if (!tts.synth.speaking) ttsSpeak(tts.idx);
+
+  } else {
+    /* 재생 중 → 일시정지 */
+    tts.paused = true;
+    ttsBtnState('paused');
+    tts.synth.pause();
+  }
+}
+
+function ttsStop() {
+  if (tts.synth) tts.synth.cancel();
+  tts.active = false;
+  tts.paused = false;
+  tts.queue  = [];
+  tts.idx    = 0;
+  ttsHighlight(null);
+  ttsBtnState('idle');
+}
+
+/* 페이지 이탈 / 숨김 시 TTS 중단 */
+document.addEventListener('visibilitychange', function() {
+  if (document.hidden) ttsStop();
+});
+</script>
+
+</body>
+</html>
