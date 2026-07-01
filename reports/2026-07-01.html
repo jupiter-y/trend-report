@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="report-headline" content="트럼프 정부의 AI 규제로 OpenAI, GPT-5.6 제한 공개">
+  <title>트럼프 정부의 AI 규제로 OpenAI, GPT-5.6 제한 공개</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:ital,wght@0,300;0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+<style>
+:root {
+  --bg:          #ffffff;
+  --bg-subtle:   #f8f9fa;
+  --bg-toc:      #f4f5f7;
+  --border:      #e5e7eb;
+  --border-soft: #f0f0f0;
+  --fg:          #0d1117;
+  --fg-muted:    #374151;
+  --fg-subtle:   #6b7280;
+  --fg-faint:    #9ca3af;
+  --accent:      #0057ff;
+  --accent-dim:  rgba(0,87,255,0.07);
+  --tag-bg:      #ffffff;
+  --tag-border:  #d1d5db;
+  --tag-fg:      #374151;
+  --tab-bar-h:   48px;
+  --font-sans:   'Noto Sans KR', -apple-system, system-ui, sans-serif;
+  --font-mono:   'JetBrains Mono', monospace;
+  --r-sm: 6px; --r-md: 10px; --r-pill: 999px;
+}
+[data-theme="dark"] {
+  --bg: #0f1117; --bg-subtle: #151820; --bg-toc: #1a1d27;
+  --border: #2a2d3a; --border-soft: #1e2130;
+  --fg: #f0f0f0; --fg-muted: #c0c4d0; --fg-subtle: #6b7280; --fg-faint: #4b5563;
+  --accent: #4e7fff; --accent-dim: rgba(78,127,255,0.1);
+  --tag-bg: #252836; --tag-border: #3a3d4a; --tag-fg: #c0c4d0;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: var(--font-sans); background: var(--bg); color: var(--fg);
+  line-height: 1.7; -webkit-font-smoothing: antialiased; display: block;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── STICKY TAB BAR ── */
+.tab-bar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  height: var(--tab-bar-h);
+  display: flex; align-items: stretch; justify-content: flex-end;
+  padding: 0 60px; gap: 0;
+  transition: background .2s, border-color .2s;
+}
+.tab-btn {
+  padding: 0 18px; font-family: var(--font-sans); font-size: 13.5px; font-weight: 500;
+  color: var(--fg-subtle); background: none; border: none;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  cursor: pointer; white-space: nowrap;
+  transition: color .15s, border-color .15s;
+}
+.tab-btn:hover { color: var(--fg-muted); }
+.tab-btn.active { color: var(--fg); border-bottom-color: var(--accent); }
+
+/* ── TTS 버튼 ── */
+.tts-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-left: 6px; margin-right: 0;
+  padding: 0 14px; height: 30px; align-self: center;
+  font-family: var(--font-sans); font-size: 12.5px; font-weight: 500;
+  color: var(--fg-subtle);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  cursor: pointer; white-space: nowrap;
+  transition: color .15s, border-color .15s, background .15s;
+  flex-shrink: 0;
+}
+.tts-btn:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+.tts-btn.playing { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+.tts-btn.paused  { color: var(--fg-muted); border-color: var(--border); }
+.tts-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+/* 읽는 중인 트렌드 아이템 하이라이트 */
+.trend-item.tts-active {
+  background: var(--accent-dim);
+  border-radius: var(--r-md);
+  padding-left: 16px; padding-right: 16px;
+  margin-left: -16px; margin-right: -16px;
+  transition: background .3s;
+}
+
+/* ── LAYOUT ── */
+.page-wrap { max-width: 860px; margin: 0 auto; padding: 48px 60px 96px; }
+
+/* ── HEADER ── */
+.report-date {
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: .04em; color: var(--fg-subtle); margin-bottom: 16px;
+}
+h1.headline {
+  font-size: clamp(34px, 5vw, 50px); font-weight: 700;
+  line-height: 1.14; letter-spacing: -0.03em; color: var(--fg); margin-bottom: 28px;
+}
+.editor-comment {
+  font-size: 17px; line-height: 1.85; color: var(--fg-muted);
+  margin-bottom: 40px; max-width: 72ch;
+}
+
+/* ── DIVIDER ── */
+hr.div { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+/* ── TOC BOX ── */
+.toc-box {
+  background: var(--bg-toc); border-radius: var(--r-md);
+  padding: 24px 28px; margin-bottom: 48px;
+}
+.toc-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fg-faint); margin-bottom: 16px;
+}
+.toc-list { list-style: none; }
+.toc-item {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 10px 0; border-top: 1px solid var(--border-soft); cursor: pointer;
+}
+.toc-item:first-child { border-top: none; padding-top: 0; }
+.toc-num {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  color: var(--accent); flex-shrink: 0; min-width: 24px;
+}
+.toc-title { font-size: 14.5px; font-weight: 500; color: var(--fg-muted); line-height: 1.5; }
+.toc-item:hover .toc-title { color: var(--fg); }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fg-subtle); margin-bottom: 14px;
+}
+
+/* ── TAGS ── */
+.tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 40px; }
+.tag {
+  font-size: 12.5px; color: var(--tag-fg);
+  background: var(--tag-bg); border: 1px solid var(--tag-border);
+  padding: 5px 13px; border-radius: var(--r-pill);
+}
+
+/* ── TREND ITEMS ── */
+.trend-list { display: flex; flex-direction: column; }
+.trend-item {
+  display: flex; gap: 28px; align-items: flex-start;
+  padding-bottom: 44px; border-bottom: 1px solid var(--border); margin-bottom: 40px;
+  transition: background .3s, padding .3s, margin .3s;
+}
+.trend-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.trend-num {
+  font-family: var(--font-mono); font-size: 14px; font-weight: 500;
+  color: var(--accent); flex-shrink: 0; padding-top: 5px; min-width: 28px;
+}
+.trend-body { flex: 1; min-width: 0; }
+.trend-title {
+  font-size: 22px; font-weight: 700; line-height: 1.35;
+  letter-spacing: -0.02em; color: var(--fg); margin-bottom: 14px;
+}
+.trend-text { font-size: 15.5px; color: var(--fg-muted); line-height: 1.85; margin-bottom: 12px; }
+.trend-source { font-size: 12.5px; color: var(--fg-faint); }
+.trend-source a {
+  color: var(--fg-faint); text-decoration: underline;
+  text-decoration-color: var(--border); text-underline-offset: 3px;
+}
+.trend-source a:hover { color: var(--fg-subtle); }
+
+/* ── TOOLTIP ── */
+.tooltip { color: var(--accent); border-bottom: 1px dashed currentColor; cursor: help; position: relative; }
+.tooltip::after {
+  content: attr(data-tip); display: none;
+  position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+  background: var(--fg); color: var(--bg); font-size: 12px;
+  padding: 6px 10px; border-radius: var(--r-sm); white-space: nowrap; z-index: 20; pointer-events: none;
+}
+.tooltip:hover::after { display: block; }
+
+.section-sep { border: none; border-top: 1px solid var(--border); margin: 44px 0 40px; }
+
+/* ── GLOSSARY ── */
+.glossary { margin-top: 48px; }
+.glossary-heading {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fg-subtle); margin-bottom: 16px;
+}
+.glossary-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+.glossary-card {
+  background: var(--bg-subtle); border: 1px solid var(--border);
+  border-radius: var(--r-md); padding: 16px 18px; transition: border-color .15s;
+}
+.glossary-card:hover { border-color: var(--accent); }
+.glossary-term { font-size: 13.5px; font-weight: 600; color: var(--fg-muted); margin-bottom: 5px; }
+.glossary-desc { font-size: 12.5px; color: var(--fg-subtle); line-height: 1.6; }
+
+/* ── FOOTER ── */
+.report-foot {
+  margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); text-align: right;
+}
+
+/* ── TAB PANELS ── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── 팟캐스트 탭 ── */
+.podcast-wrap { max-width:720px; margin:0 auto; padding:40px 60px 96px; }
+.pod-header { margin-bottom:28px; }
+.pod-eyebrow {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--fg-faint); margin-bottom:12px;
+}
+.pod-eyebrow-dot {
+  width:6px; height:6px; border-radius:50%; background:var(--accent);
+  animation:pod-pulse 1.8s ease-in-out infinite;
+}
+@keyframes pod-pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+.pod-title { font-size:clamp(20px,3vw,28px); font-weight:700; line-height:1.2; letter-spacing:-0.02em; color:var(--fg); margin-bottom:8px; }
+.pod-desc  { font-size:13.5px; color:var(--fg-muted); line-height:1.7; }
+
+.pod-player { background:var(--bg-subtle); border:1px solid var(--border); border-radius:var(--r-md); padding:18px 22px; margin-bottom:24px; }
+.pod-controls { display:flex; align-items:center; gap:14px; margin-bottom:14px; }
+.pod-play-btn {
+  width:44px; height:44px; border-radius:50%;
+  background:var(--accent); border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  transition:opacity .15s, transform .1s; box-shadow:0 2px 8px rgba(0,87,255,.25);
+}
+.pod-play-btn:hover { opacity:.88; transform:scale(1.04); }
+.pod-play-btn svg   { width:16px; height:16px; flex-shrink:0; }
+.pod-info { flex:1; min-width:0; }
+.pod-speaker-now  { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--fg-faint); margin-bottom:2px; }
+.pod-speaker-name { font-size:13.5px; font-weight:700; color:var(--fg-subtle); transition:color .3s; }
+.pod-progress-wrap { display:flex; align-items:center; gap:10px; }
+.pod-progress-bar  { flex:1; height:4px; background:var(--border); border-radius:2px; cursor:pointer; }
+.pod-progress-fill { height:100%; background:var(--accent); border-radius:2px; width:0%; transition:width .25s linear; }
+.pod-time { font-family:var(--font-mono); font-size:11px; color:var(--fg-faint); white-space:nowrap; }
+.pod-bottom-row  { display:flex; align-items:center; justify-content:space-between; margin-top:10px; }
+.pod-speed-group { display:flex; align-items:center; gap:5px; }
+.pod-speed-label { font-size:11px; color:var(--fg-faint); margin-right:2px; }
+.pod-speed-btn   { font-size:11px; font-weight:600; font-family:var(--font-mono); padding:3px 8px; border-radius:var(--r-pill); border:1px solid var(--border); background:none; cursor:pointer; color:var(--fg-subtle); transition:all .15s; }
+.pod-speed-btn.pod-speed-active { background:var(--accent); border-color:var(--accent); color:#fff; }
+.pod-restart-btn { font-size:11.5px; color:var(--fg-faint); background:none; border:none; cursor:pointer; display:flex; align-items:center; gap:4px; font-family:var(--font-sans); transition:color .15s; }
+.pod-restart-btn:hover { color:var(--fg-muted); }
+.pod-restart-btn svg { width:12px; height:12px; }
+
+.pod-personas { display:flex; gap:8px; margin-bottom:24px; overflow-x:auto; padding-bottom:4px; scrollbar-width:none; }
+.pod-personas::-webkit-scrollbar { display:none; }
+.persona-card  { flex-shrink:0; width:112px; border-radius:var(--r-md); border:1.5px solid var(--border); padding:12px 10px 10px; text-align:center; transition:border-color .2s, box-shadow .2s, transform .2s; }
+.persona-card.pod-speaking { transform:translateY(-3px); }
+.persona-avatar { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:15px; margin:0 auto 7px; }
+.persona-name   { font-size:11.5px; font-weight:700; margin-bottom:2px; line-height:1.3; }
+.persona-role   { font-size:9.5px; color:var(--fg-faint); font-family:var(--font-mono); }
+.persona-host      .persona-avatar { background:rgba(55,65,81,.08); }
+.persona-host      .persona-name   { color:#374151; }
+.persona-host.pod-speaking         { border-color:#374151; box-shadow:0 4px 12px rgba(55,65,81,.12); }
+.persona-marketer  .persona-avatar { background:rgba(0,87,255,.08); }
+.persona-marketer  .persona-name   { color:var(--accent); }
+.persona-marketer.pod-speaking     { border-color:var(--accent); box-shadow:0 4px 12px rgba(0,87,255,.12); }
+.persona-developer .persona-avatar { background:rgba(5,150,105,.08); }
+.persona-developer .persona-name   { color:#059669; }
+.persona-developer.pod-speaking    { border-color:#059669; box-shadow:0 4px 12px rgba(5,150,105,.12); }
+.persona-designer  .persona-avatar { background:rgba(124,58,237,.08); }
+.persona-designer  .persona-name   { color:#7c3aed; }
+.persona-designer.pod-speaking     { border-color:#7c3aed; box-shadow:0 4px 12px rgba(124,58,237,.12); }
+.persona-executive .persona-avatar { background:rgba(217,119,6,.08); }
+.persona-executive .persona-name   { color:#d97706; }
+.persona-executive.pod-speaking    { border-color:#d97706; box-shadow:0 4px 12px rgba(217,119,6,.12); }
+
+.pod-script { display:flex; flex-direction:column; gap:2px; }
+.pod-line   { display:flex; gap:12px; align-items:flex-start; padding:10px 12px; border-radius:var(--r-md); border-left:3px solid transparent; transition:background .2s; }
+.pod-line-active { background:var(--bg-subtle); }
+.pod-line-host      .pod-line-avatar { background:rgba(55,65,81,.08); }
+.pod-line-marketer  .pod-line-avatar { background:rgba(0,87,255,.08); }
+.pod-line-developer .pod-line-avatar { background:rgba(5,150,105,.08); }
+.pod-line-designer  .pod-line-avatar { background:rgba(124,58,237,.08); }
+.pod-line-executive .pod-line-avatar { background:rgba(217,119,6,.08); }
+.pod-line-host.pod-line-active      { border-left-color:#374151; background:var(--bg-subtle); }
+.pod-line-marketer.pod-line-active  { border-left-color:var(--accent); }
+.pod-line-developer.pod-line-active { border-left-color:#059669; }
+.pod-line-designer.pod-line-active  { border-left-color:#7c3aed; }
+.pod-line-executive.pod-line-active { border-left-color:#d97706; }
+.pod-line-avatar { width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; margin-top:3px; }
+.pod-line-bubble { flex:1; min-width:0; }
+.pod-line-name   { font-size:11px; font-weight:700; margin-bottom:3px; font-family:var(--font-mono); }
+.pod-line-text   { font-size:14px; line-height:1.85; color:var(--fg-muted); }
+.pod-line-active .pod-line-text { color:var(--fg); }
+
+@media (max-width:700px) {
+  .podcast-wrap { padding:32px 20px 72px; }
+  .pod-title { font-size:20px; }
+  .persona-card { width:90px; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .tab-bar { padding: 0 16px; gap: 0; }
+  .tab-btn { padding: 0 10px; font-size: 12.5px; }
+  .tts-btn { padding: 0 10px; font-size: 12px; margin-left: 6px; }
+  .page-wrap { padding: 32px 20px 72px; }
+  h1.headline { font-size: 28px; }
+  .trend-title { font-size: 18px; }
+  .trend-item { gap: 16px; }
+  .glossary-grid { grid-template-columns: 1fr; }
+  .trend-item.tts-active { padding-left: 10px; padding-right: 10px; margin-left: -10px; margin-right: -10px; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- ── STICKY TAB BAR (우측 정렬) ── -->
+<nav class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('all',this)">전체</button>
+  <button class="tab-btn" onclick="switchTab('marketer',this)">마케터</button>
+  <button class="tab-btn" onclick="switchTab('developer',this)">개발자</button>
+  <button class="tab-btn" onclick="switchTab('design',this)">디자인</button>
+  <button class="tab-btn" onclick="switchTab('executive',this)">경영자</button>
+  <button class="tts-btn" id="ttsBtn" onclick="switchTab('podcast',this)" title="팟캐스트로 듣기">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+    <span>팟캐스트</span>
+  </button>
+</nav>
+
+<!-- ── 전체 탭 ── -->
+<div class="tab-panel active" id="tab-all">
+<div class="page-wrap">
+  <div class="report-date">2026년 07월 01일</div>
+  <h1 class="headline">트럼프 정부의 AI 규제로 OpenAI, GPT-5.6 제한 공개</h1>
+  <p class="editor-comment">트럼프 행정부의 AI 규제 강화와 글로벌 AI 악용 사례는 상반된 현실을 보여준다. 정부 감시 체계 강화는 국가 안보를 명목으로 하지만, 동시에 미얀마 사기 집단처럼 AI를 악용하는 비국가 행위자들은 규제 사각지대를 누리고 있다는 뜻이다. OpenAI의 우려대로 선진국의 AI 접근 제한이 심화되면, 결국 개발도상국의 일반 사용자들만 피해를 입으면서 AI 격차는 더욱 벌어질 가능성이 높다. 결국 진정한 AI 안보는 정부 독점이 아닌 글로벌 협력과 투명한 감시 체계에서 나온다는 교훈을 놓쳐서는 안 된다.</p>
+  <hr class="div">
+
+  <div class="toc-box">
+    <div class="toc-label">이 리포트의 구성</div>
+    <ul class="toc-list">
+    <li class="toc-item">
+      <span class="toc-num">01</span>
+      <span class="toc-title">트럼프 행정부의 AI 개입 심화 — OpenAI, 정부 요청으로 GPT-5.6 제한 공개</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">02</span>
+      <span class="toc-title">Anthropic Fable 5·Mythos 5 전면 차단 — 수출통제로 촉발된 초유의 상업 AI 강제 철수</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">03</span>
+      <span class="toc-title">Google AI 두뇌 유출 가속 — Gemini 핵심 연구진 줄줄이 Anthropic·OpenAI行</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">04</span>
+      <span class="toc-title">AI·스타링크가 키운 글로벌 사기 산업의 민낯</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">05</span>
+      <span class="toc-title">팟캐스트, 2028 대선을 겨냥한 새로운 정치 권력 무대로</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">06</span>
+      <span class="toc-title">500만 달러짜리 휴머노이드 교사, 교육 혁신인가 실험대상인가</span>
+    </li></ul>
+  </div>
+
+  <div class="section-label">WHAT'S NEW</div>
+  <div class="tags"><span class="tag">AI 규제</span><span class="tag">AI 모델 개발</span><span class="tag">정부 감시</span><span class="tag">연구진 이탈</span><span class="tag">국가 안보</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="트럼프 행정부의 AI 개입 심화 — OpenAI, 정부 요청으로 GPT-5.6 제한 공개" data-tts-content="트럼프 대통령이 2026년 6월 2일 서명한 사이버 행정명령에 따라, 연방 기관들이 신규 AI 모델의 역량을 평가하는 프레임워크 구축이 추진 중이다. 이에 OpenAI는 정부 요청에 따라 GPT-5.6 Sol·Terra·Luna를 정부에 참여자 명단이 공유된 소수 '신뢰 파트너'들에게만 먼저 공개했다. OpenAI는 "이 같은 정부 접근 절차가 장기적 기본값이 되어서는 안 된다"고 밝히며, 최고의 도구가 사용자·개발자·사이버 방어자에게 닿지 못하게 된다고 우려했다. 세 모델 모두 사이버 및 생화학 역량에서 '고위험(High)' 등급으로 분류돼, 이를 활용하는 기업에 새로운 거버넌스 의무가 부과될 수 있다.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">트럼프 행정부의 AI 개입 심화 — OpenAI, 정부 요청으로 GPT-5.6 제한 공개</div>
+        <p class="trend-text">트럼프 대통령이 2026년 6월 2일 서명한 <span class="tooltip" data-tip="AI 모델의 역량을 정부가 사전 평가해 안전성을 검증하는 체계">사이버 행정명령</span>에 따라, 연방 기관들이 신규 AI 모델의 역량을 평가하는 프레임워크 구축이 추진 중이다. 이에 OpenAI는 정부 요청에 따라 GPT-5.6 Sol·Terra·Luna를 정부에 참여자 명단이 공유된 소수 '신뢰 파트너'들에게만 먼저 공개했다. OpenAI는 "이 같은 정부 접근 절차가 장기적 기본값이 되어서는 안 된다"고 밝히며, 최고의 도구가 사용자·개발자·사이버 방어자에게 닿지 못하게 된다고 우려했다. 세 모델 모두 사이버 및 생화학 역량에서 '고위험(High)' 등급으로 분류돼, 이를 활용하는 기업에 새로운 거버넌스 의무가 부과될 수 있다.</p>
+        <div class="trend-source">출처: <a href="https://www.cnbc.com/2026/06/26/openai-limits-new-ai-models-to-trusted-partners-request-us-government.html" target="_blank">OpenAI limits new AI models to trusted partners request US government</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="Anthropic Fable 5·Mythos 5 전면 차단 — 수출통제로 촉발된 초유의 상업 AI 강제 철수" data-tts-content="미 정부는 Fable 5·Mythos 5 공개 불과 3일 만에 상무부의 수출통제 명령을 발동해, 미국 내외 모든 외국인의 접근을 전면 차단했다. 정부는 Fable 5의 안전장치를 우회하는 탈옥(jailbreak) 방법이 발견됐다고 주장했으나, Anthropic은 해당 취약점이 단순하고 다른 공개 모델에서도 동일하게 재현된다며 반박했다. 협상 결렬 후 국방부는 Anthropic을 '공급망 위험' 기업으로 지정했으며, 이 지정은 역사적으로 외국 적대국에만 적용되던 것으로 Anthropic은 소송으로 맞서고 있다. 이번 사태는 한 달 사이 두 번째 정부의 프론티어 모델 출시 개입으로, OpenAI는 Anthropic의 선례를 보고 선제적으로 정부에 모델 정보를 제공하는 전략을 택한 것으로 분석된다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">Anthropic Fable 5·Mythos 5 전면 차단 — 수출통제로 촉발된 초유의 상업 AI 강제 철수</div>
+        <p class="trend-text">미 정부는 Fable 5·Mythos 5 공개 불과 3일 만에 상무부의 <span class="tooltip" data-tip="국가 안보를 이유로 특정 기술의 해외 이전을 금지하는 규제">수출통제</span> 명령을 발동해, 미국 내외 모든 외국인의 접근을 전면 차단했다. 정부는 Fable 5의 안전장치를 우회하는 <span class="tooltip" data-tip="AI 모델의 안전 필터를 속여 금지된 응답을 유도하는 기법">탈옥(jailbreak)</span> 방법이 발견됐다고 주장했으나, Anthropic은 해당 취약점이 단순하고 다른 공개 모델에서도 동일하게 재현된다며 반박했다. 협상 결렬 후 국방부는 Anthropic을 '공급망 위험' 기업으로 지정했으며, 이 지정은 역사적으로 외국 적대국에만 적용되던 것으로 Anthropic은 소송으로 맞서고 있다. 이번 사태는 한 달 사이 두 번째 정부의 프론티어 모델 출시 개입으로, OpenAI는 Anthropic의 선례를 보고 선제적으로 정부에 모델 정보를 제공하는 전략을 택한 것으로 분석된다.</p>
+        <div class="trend-source">출처: <a href="https://www.cnbc.com/2026/06/12/anthropic-disables-access-to-fable-5-and-mythos-5-to-comply-with-government-directive.html" target="_blank">Anthropic disables access to Fable 5 and Mythos 5 to comply with government directive</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="Google AI 두뇌 유출 가속 — Gemini 핵심 연구진 줄줄이 Anthropic·OpenAI行" data-tts-content="Google의 핵심 AI 연구원 Jonas Adler와 Alexander Pritzel이 Anthropic으로 이직을 준비 중이며, 두 사람 모두 Gemini 모델의 핵심 기여자로 내부에서 평가받아 왔다. 이들은 노벨상 수상자 John Jumper와 함께 AlphaFold 연구에 참여했으며, Jumper의 Anthropic 이직 발표에 이어 스타 연구원 Noam Shazeer도 OpenAI로 자리를 옮겼다. Anthropic과 OpenAI의 프리-IPO 접근이 임박하면서, 대형 테크 기업 수준의 보상으로도 대응하기 어려운 지분 인센티브 경쟁이 인재 이탈을 가속하고 있다. 벤처캐피털 SignalFire의 2025년 분석에 따르면, DeepMind 엔지니어가 Anthropic으로 이직할 확률은 그 역방향보다 약 11배 높다.">
+      <span class="trend-num">03</span>
+      <div class="trend-body">
+        <div class="trend-title">Google AI 두뇌 유출 가속 — Gemini 핵심 연구진 줄줄이 Anthropic·OpenAI行</div>
+        <p class="trend-text">Google의 핵심 AI 연구원 Jonas Adler와 Alexander Pritzel이 Anthropic으로 이직을 준비 중이며, 두 사람 모두 Gemini 모델의 핵심 기여자로 내부에서 평가받아 왔다. 이들은 노벨상 수상자 John Jumper와 함께 <span class="tooltip" data-tip="AI로 단백질 3D 구조를 예측하는 Google DeepMind의 혁신 연구">AlphaFold</span> 연구에 참여했으며, Jumper의 Anthropic 이직 발표에 이어 스타 연구원 Noam Shazeer도 OpenAI로 자리를 옮겼다. Anthropic과 OpenAI의 <span class="tooltip" data-tip="기업 공개 직전 주식을 매입해 상장 차익을 노리는 투자 전략">프리-IPO</span> 접근이 임박하면서, 대형 테크 기업 수준의 보상으로도 대응하기 어려운 지분 인센티브 경쟁이 인재 이탈을 가속하고 있다. 벤처캐피털 SignalFire의 2025년 분석에 따르면, DeepMind 엔지니어가 Anthropic으로 이직할 확률은 그 역방향보다 약 11배 높다.</p>
+        <div class="trend-source">출처: <a href="https://techcrunch.com/2026/06/24/ai-researchers-continue-to-leave-google-for-its-rivals/" target="_blank">AI researchers continue to leave Google for its rivals</a></div>
+      </div>
+    </div></div>
+
+  <hr class="section-sep">
+
+  <div class="section-label">HOW TO USE</div>
+  <div class="tags"><span class="tag">온라인 사기</span><span class="tag">인공지능 악용</span><span class="tag">스타링크 위성통신</span><span class="tag">팟캐스트 정치 영향력</span><span class="tag">교육 로봇 도입</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="AI·스타링크가 키운 글로벌 사기 산업의 민낯" data-tts-content="AP·Frontline 공동 조사에 따르면, 미얀마 사기 집단은 ChatGPT·Gemini 기반 전용 소프트웨어로 100개 이상 언어를 구사하며 수만 명의 피해자를 동시 공략하고 있다. 특히 스타링크는 태국의 인터넷 차단 조치를 우회하는 수단으로 활용되며 현재 미얀마 내 점유율 1위(약 20%) ISP로 자리잡았다. FTC 추산 2024년 미국인 피해액만 약 2,000억 달러에 달하며, AI 에이전트 기반 완전 자동화 사기가 목전에 이른 상황이다.">
+      <span class="trend-num">04</span>
+      <div class="trend-body">
+        <div class="trend-title">AI·스타링크가 키운 글로벌 사기 산업의 민낯</div>
+        <p class="trend-text">AP·Frontline 공동 조사에 따르면, 미얀마 사기 집단은 ChatGPT·Gemini 기반 전용 소프트웨어로 100개 이상 언어를 구사하며 수만 명의 피해자를 동시 공략하고 있다. 특히 스타링크는 태국의 인터넷 차단 조치를 우회하는 수단으로 활용되며 현재 미얀마 내 점유율 1위(약 20%) <span class="tooltip" data-tip="인터넷 서비스 제공자(ISP)가 운용하는 네트워크를 통해 데이터를 목적지까지 전달하는 과정">ISP</span>로 자리잡았다. FTC 추산 2024년 미국인 피해액만 약 2,000억 달러에 달하며, AI 에이전트 기반 완전 자동화 사기가 목전에 이른 상황이다.</p>
+        <div class="trend-source">출처: <a href="https://www.fastcompany.com/91567318/global-scam-economy-ai-starlink" target="_blank">Inside the rise of the global scam economy powered by AI and Starlink</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="팟캐스트, 2028 대선을 겨냥한 새로운 정치 권력 무대로" data-tts-content="테크 저널리스트 카라 스위셔는 가빈 뉴섬, 카말라 해리스, 피트 부티지지 등 민주당 유력 주자들을 자신의 팟캐스트에 출연시키며 대선 전초전의 핵심 플랫폼으로 부상하고 있다. 공동 진행 팟캐스트 은 연간 1,500만~2,000만 달러 규모의 비즈니스로 성장했으며, 디지털 전략가들은 "2시간짜리 팟캐스트 인터뷰도 소화할 수 있는 능력이 후보의 필수 조건"이라고 강조한다. 조 로건의 트럼프 인터뷰 파급력에 충격받은 민주당이 팟캐스트 공략을 본격화하는 흐름과 맞닿아 있다.">
+      <span class="trend-num">05</span>
+      <div class="trend-body">
+        <div class="trend-title">팟캐스트, 2028 대선을 겨냥한 새로운 정치 권력 무대로</div>
+        <p class="trend-text">테크 저널리스트 카라 스위셔는 가빈 뉴섬, 카말라 해리스, 피트 부티지지 등 민주당 유력 주자들을 자신의 팟캐스트에 출연시키며 대선 전초전의 핵심 플랫폼으로 부상하고 있다. 공동 진행 팟캐스트 <Pivot>은 연간 1,500만~2,000만 달러 규모의 비즈니스로 성장했으며, <span class="tooltip" data-tip="디지털 플랫폼에서 후보자의 온라인 메시지 전략을 설계하는 전문가">디지털 전략가</span>들은 "2시간짜리 팟캐스트 인터뷰도 소화할 수 있는 능력이 후보의 필수 조건"이라고 강조한다. 조 로건의 트럼프 인터뷰 파급력에 충격받은 민주당이 팟캐스트 공략을 본격화하는 흐름과 맞닿아 있다.</p>
+        <div class="trend-source">출처: <a href="https://www.fastcompany.com/91567323/journalist-kara-swisher-made-mark-silicon-valley-next-target-2028-campaign" target="_blank">Journalist Kara Swisher made her mark on Silicon Valley. Her next target: The 2028 campaign</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="500만 달러짜리 휴머노이드 교사, 교육 혁신인가 실험대상인가" data-tts-content="샌디에이고 차터스쿨 Altus Schools가 ChatGPT 기반 휴머노이드 로봇 'Ameca' 2대를 50만 달러에 도입해 학업 부진 학생 대상 1:1 교습에 투입할 예정이다. 교사·진로 상담·번역 외에 '웰니스 코치' 페르소나가 탑재돼 있어, Common Sense Media·스탠퍼드 공동연구가 경고한 "AI와의 비정상적 정서적 유대" 위험이 취약계층 청소년에게 더 크게 작용할 수 있다는 우려가 나온다. 학교 측은 정신건강 서비스 대체 불가·사용 후 메모리 초기화 방침을 밝혔으나, 거액 지출의 교육적 타당성 논란은 계속될 전망이다.">
+      <span class="trend-num">06</span>
+      <div class="trend-body">
+        <div class="trend-title">500만 달러짜리 휴머노이드 교사, 교육 혁신인가 실험대상인가</div>
+        <p class="trend-text">샌디에이고 차터스쿨 Altus Schools가 ChatGPT 기반 <span class="tooltip" data-tip="인간의 외형과 동작을 모방하도록 설계된 로봇">휴머노이드 로봇</span> 'Ameca' 2대를 50만 달러에 도입해 학업 부진 학생 대상 1:1 교습에 투입할 예정이다. 교사·진로 상담·번역 외에 '웰니스 코치' 페르소나가 탑재돼 있어, Common Sense Media·스탠퍼드 공동연구가 경고한 "AI와의 비정상적 정서적 유대" 위험이 취약계층 청소년에게 더 크게 작용할 수 있다는 우려가 나온다. 학교 측은 정신건강 서비스 대체 불가·사용 후 메모리 초기화 방침을 밝혔으나, 거액 지출의 교육적 타당성 논란은 계속될 전망이다.</p>
+        <div class="trend-source">출처: <a href="https://www.fastcompany.com/91567406/altus-san-diego-charter-school-humanoid-robots" target="_blank">This San Diego charter school bought $500,000 worth of humanoid robots for the classroom</a></div>
+      </div>
+    </div></div>
+
+  <hr class="div">
+  <div class="glossary">
+    <div class="glossary-heading">용어사전</div>
+    <div class="glossary-grid">
+      <div class="glossary-card">
+        <div class="glossary-term">사이버 행정명령</div>
+        <p class="glossary-desc">AI 모델의 역량을 정부가 사전 평가해 안전성을 검증하는 체계</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">신뢰 파트너</div>
+        <p class="glossary-desc">정부가 지정한 참여자 명단이 공유된 소수의 신뢰할 수 있는 협력 기관</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">ISP</div>
+        <p class="glossary-desc">인터넷 서비스 제공자가 운용하는 네트워크로 데이터를 전달하는 과정</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">AI 에이전트</div>
+        <p class="glossary-desc">인공지능 기반으로 독립적으로 작업을 수행하는 자동화된 프로그램</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">스타링크</div>
+        <p class="glossary-desc">저궤도 위성을 이용한 글로벌 인터넷 통신 서비스</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">GPT-5.6</div>
+        <p class="glossary-desc">OpenAI가 개발한 차세대 생성형 AI 언어 모델</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">인터넷 차단 우회</div>
+        <p class="glossary-desc">정부의 인터넷 검열 및 제한 조치를 피하기 위한 기술</p>
+      </div></div>
+  </div>
+
+  <div class="report-foot">마지막 업데이트: 2026년 07월 01일</div>
+</div>
+</div>
+
+
+<div class="tab-panel" id="tab-marketer">
+<div class="page-wrap">
+  <div class="report-date">2026년 07월 01일</div>
+  <h1 class="headline">캠페인 실무자를 위한<br>AI 활용 전략</h1>
+  <p class="editor-comment">마케터·AE 관점으로 재구성했습니다. 캠페인 기획, 클라이언트 제안, 툴 활용에 바로 쓸 수 있는 인사이트를 담았습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 규제</span><span class="tag">AI 모델 개발</span><span class="tag">정부 감시</span><span class="tag">연구진 이탈</span><span class="tag">국가 안보</span><span class="tag">온라인 사기</span><span class="tag">인공지능 악용</span><span class="tag">스타링크 위성통신</span><span class="tag">팟캐스트 정치 영향력</span><span class="tag">교육 로봇 도입</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="AI 인프라, 글로벌 사기 산업의 핵심 무기로 부상" data-tts-content="AP 조사에 따르면 ChatGPT·Gemini 등 미국산 AI 모델과 스타링크 위성통신이 미얀마 사기 조직의 핵심 인프라로 악용되고 있다. 2024년 미국인 피해액만 약 200조 원에 달하며, 완전 자동화 AI 사기 시대가 임박했다는 경고도 나온다. 브랜드 세이프티와 AI 윤리 기준이 마케팅 신뢰도에 직결되는 시대임을 보여준다.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 인프라, 글로벌 사기 산업의 핵심 무기로 부상</div>
+        <p class="trend-text">AP 조사에 따르면 ChatGPT·Gemini 등 미국산 AI 모델과 스타링크 위성통신이 미얀마 사기 조직의 핵심 인프라로 악용되고 있다. 2024년 미국인 피해액만 약 200조 원에 달하며, 완전 자동화 AI 사기 시대가 임박했다는 경고도 나온다. 브랜드 세이프티와 AI 윤리 기준이 마케팅 신뢰도에 직결되는 시대임을 보여준다.</p>
+        <div class="trend-source">출처: <a href="https://www.fastcompany.com/91567318/global-scam-economy-ai-starlink" target="_blank">Inside the rise of the global scam economy powered by AI and Starlink</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="팟캐스트, 2028 대선을 겨냥한 핵심 정치 미디어 채널로 급부상" data-tts-content="카라 스위셔의 팟캐스트 Pivot이 연 150억~200억 원 규모 비즈니스로 성장하며 민주당 유력 대선 후보들의 필수 출연 무대가 됐다. 전통 미디어를 대체하는 팟캐스트의 정치적 영향력은 광고주와 브랜드에게도 새로운 스폰서십 기회를 의미한다. 오디언스 신뢰도 높은 롱폼 콘텐츠 채널로서 마케팅 예산 재배분 검토가 필요하다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">팟캐스트, 2028 대선을 겨냥한 핵심 정치 미디어 채널로 급부상</div>
+        <p class="trend-text">카라 스위셔의 팟캐스트 Pivot이 연 150억~200억 원 규모 비즈니스로 성장하며 민주당 유력 대선 후보들의 필수 출연 무대가 됐다. 전통 미디어를 대체하는 팟캐스트의 정치적 영향력은 광고주와 브랜드에게도 새로운 스폰서십 기회를 의미한다. 오디언스 신뢰도 높은 롱폼 콘텐츠 채널로서 마케팅 예산 재배분 검토가 필요하다.</p>
+        <div class="trend-source">출처: <a href="https://www.fastcompany.com/91567323/journalist-kara-swisher-made-mark-silicon-valley-next-target-2028-campaign" target="_blank">Journalist Kara Swisher made her mark on Silicon Valley. Her next target: The 2028 campaign</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="교육 현장에 50만 달러짜리 AI 휴머노이드 로봇 도입, 찬반 논란 확산" data-tts-content="샌디에이고 차터스쿨이 ChatGPT 기반 휴머노이드 로봇 2대를 5억 원에 구매해 교육 보조 도구로 투입한다. AI 웰니스 코치 기능이 취약계층 청소년의 정서 의존 문제를 야기할 수 있다는 우려도 제기됐다. 에듀테크 브랜드와 B2B AI 솔루션 마케터에게 신뢰성과 안전성 메시지가 핵심 차별화 포인트임을 시사한다.">
+      <span class="trend-num">03</span>
+      <div class="trend-body">
+        <div class="trend-title">교육 현장에 50만 달러짜리 AI 휴머노이드 로봇 도입, 찬반 논란 확산</div>
+        <p class="trend-text">샌디에이고 차터스쿨이 ChatGPT 기반 휴머노이드 로봇 2대를 5억 원에 구매해 교육 보조 도구로 투입한다. AI 웰니스 코치 기능이 취약계층 청소년의 정서 의존 문제를 야기할 수 있다는 우려도 제기됐다. 에듀테크 브랜드와 B2B AI 솔루션 마케터에게 신뢰성과 안전성 메시지가 핵심 차별화 포인트임을 시사한다.</p>
+        <div class="trend-source">출처: <a href="https://www.fastcompany.com/91567406/altus-san-diego-charter-school-humanoid-robots" target="_blank">This San Diego charter school bought $500,000 worth of humanoid robots for the classroom</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 07월 01일</div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-developer">
+<div class="page-wrap">
+  <div class="report-date">2026년 07월 01일</div>
+  <h1 class="headline">개발·데이터 팀을 위한<br>기술 변화 포인트</h1>
+  <p class="editor-comment">API 변화, 아키텍처 영향, 데이터 파이프라인 관점에서 오늘 뉴스를 재해석했습니다. 지금 당장 확인해야 할 것들을 정리했습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 규제</span><span class="tag">AI 모델 개발</span><span class="tag">정부 감시</span><span class="tag">연구진 이탈</span><span class="tag">국가 안보</span><span class="tag">온라인 사기</span><span class="tag">인공지능 악용</span><span class="tag">스타링크 위성통신</span><span class="tag">팟캐스트 정치 영향력</span><span class="tag">교육 로봇 도입</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="미 정부의 AI 모델 접근 통제 강화, 개발 생태계 재편 신호" data-tts-content="트럼프 행정부가 AI 행정명령을 통해 OpenAI·Anthropic 신규 모델의 공개 범위와 시점을 직접 통제하기 시작했다. Anthropic의 Fable 5·Mythos 5는 보안 취약점 발견을 이유로 접근이 강제 차단됐다. 개발자 입장에서는 API 가용성과 출시 일정이 정부 규제에 종속될 수 있다는 새로운 리스크 변수가 생긴 셈이다.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">미 정부의 AI 모델 접근 통제 강화, 개발 생태계 재편 신호</div>
+        <p class="trend-text">트럼프 행정부가 AI 행정명령을 통해 OpenAI·Anthropic 신규 모델의 공개 범위와 시점을 직접 통제하기 시작했다. Anthropic의 Fable 5·Mythos 5는 보안 취약점 발견을 이유로 접근이 강제 차단됐다. 개발자 입장에서는 API 가용성과 출시 일정이 정부 규제에 종속될 수 있다는 새로운 리스크 변수가 생긴 셈이다.</p>
+        <div class="trend-source">출처: <a href="https://www.cnbc.com/2026/06/26/openai-limits-new-ai-models-to-trusted-partners-request-us-government.html" target="_blank">OpenAI limits new AI models to trusted partners at request of US government</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="AI 인프라가 산업형 사기 엔진으로 전용, 기술 책임 논쟁 확산" data-tts-content="AP·Frontline 조사에 따르면 ChatGPT·Gemini 기반 툴이 미얀마 사기 센터에서 100개 언어 자동 번역·피해자 타겟팅에 활용됐고, Starlink가 현지 1위 ISP로 인프라를 제공했다. 미국 ISP 트래픽의 20%가 사기 센터를 경유한 것으로 분석됐다. AI 모델과 클라우드 인프라 제공자의 이용약관 집행 및 악용 탐지 책임 강화가 업계 화두로 부상하고 있다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 인프라가 산업형 사기 엔진으로 전용, 기술 책임 논쟁 확산</div>
+        <p class="trend-text">AP·Frontline 조사에 따르면 ChatGPT·Gemini 기반 툴이 미얀마 사기 센터에서 100개 언어 자동 번역·피해자 타겟팅에 활용됐고, Starlink가 현지 1위 ISP로 인프라를 제공했다. 미국 ISP 트래픽의 20%가 사기 센터를 경유한 것으로 분석됐다. AI 모델과 클라우드 인프라 제공자의 이용약관 집행 및 악용 탐지 책임 강화가 업계 화두로 부상하고 있다.</p>
+        <div class="trend-source">출처: <a href="https://www.fastcompany.com/91567318/global-scam-economy-ai-starlink" target="_blank">Inside the rise of the global scam economy powered by AI and Starlink</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 07월 01일</div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-design">
+<div class="page-wrap">
+  <div class="report-date">2026년 07월 01일</div>
+  <h1 class="headline">크리에이티브 팀을 위한<br>AI 활용 포인트</h1>
+  <p class="editor-comment">크리에이티브 워크플로우 변화, 브랜드 아이덴티티 유지, 실제 활용 가능한 AI 디자인 툴을 중심으로 정리했습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 규제</span><span class="tag">AI 모델 개발</span><span class="tag">정부 감시</span><span class="tag">연구진 이탈</span><span class="tag">국가 안보</span><span class="tag">온라인 사기</span><span class="tag">인공지능 악용</span><span class="tag">스타링크 위성통신</span><span class="tag">팟캐스트 정치 영향력</span><span class="tag">교육 로봇 도입</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="AI가 설계한 사기 공장, 디자인된 신뢰가 무기가 된다" data-tts-content="미얀마 사기 센터들이 ChatGPT·Gemini로 100개 언어를 구사하며 산업적 규모의 피해를 양산 중이다. 시각적 신뢰 설계(페르소나·딥페이크)가 범죄 인프라로 전용된 현실은, 크리에이티브 업계가 AI 윤리 설계를 재고해야 할 시점임을 가리킨다. Starlink가 이 생태계의 핵심 인프라로 작동 중이라는 점도 주목할 만하다.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">AI가 설계한 사기 공장, 디자인된 신뢰가 무기가 된다</div>
+        <p class="trend-text">미얀마 사기 센터들이 ChatGPT·Gemini로 100개 언어를 구사하며 산업적 규모의 피해를 양산 중이다. 시각적 신뢰 설계(페르소나·딥페이크)가 범죄 인프라로 전용된 현실은, 크리에이티브 업계가 AI 윤리 설계를 재고해야 할 시점임을 가리킨다. Starlink가 이 생태계의 핵심 인프라로 작동 중이라는 점도 주목할 만하다.</p>
+        <div class="trend-source">출처: <a href="https://www.fastcompany.com/91567318/global-scam-economy-ai-starlink" target="_blank">Inside the rise of the global scam economy powered by AI and Starlink</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="교실에 들어온 휴머노이드, 50만 달러짜리 실험" data-tts-content="샌디에이고 차터스쿨이 Ameca 로봇 2대를 50만 달러에 도입해 교사 보조 역할을 맡겼다. 학습 부진 학생 대상 웰니스 코치 기능이 논란의 중심으로, AI 인터페이스 디자인이 청소년 정서에 미치는 영향에 대한 업계적 책임 논의가 불가피해졌다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">교실에 들어온 휴머노이드, 50만 달러짜리 실험</div>
+        <p class="trend-text">샌디에이고 차터스쿨이 Ameca 로봇 2대를 50만 달러에 도입해 교사 보조 역할을 맡겼다. 학습 부진 학생 대상 웰니스 코치 기능이 논란의 중심으로, AI 인터페이스 디자인이 청소년 정서에 미치는 영향에 대한 업계적 책임 논의가 불가피해졌다.</p>
+        <div class="trend-source">출처: <a href="https://www.fastcompany.com/91567406/altus-san-diego-charter-school-humanoid-robots" target="_blank">This San Diego charter school bought $500,000 worth of humanoid robots for the classroom</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="팟캐스트, 정치 캠페인의 새 비주얼 무대로" data-tts-content="Kara Swisher의 팟캐스트가 연 1500만~2000만 달러 규모 비즈니스로 성장하며 2028년 대선 후보들의 핵심 소통 채널로 부상 중이다. 텍스트 미디어에서 오디오·영상 중심으로 이동하는 정치 커뮤니케이션은 브랜드 아이덴티티와 퍼스널 디자인 전략의 새 기준을 요구한다.">
+      <span class="trend-num">03</span>
+      <div class="trend-body">
+        <div class="trend-title">팟캐스트, 정치 캠페인의 새 비주얼 무대로</div>
+        <p class="trend-text">Kara Swisher의 팟캐스트가 연 1500만~2000만 달러 규모 비즈니스로 성장하며 2028년 대선 후보들의 핵심 소통 채널로 부상 중이다. 텍스트 미디어에서 오디오·영상 중심으로 이동하는 정치 커뮤니케이션은 브랜드 아이덴티티와 퍼스널 디자인 전략의 새 기준을 요구한다.</p>
+        <div class="trend-source">출처: <a href="https://www.fastcompany.com/91567323/journalist-kara-swisher-made-mark-silicon-valley-next-target-2028-campaign" target="_blank">Journalist Kara Swisher made her mark on Silicon Valley. Her next target: The 2028 campaign</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 07월 01일</div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-executive">
+<div class="page-wrap">
+  <div class="report-date">2026년 07월 01일</div>
+  <h1 class="headline">의사결정자를 위한<br>전략 브리핑</h1>
+  <p class="editor-comment">시장 포지션, 비용·리스크, 지금 결정해야 할 것. 기술 세부사항 없이 경영 판단에 필요한 핵심만 정리했습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 규제</span><span class="tag">AI 모델 개발</span><span class="tag">정부 감시</span><span class="tag">연구진 이탈</span><span class="tag">국가 안보</span><span class="tag">온라인 사기</span><span class="tag">인공지능 악용</span><span class="tag">스타링크 위성통신</span><span class="tag">팟캐스트 정치 영향력</span><span class="tag">교육 로봇 도입</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="미 정부의 AI 통제 강화, 기업 전략 재편 압박" data-tts-content="트럼프 행정부가 AI 모델 출시 전 정부 역량 평가를 요구하며 OpenAI는 신규 모델을 신뢰 파트너에게만 제한 공개했고, Anthropic은 최신 모델 접근이 강제 차단됐다. Google은 핵심 AI 인재를 경쟁사에 연달아 빼앗기며 기술 경쟁력 위기에 직면했다. 규제 리스크와 인재 유출이 동시에 심화되는 상황에서 AI 기업들의 전략적 대응이 시급해졌다.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">미 정부의 AI 통제 강화, 기업 전략 재편 압박</div>
+        <p class="trend-text">트럼프 행정부가 AI 모델 출시 전 정부 역량 평가를 요구하며 OpenAI는 신규 모델을 신뢰 파트너에게만 제한 공개했고, Anthropic은 최신 모델 접근이 강제 차단됐다. Google은 핵심 AI 인재를 경쟁사에 연달아 빼앗기며 기술 경쟁력 위기에 직면했다. 규제 리스크와 인재 유출이 동시에 심화되는 상황에서 AI 기업들의 전략적 대응이 시급해졌다.</p>
+        <div class="trend-source">출처: <a href="https://www.cnbc.com/2026/06/26/openai-limits-new-ai-models-to-trusted-partners-request-us-government.html" target="_blank">OpenAI, 미 정부 요청으로 신규 AI 모델을 신뢰 파트너에게만 제한 공개</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="AI·스타링크로 산업화된 글로벌 사기 경제, 기업 책임 논쟁 점화" data-tts-content="ChatGPT·Gemini 기반 사기 소프트웨어와 스타링크 위성통신을 활용한 미얀마 사기 조직이 연간 수십억 달러 규모의 피해를 양산하고 있다. 미국 빅테크 인프라가 범죄 공급망에 깊숙이 연루됐음이 드러나며 자발적 규제의 한계가 확인됐다. 영국·EU 등이 기업 책임 규정을 도입한 반면 미국은 여전히 자율 협력에 의존해 제도적 공백이 경영 리스크로 부상하고 있다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">AI·스타링크로 산업화된 글로벌 사기 경제, 기업 책임 논쟁 점화</div>
+        <p class="trend-text">ChatGPT·Gemini 기반 사기 소프트웨어와 스타링크 위성통신을 활용한 미얀마 사기 조직이 연간 수십억 달러 규모의 피해를 양산하고 있다. 미국 빅테크 인프라가 범죄 공급망에 깊숙이 연루됐음이 드러나며 자발적 규제의 한계가 확인됐다. 영국·EU 등이 기업 책임 규정을 도입한 반면 미국은 여전히 자율 협력에 의존해 제도적 공백이 경영 리스크로 부상하고 있다.</p>
+        <div class="trend-source">출처: <a href="https://www.fastcompany.com/91567318/global-scam-economy-ai-starlink" target="_blank">Inside the rise of the global scam economy powered by AI and Starlink</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 07월 01일</div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-podcast">
+<div class="podcast-wrap">
+
+  <div class="pod-header">
+    <div class="pod-eyebrow">
+      <span class="pod-eyebrow-dot"></span>
+      AI Trend Report · 2026년 07월 01일
+    </div>
+    <div class="pod-title">트럼프 정부의 AI 규제로 OpenAI, GPT-5.6 제한 공개</div>
+    <p class="pod-desc">트럼프 행정부의 AI 규제 강화와 글로벌 AI 악용 사례는 상반된 현실을 보여준다. 정부 감시 체계 강화는 국가 안보를 명목으로 하지만, 동시에 미얀마 사기 집단처럼 AI를</p>
+  </div>
+
+  <div class="pod-player">
+    <div class="pod-controls">
+      <button class="pod-play-btn" id="podPlayBtn" onclick="podToggle()">
+        <svg id="podPlayIcon" viewBox="0 0 24 24" width="16" height="16" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+      <div class="pod-info">
+        <div class="pod-speaker-now">지금 말하는 사람</div>
+        <div class="pod-speaker-name" id="podSpeakerName">재생 버튼을 눌러 시작하세요</div>
+      </div>
+    </div>
+    <div class="pod-progress-wrap">
+      <div class="pod-progress-bar" onclick="podSeek(event)">
+        <div class="pod-progress-fill" id="podProgressFill"></div>
+      </div>
+      <span class="pod-time" id="podTime">0 / 0</span>
+    </div>
+    <div class="pod-bottom-row">
+      <div class="pod-speed-group">
+        <span class="pod-speed-label">속도</span>
+        <button class="pod-speed-btn" onclick="podSetSpeed(0.8,this)">0.8x</button>
+        <button class="pod-speed-btn pod-speed-active" onclick="podSetSpeed(1.0,this)">1.0x</button>
+        <button class="pod-speed-btn" onclick="podSetSpeed(1.2,this)">1.2x</button>
+        <button class="pod-speed-btn" onclick="podSetSpeed(1.5,this)">1.5x</button>
+      </div>
+      <button class="pod-restart-btn" onclick="podRestart()">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a6 6 0 1 1 1.2 3.6"/><polyline points="4 14 4 10 8 10"/></svg>
+        처음부터
+      </button>
+    </div>
+  </div>
+
+  <div class="pod-personas">
+    <div class="persona-card persona-host"      id="pcard-host">
+      <div class="persona-avatar">🎙️</div>
+      <div class="persona-name">AI리포트</div>
+      <div class="persona-role">Host / 사회자</div>
+    </div>
+    <div class="persona-card persona-marketer"  id="pcard-marketer">
+      <div class="persona-avatar">📢</div>
+      <div class="persona-name">김마케터</div>
+      <div class="persona-role">Marketer / AE</div>
+    </div>
+    <div class="persona-card persona-developer" id="pcard-developer">
+      <div class="persona-avatar">💻</div>
+      <div class="persona-name">이개발자</div>
+      <div class="persona-role">Developer</div>
+    </div>
+    <div class="persona-card persona-designer"  id="pcard-designer">
+      <div class="persona-avatar">🎨</div>
+      <div class="persona-name">박디자이너</div>
+      <div class="persona-role">Art Director</div>
+    </div>
+    <div class="persona-card persona-executive" id="pcard-executive">
+      <div class="persona-avatar">📊</div>
+      <div class="persona-name">최경영자</div>
+      <div class="persona-role">Executive</div>
+    </div>
+  </div>
+
+  <div class="pod-script" id="podScript"></div>
+
+</div>
+</div>
+
+<script>
+(function(){
+var POD_SCRIPT = [{"persona": "host", "name": "AI리포트", "text": "안녕하세요, AI리포트이에요. 오늘은 트럼프 행정부가 AI 모델 공개에 직접 개입하면서 업계가 술렁이고 있는 이야기, 그리고 그 반대편에서 AI를 마음껏 악용하는 사람들 이야기까지 같이 나눠볼게요."}, {"persona": "developer", "name": "이개발자", "text": "저는 이번 GPT-5.6 사태가 꽤 충격적이었어요. 모델이 나왔는데 개발자가 바로 못 쓴다는 게 말이 돼요? 신뢰 파트너 명단에 들어간 소수만 먼저 접근할 수 있다는 거잖아요."}, {"persona": "executive", "name": "최경영자", "text": "Anthropic 케이스가 더 심각하죠. Fable 5가 나온 지 사흘 만에 강제 철수당했는데, 역사적으로 적대국에나 쓰던 공급망 위험 기업 딱지를 미국 자국 기업한테 붙인 거잖아요."}, {"persona": "marketer", "name": "김마케터", "text": "OpenAI 입장에서는 Anthropic 꼴 나지 않으려고 선제적으로 정부한테 정보를 넘긴 거라는 분석이 나오던데, 기업이 눈치를 봐야 하는 상황이 된 거예요."}, {"persona": "host", "name": "AI리포트", "text": "그럼 이번엔 How to Use 섹션으로 넘어가 볼게요. 규제가 강화되는 사이에 오히려 AI를 가장 적극적으로 쓰는 곳이 있다고요?"}, {"persona": "designer", "name": "박디자이너", "text": "미얀마 사기 집단 얘기 보고 소름 돋았어요. 100개 언어로 동시에 피해자한테 말을 거는 전용 소프트웨어를 이미 돌리고 있대요. 저희가 다국어 캠페인 만들 때 얼마나 고생하는지 아는데, 걔네는 AI로 그걸 자동화해버린 거예요."}, {"persona": "developer", "name": "이개발자", "text": "더 무서운 건 스타링크로 인터넷 차단도 우회하고 있다는 거예요. 기술 인프라가 규제 사각지대를 만들어주는 구조인데, AI 에이전트 기반 완전 자동화 사기는 이미 코앞에 와 있다고 봐요."}, {"persona": "marketer", "name": "김마케터", "text": "팟캐스트 얘기도 흥미롭던데요. 카라 스위셔 팟캐스트가 연간 2,000만 달러 비즈니스가 됐고, 2028 대선 전초전 플랫폼으로 떠오르고 있잖아요. 저한테는 그게 AI 이야기만큼이나 미디어 판도 변화로 읽혀요."}, {"persona": "host", "name": "AI리포트", "text": "마무리로 한 분만 오늘 핵심을 한 줄로 정리해 주신다면요?"}, {"persona": "executive", "name": "최경영자", "text": "정부가 AI를 통제하려 할수록 규제 밖에 있는 나쁜 행위자들만 더 자유로워지는 역설, 이게 오늘의 핵심이에요."}, {"persona": "host", "name": "AI리포트", "text": "날카로운 정리 감사해요. 오늘 AI리포트 여기서 마무리할게요, 다음 주에 또 만나요."}];
+
+var POD_META = {
+  host:      { emoji:'🎙️', color:'#374151', pitch:0.82, rate:0.94 },
+  marketer:  { emoji:'📢', color:'#0057ff', pitch:1.28, rate:1.04 },
+  developer: { emoji:'💻', color:'#059669', pitch:0.72, rate:0.96 },
+  designer:  { emoji:'🎨', color:'#7c3aed', pitch:1.38, rate:1.02 },
+  executive: { emoji:'📊', color:'#d97706', pitch:0.66, rate:0.91 },
+};
+
+var pod = { synth:window.speechSynthesis||null, idx:0, active:false, paused:false, speed:1.0 };
+
+/* 스크립트 렌더 */
+function podRenderScript() {
+  var el = document.getElementById('podScript');
+  if (!el) return;
+  el.innerHTML = POD_SCRIPT.map(function(line, i) {
+    var meta = POD_META[line.persona] || POD_META.host;
+    return '<div class="pod-line pod-line-' + line.persona + '" id="pod-line-' + i + '">'
+      + '<div class="pod-line-avatar">' + meta.emoji + '</div>'
+      + '<div class="pod-line-bubble">'
+      + '<div class="pod-line-name" style="color:' + meta.color + '">' + line.name + '</div>'
+      + '<div class="pod-line-text">' + line.text + '</div>'
+      + '</div></div>';
+  }).join('');
+}
+
+/* UI 업데이트 */
+function podUpdateUI() {
+  var line = POD_SCRIPT[pod.idx] || POD_SCRIPT[0];
+  var meta = POD_META[line.persona] || POD_META.host;
+  var nameEl = document.getElementById('podSpeakerName');
+  if (nameEl) { nameEl.textContent = line.name; nameEl.style.color = meta.color; }
+  var pct = POD_SCRIPT.length > 1 ? (pod.idx / (POD_SCRIPT.length-1)) * 100 : 0;
+  var fill = document.getElementById('podProgressFill');
+  if (fill) fill.style.width = pct + '%';
+  var timeEl = document.getElementById('podTime');
+  if (timeEl) timeEl.textContent = (pod.idx+1) + ' / ' + POD_SCRIPT.length;
+  /* 페르소나 카드 */
+  document.querySelectorAll('.persona-card').forEach(function(c){ c.classList.remove('pod-speaking'); });
+  var card = document.getElementById('pcard-' + line.persona);
+  if (card) card.classList.add('pod-speaking');
+  /* 스크립트 라인 */
+  document.querySelectorAll('.pod-line').forEach(function(l){ l.classList.remove('pod-line-active'); });
+  var activeLine = document.getElementById('pod-line-' + pod.idx);
+  if (activeLine) {
+    activeLine.classList.add('pod-line-active');
+    activeLine.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }
+  /* 재생 아이콘 */
+  var icon = document.getElementById('podPlayIcon');
+  if (icon) {
+    icon.setAttribute('width','16'); icon.setAttribute('height','16');
+    if (pod.active && !pod.paused) {
+      icon.innerHTML = '<rect x="6" y="4" width="4" height="16" fill="white"/><rect x="14" y="4" width="4" height="16" fill="white"/>';
+    } else {
+      icon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3" fill="white"/>';
+    }
+  }
+}
+
+/* TTS */
+function podSpeak(idx) {
+  if (!pod.synth || idx >= POD_SCRIPT.length) { podStopAll(); return; }
+  pod.idx = idx;
+  podUpdateUI();
+  var line = POD_SCRIPT[idx];
+  var meta = POD_META[line.persona] || POD_META.host;
+  var utt  = new SpeechSynthesisUtterance(line.text);
+  utt.lang  = 'ko-KR';
+  utt.rate  = pod.speed * meta.rate;
+  utt.pitch = meta.pitch;
+  var voices = pod.synth.getVoices();
+  var koVoice =
+    voices.find(function(v){ return v.lang==='ko-KR' && v.name.includes('Google'); }) ||
+    voices.find(function(v){ return v.lang==='ko-KR' && v.name.includes('Microsoft'); }) ||
+    voices.find(function(v){ return v.lang.startsWith('ko'); });
+  if (koVoice) utt.voice = koVoice;
+  utt.onend   = function(){ if (!pod.paused) podSpeak(idx+1); };
+  utt.onerror = function(){ podSpeak(idx+1); };
+  pod.synth.speak(utt);
+}
+
+window.podToggle = function() {
+  if (!pod.synth) { alert('Chrome 또는 Edge를 사용해 주세요.'); return; }
+  if (!pod.active) {
+    pod.active = true; pod.paused = false;
+    pod.synth.cancel();
+    /* voiceschanged 콜백 안에서도 active 체크 — 자동재생 방지 */
+    if (pod.synth.getVoices().length === 0) {
+      pod.synth.addEventListener('voiceschanged', function onV(){
+        pod.synth.removeEventListener('voiceschanged', onV);
+        if (pod.active && !pod.paused) podSpeak(pod.idx);
+      });
+    } else { podSpeak(pod.idx); }
+  } else if (pod.paused) {
+    pod.paused = false;
+    pod.synth.resume();
+    if (!pod.synth.speaking) podSpeak(pod.idx);
+    podUpdateUI();
+  } else {
+    /* 재생 중 → 사용자 일시정지
+       pod.paused=true 로 설정하면 keepalive·visibilitychange 모두 resume 안 함 */
+    pod.paused = true;
+    pod.synth.pause();
+    podUpdateUI();
+  }
+};
+
+function podStopAll() {
+  if (pod.synth) pod.synth.cancel();
+  pod.active = false; pod.paused = false;
+  document.querySelectorAll('.pod-line').forEach(function(l){ l.classList.remove('pod-line-active'); });
+  document.querySelectorAll('.persona-card').forEach(function(c){ c.classList.remove('pod-speaking'); });
+  var nameEl = document.getElementById('podSpeakerName');
+  if (nameEl) { nameEl.textContent = '재생이 완료됐습니다'; nameEl.style.color = 'var(--fg-subtle)'; }
+  var icon = document.getElementById('podPlayIcon');
+  if (icon) icon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3" fill="white"/>';
+  var fill = document.getElementById('podProgressFill');
+  if (fill) fill.style.width = '100%';
+  var timeEl = document.getElementById('podTime');
+  if (timeEl) timeEl.textContent = POD_SCRIPT.length + ' / ' + POD_SCRIPT.length;
+}
+
+window.podRestart = function() {
+  if (pod.synth) pod.synth.cancel();
+  pod.active = false; pod.paused = false; pod.idx = 0;
+  document.querySelectorAll('.pod-line').forEach(function(l){ l.classList.remove('pod-line-active'); });
+  document.querySelectorAll('.persona-card').forEach(function(c){ c.classList.remove('pod-speaking'); });
+  var nameEl = document.getElementById('podSpeakerName');
+  if (nameEl) { nameEl.textContent = '재생 버튼을 눌러 시작하세요'; nameEl.style.color = 'var(--fg-subtle)'; }
+  var icon = document.getElementById('podPlayIcon');
+  if (icon) icon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3" fill="white"/>';
+  var fill = document.getElementById('podProgressFill');
+  if (fill) fill.style.width = '0%';
+  var timeEl = document.getElementById('podTime');
+  if (timeEl) timeEl.textContent = '0 / ' + POD_SCRIPT.length;
+};
+
+window.podSeek = function(e) {
+  var pct = e.offsetX / e.currentTarget.offsetWidth;
+  var newIdx = Math.round(pct * (POD_SCRIPT.length-1));
+  if (pod.synth) pod.synth.cancel();
+  pod.idx = newIdx;
+  if (pod.active) { pod.paused=false; podSpeak(newIdx); } else { podUpdateUI(); }
+};
+
+window.podSetSpeed = function(s, btn) {
+  pod.speed = s;
+  document.querySelectorAll('.pod-speed-btn').forEach(function(b){ b.classList.remove('pod-speed-active'); });
+  if (btn) btn.classList.add('pod-speed-active');
+  if (pod.active && !pod.paused) { if (pod.synth) pod.synth.cancel(); podSpeak(pod.idx); }
+};
+
+/* 탭 전환 시 팟캐스트 중지
+   — DOMContentLoaded 이후에 switchTab이 정의되므로 document.ready 이후 등록 */
+function podStopOnTabSwitch(id) {
+  if (id !== 'podcast' && pod.active) {
+    if (pod.synth) pod.synth.cancel();
+    pod.active = false; pod.paused = false;
+    podUpdateUI();
+  }
+}
+
+/* switchTab은 _JS 블록에 정의되어 있으므로
+   팟캐스트 IIFE가 끝난 뒤 window.onPodTabSwitch 훅으로 연결 */
+window._podStopOnTabSwitch = podStopOnTabSwitch;
+
+/* Chrome 백그라운드 TTS 자동 중단 버그 대응
+   — Chrome은 페이지가 숨겨지면 약 30초 후 speechSynthesis를 자동으로 pause()함
+   — 14초마다 pause→resume을 반복해서 재생 유지
+   — 단, 사용자가 직접 일시정지한 경우(pod.paused)는 절대 resume 안 함 */
+setInterval(function() {
+  if (!pod.synth || !pod.active || pod.paused) return;  // 일시정지·비활성 시 완전 스킵
+  if (pod.synth.speaking && !pod.synth.paused) {
+    pod.synth.pause();
+    pod.synth.resume();
+  }
+}, 14000);
+
+/* 초기 렌더 — 절대 자동 재생하지 않음 */
+podRenderScript();
+})();
+</script>
+
+
+
+<script>
+/* ── 탭 전환 ── */
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+  ttsStop(); // 탭 전환 시 기존 TTS 중단
+  /* 팟캐스트 탭이 아닌 곳으로 이동 시 팟캐스트도 중단 */
+  if (typeof window._podStopOnTabSwitch === 'function') {
+    window._podStopOnTabSwitch(id);
+  }
+}
+
+/* ────────────────────────────────────────
+   TTS — Web Speech API
+   읽기 순서: 헤드라인 → 에디터 코멘트 → 트렌드(제목+내용) 순
+   각 트렌드 아이템 읽는 동안 해당 카드 하이라이트
+──────────────────────────────────────── */
+var tts = {
+  synth:    window.speechSynthesis || null,
+  queue:    [],   // {text, el} 배열
+  idx:      0,
+  active:   false,
+  paused:   false,
+  curEl:    null,
+};
+
+var TTS_ICONS = {
+  play:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>',
+  pause: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>',
+  stop:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>',
+};
+
+function ttsBtn() { return document.getElementById('ttsBtn'); }
+
+function ttsBtnState(state) {
+  var btn = ttsBtn(); if (!btn) return;
+  if (state === 'playing') {
+    btn.innerHTML = TTS_ICONS.pause + '<span>일시정지</span>';
+    btn.classList.add('playing'); btn.classList.remove('paused');
+  } else if (state === 'paused') {
+    btn.innerHTML = TTS_ICONS.play + '<span>계속 읽기</span>';
+    btn.classList.remove('playing'); btn.classList.add('paused');
+  } else {
+    btn.innerHTML = TTS_ICONS.play + '<span>읽어주기</span>';
+    btn.classList.remove('playing', 'paused');
+  }
+}
+
+function ttsHighlight(el) {
+  if (tts.curEl) tts.curEl.classList.remove('tts-active');
+  tts.curEl = el;
+  if (el) {
+    el.classList.add('tts-active');
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function ttsBuildQueue() {
+  /* 현재 활성 탭에서 읽을 내용 수집 */
+  var panel = document.querySelector('.tab-panel.active');
+  if (!panel) return [];
+
+  var queue = [];
+
+  /* 1. 헤드라인 */
+  var h1 = panel.querySelector('h1.headline');
+  if (h1) queue.push({ text: h1.innerText, el: null });
+
+  /* 2. 에디터 코멘트 */
+  var ec = panel.querySelector('.editor-comment');
+  if (ec) queue.push({ text: ec.innerText, el: null });
+
+  /* 3. 트렌드 아이템 — data-tts-title / data-tts-content 속성 사용 */
+  var items = panel.querySelectorAll('.trend-item[data-tts-title]');
+  items.forEach(function(item) {
+    var title   = item.getAttribute('data-tts-title')   || '';
+    var content = item.getAttribute('data-tts-content') || '';
+    if (title) queue.push({ text: title + '. ' + content, el: item });
+  });
+
+  return queue;
+}
+
+function ttsSpeak(idx) {
+  if (!tts.synth || idx >= tts.queue.length) {
+    ttsStop(); return;
+  }
+  tts.idx = idx;
+  var item = tts.queue[idx];
+  ttsHighlight(item.el);
+
+  var utt = new SpeechSynthesisUtterance(item.text);
+  utt.lang = 'ko-KR';
+  utt.rate = 0.92;
+  utt.pitch = 1.05;
+
+  /* 고품질 음성 우선 선택: Google > Microsoft > 기타 ko 순 */
+  var voices = tts.synth.getVoices();
+  var koVoice =
+    voices.find(function(v){ return v.lang === 'ko-KR' && v.name.includes('Google'); }) ||
+    voices.find(function(v){ return v.lang === 'ko-KR' && v.name.includes('Microsoft'); }) ||
+    voices.find(function(v){ return v.lang.startsWith('ko'); });
+  if (koVoice) utt.voice = koVoice;
+
+  utt.onend = function() {
+    if (!tts.paused) ttsSpeak(idx + 1);
+  };
+  utt.onerror = function() {
+    ttsSpeak(idx + 1);
+  };
+
+  tts.synth.speak(utt);
+}
+
+function ttsToggle() {
+  if (!tts.synth) {
+    alert('이 브라우저는 음성 읽기를 지원하지 않습니다. Chrome 또는 Edge를 사용해 주세요.');
+    return;
+  }
+
+  if (!tts.active) {
+    /* 처음 시작 */
+    tts.queue  = ttsBuildQueue();
+    tts.idx    = 0;
+    tts.active = true;
+    tts.paused = false;
+    tts.synth.cancel();
+    ttsBtnState('playing');
+    /* Chrome은 getVoices()가 비동기 로드 → voiceschanged 대응 */
+    if (tts.synth.getVoices().length === 0) {
+      tts.synth.addEventListener('voiceschanged', function onVoices() {
+        tts.synth.removeEventListener('voiceschanged', onVoices);
+        ttsSpeak(0);
+      });
+    } else {
+      ttsSpeak(0);
+    }
+
+  } else if (tts.paused) {
+    /* 일시정지 → 재개 */
+    tts.paused = false;
+    ttsBtnState('playing');
+    tts.synth.resume();
+    /* resume이 동작하지 않는 브라우저 대응: 현재 idx부터 재시작 */
+    if (!tts.synth.speaking) ttsSpeak(tts.idx);
+
+  } else {
+    /* 재생 중 → 일시정지 */
+    tts.paused = true;
+    ttsBtnState('paused');
+    tts.synth.pause();
+  }
+}
+
+function ttsStop() {
+  if (tts.synth) tts.synth.cancel();
+  tts.active = false;
+  tts.paused = false;
+  tts.queue  = [];
+  tts.idx    = 0;
+  ttsHighlight(null);
+  ttsBtnState('idle');
+}
+
+/* visibilitychange 이벤트 미사용
+   — 다중 스크린 환경에서 다른 화면으로 이동해도 팟캐스트가 계속 재생되도록 유지
+   — 탭 전환 시 중단은 switchTab 함수에서 별도 처리 */
+
+/* 화면 복귀 시 팟캐스트 버벅임 방지
+   — 다른 스크린에서 돌아왔을 때 synth가 paused 상태로 굳는 브라우저 버그 대응
+   — 단, 사용자가 직접 일시정지한 경우는 resume 안 함 */
+document.addEventListener('visibilitychange', function() {
+  if (!document.hidden) {
+    var synth = window.speechSynthesis;
+    /* _podStopOnTabSwitch 존재 = 팟캐스트 탭이 있음
+       pod 상태는 IIFE 내부라 직접 접근 불가 → synth.paused && synth.speaking 으로만 판단 */
+    if (synth && synth.paused && synth.speaking) {
+      /* 사용자가 직접 일시정지한 건 podToggle에서 pod.paused=true로 관리됨
+         여기서는 Chrome이 강제로 pause한 경우(synth.paused but pod intended playing)만 resume */
+      synth.resume();
+    }
+  }
+});
+</script>
+
+</body>
+</html>
