@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="report-headline" content="마케팅 자동화, 2028년까지 비율 2배 증가 예상">
+  <title>마케팅 자동화, 2028년까지 비율 2배 증가 예상</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:ital,wght@0,300;0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+<style>
+:root {
+  --bg:          #ffffff;
+  --bg-subtle:   #f8f9fa;
+  --bg-toc:      #f4f5f7;
+  --border:      #e5e7eb;
+  --border-soft: #f0f0f0;
+  --fg:          #0d1117;
+  --fg-muted:    #374151;
+  --fg-subtle:   #6b7280;
+  --fg-faint:    #9ca3af;
+  --accent:      #0057ff;
+  --accent-dim:  rgba(0,87,255,0.07);
+  --tag-bg:      #ffffff;
+  --tag-border:  #d1d5db;
+  --tag-fg:      #374151;
+  --tab-bar-h:   48px;
+  --font-sans:   'Noto Sans KR', -apple-system, system-ui, sans-serif;
+  --font-mono:   'JetBrains Mono', monospace;
+  --r-sm: 6px; --r-md: 10px; --r-pill: 999px;
+}
+[data-theme="dark"] {
+  --bg: #0f1117; --bg-subtle: #151820; --bg-toc: #1a1d27;
+  --border: #2a2d3a; --border-soft: #1e2130;
+  --fg: #f0f0f0; --fg-muted: #c0c4d0; --fg-subtle: #6b7280; --fg-faint: #4b5563;
+  --accent: #4e7fff; --accent-dim: rgba(78,127,255,0.1);
+  --tag-bg: #252836; --tag-border: #3a3d4a; --tag-fg: #c0c4d0;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  font-family: var(--font-sans); background: var(--bg); color: var(--fg);
+  line-height: 1.7; -webkit-font-smoothing: antialiased; display: block;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── STICKY TAB BAR ── */
+.tab-bar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  height: var(--tab-bar-h);
+  display: flex; align-items: stretch; justify-content: flex-end;
+  padding: 0 60px; gap: 0;
+  transition: background .2s, border-color .2s;
+}
+.tab-btn {
+  padding: 0 18px; font-family: var(--font-sans); font-size: 13.5px; font-weight: 500;
+  color: var(--fg-subtle); background: none; border: none;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  cursor: pointer; white-space: nowrap;
+  transition: color .15s, border-color .15s;
+}
+.tab-btn:hover { color: var(--fg-muted); }
+.tab-btn.active { color: var(--fg); border-bottom-color: var(--accent); }
+
+/* ── TTS 버튼 ── */
+.tts-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-left: 6px; margin-right: 0;
+  padding: 0 14px; height: 30px; align-self: center;
+  font-family: var(--font-sans); font-size: 12.5px; font-weight: 500;
+  color: var(--fg-subtle);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  cursor: pointer; white-space: nowrap;
+  transition: color .15s, border-color .15s, background .15s;
+  flex-shrink: 0;
+}
+.tts-btn:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+.tts-btn.playing { color: var(--accent); border-color: var(--accent); background: var(--accent-dim); }
+.tts-btn.paused  { color: var(--fg-muted); border-color: var(--border); }
+.tts-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+/* 읽는 중인 트렌드 아이템 하이라이트 */
+.trend-item.tts-active {
+  background: var(--accent-dim);
+  border-radius: var(--r-md);
+  padding-left: 16px; padding-right: 16px;
+  margin-left: -16px; margin-right: -16px;
+  transition: background .3s;
+}
+
+/* ── LAYOUT ── */
+.page-wrap { max-width: 860px; margin: 0 auto; padding: 48px 60px 96px; }
+
+/* ── HEADER ── */
+.report-date {
+  font-family: var(--font-mono); font-size: 12px;
+  letter-spacing: .04em; color: var(--fg-subtle); margin-bottom: 16px;
+}
+h1.headline {
+  font-size: clamp(34px, 5vw, 50px); font-weight: 700;
+  line-height: 1.14; letter-spacing: -0.03em; color: var(--fg); margin-bottom: 28px;
+}
+.editor-comment {
+  font-size: 17px; line-height: 1.85; color: var(--fg-muted);
+  margin-bottom: 40px; max-width: 72ch;
+}
+
+/* ── DIVIDER ── */
+hr.div { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+/* ── TOC BOX ── */
+.toc-box {
+  background: var(--bg-toc); border-radius: var(--r-md);
+  padding: 24px 28px; margin-bottom: 48px;
+}
+.toc-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fg-faint); margin-bottom: 16px;
+}
+.toc-list { list-style: none; }
+.toc-item {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 10px 0; border-top: 1px solid var(--border-soft); cursor: pointer;
+}
+.toc-item:first-child { border-top: none; padding-top: 0; }
+.toc-num {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  color: var(--accent); flex-shrink: 0; min-width: 24px;
+}
+.toc-title { font-size: 14.5px; font-weight: 500; color: var(--fg-muted); line-height: 1.5; }
+.toc-item:hover .toc-title { color: var(--fg); }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fg-subtle); margin-bottom: 14px;
+}
+
+/* ── TAGS ── */
+.tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 40px; }
+.tag {
+  font-size: 12.5px; color: var(--tag-fg);
+  background: var(--tag-bg); border: 1px solid var(--tag-border);
+  padding: 5px 13px; border-radius: var(--r-pill);
+}
+
+/* ── TREND ITEMS ── */
+.trend-list { display: flex; flex-direction: column; }
+.trend-item {
+  display: flex; gap: 28px; align-items: flex-start;
+  padding-bottom: 44px; border-bottom: 1px solid var(--border); margin-bottom: 40px;
+  transition: background .3s, padding .3s, margin .3s;
+}
+.trend-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.trend-num {
+  font-family: var(--font-mono); font-size: 14px; font-weight: 500;
+  color: var(--accent); flex-shrink: 0; padding-top: 5px; min-width: 28px;
+}
+.trend-body { flex: 1; min-width: 0; }
+.trend-title {
+  font-size: 22px; font-weight: 700; line-height: 1.35;
+  letter-spacing: -0.02em; color: var(--fg); margin-bottom: 14px;
+}
+.trend-text { font-size: 15.5px; color: var(--fg-muted); line-height: 1.85; margin-bottom: 12px; }
+.trend-source { font-size: 12.5px; color: var(--fg-faint); }
+.trend-source a {
+  color: var(--fg-faint); text-decoration: underline;
+  text-decoration-color: var(--border); text-underline-offset: 3px;
+}
+.trend-source a:hover { color: var(--fg-subtle); }
+
+/* ── TOOLTIP ── */
+.tooltip { color: var(--accent); border-bottom: 1px dashed currentColor; cursor: help; position: relative; }
+.tooltip::after {
+  content: attr(data-tip); display: none;
+  position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+  background: var(--fg); color: var(--bg); font-size: 12px;
+  padding: 6px 10px; border-radius: var(--r-sm); white-space: nowrap; z-index: 20; pointer-events: none;
+}
+.tooltip:hover::after { display: block; }
+
+.section-sep { border: none; border-top: 1px solid var(--border); margin: 44px 0 40px; }
+
+/* ── GLOSSARY ── */
+.glossary { margin-top: 48px; }
+.glossary-heading {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--fg-subtle); margin-bottom: 16px;
+}
+.glossary-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+.glossary-card {
+  background: var(--bg-subtle); border: 1px solid var(--border);
+  border-radius: var(--r-md); padding: 16px 18px; transition: border-color .15s;
+}
+.glossary-card:hover { border-color: var(--accent); }
+.glossary-term { font-size: 13.5px; font-weight: 600; color: var(--fg-muted); margin-bottom: 5px; }
+.glossary-desc { font-size: 12.5px; color: var(--fg-subtle); line-height: 1.6; }
+
+/* ── FOOTER ── */
+.report-foot {
+  margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border);
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-faint); text-align: right;
+}
+
+/* ── TAB PANELS ── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── 팟캐스트 탭 ── */
+.podcast-wrap { max-width:720px; margin:0 auto; padding:40px 60px 96px; }
+.pod-header { margin-bottom:28px; }
+.pod-eyebrow {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--fg-faint); margin-bottom:12px;
+}
+.pod-eyebrow-dot {
+  width:6px; height:6px; border-radius:50%; background:var(--accent);
+  animation:pod-pulse 1.8s ease-in-out infinite;
+}
+@keyframes pod-pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+.pod-title { font-size:clamp(20px,3vw,28px); font-weight:700; line-height:1.2; letter-spacing:-0.02em; color:var(--fg); margin-bottom:8px; }
+.pod-desc  { font-size:13.5px; color:var(--fg-muted); line-height:1.7; }
+
+.pod-player { background:var(--bg-subtle); border:1px solid var(--border); border-radius:var(--r-md); padding:18px 22px; margin-bottom:24px; }
+.pod-controls { display:flex; align-items:center; gap:14px; margin-bottom:14px; }
+.pod-play-btn {
+  width:44px; height:44px; border-radius:50%;
+  background:var(--accent); border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  transition:opacity .15s, transform .1s; box-shadow:0 2px 8px rgba(0,87,255,.25);
+}
+.pod-play-btn:hover { opacity:.88; transform:scale(1.04); }
+.pod-play-btn svg   { width:16px; height:16px; flex-shrink:0; }
+.pod-info { flex:1; min-width:0; }
+.pod-speaker-now  { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--fg-faint); margin-bottom:2px; }
+.pod-speaker-name { font-size:13.5px; font-weight:700; color:var(--fg-subtle); transition:color .3s; }
+.pod-progress-wrap { display:flex; align-items:center; gap:10px; }
+.pod-progress-bar  { flex:1; height:4px; background:var(--border); border-radius:2px; cursor:pointer; }
+.pod-progress-fill { height:100%; background:var(--accent); border-radius:2px; width:0%; transition:width .25s linear; }
+.pod-time { font-family:var(--font-mono); font-size:11px; color:var(--fg-faint); white-space:nowrap; }
+.pod-bottom-row  { display:flex; align-items:center; justify-content:space-between; margin-top:10px; }
+.pod-speed-group { display:flex; align-items:center; gap:5px; }
+.pod-speed-label { font-size:11px; color:var(--fg-faint); margin-right:2px; }
+.pod-speed-btn   { font-size:11px; font-weight:600; font-family:var(--font-mono); padding:3px 8px; border-radius:var(--r-pill); border:1px solid var(--border); background:none; cursor:pointer; color:var(--fg-subtle); transition:all .15s; }
+.pod-speed-btn.pod-speed-active { background:var(--accent); border-color:var(--accent); color:#fff; }
+.pod-restart-btn { font-size:11.5px; color:var(--fg-faint); background:none; border:none; cursor:pointer; display:flex; align-items:center; gap:4px; font-family:var(--font-sans); transition:color .15s; }
+.pod-restart-btn:hover { color:var(--fg-muted); }
+.pod-restart-btn svg { width:12px; height:12px; }
+
+.pod-personas { display:flex; gap:8px; margin-bottom:24px; overflow-x:auto; padding-bottom:4px; scrollbar-width:none; }
+.pod-personas::-webkit-scrollbar { display:none; }
+.persona-card  { flex-shrink:0; width:112px; border-radius:var(--r-md); border:1.5px solid var(--border); padding:12px 10px 10px; text-align:center; transition:border-color .2s, box-shadow .2s, transform .2s; }
+.persona-card.pod-speaking { transform:translateY(-3px); }
+.persona-avatar { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:15px; margin:0 auto 7px; }
+.persona-name   { font-size:11.5px; font-weight:700; margin-bottom:2px; line-height:1.3; }
+.persona-role   { font-size:9.5px; color:var(--fg-faint); font-family:var(--font-mono); }
+.persona-host      .persona-avatar { background:rgba(55,65,81,.08); }
+.persona-host      .persona-name   { color:#374151; }
+.persona-host.pod-speaking         { border-color:#374151; box-shadow:0 4px 12px rgba(55,65,81,.12); }
+.persona-marketer  .persona-avatar { background:rgba(0,87,255,.08); }
+.persona-marketer  .persona-name   { color:var(--accent); }
+.persona-marketer.pod-speaking     { border-color:var(--accent); box-shadow:0 4px 12px rgba(0,87,255,.12); }
+.persona-developer .persona-avatar { background:rgba(5,150,105,.08); }
+.persona-developer .persona-name   { color:#059669; }
+.persona-developer.pod-speaking    { border-color:#059669; box-shadow:0 4px 12px rgba(5,150,105,.12); }
+.persona-designer  .persona-avatar { background:rgba(124,58,237,.08); }
+.persona-designer  .persona-name   { color:#7c3aed; }
+.persona-designer.pod-speaking     { border-color:#7c3aed; box-shadow:0 4px 12px rgba(124,58,237,.12); }
+.persona-executive .persona-avatar { background:rgba(217,119,6,.08); }
+.persona-executive .persona-name   { color:#d97706; }
+.persona-executive.pod-speaking    { border-color:#d97706; box-shadow:0 4px 12px rgba(217,119,6,.12); }
+
+.pod-script { display:flex; flex-direction:column; gap:2px; }
+.pod-line   { display:flex; gap:12px; align-items:flex-start; padding:10px 12px; border-radius:var(--r-md); border-left:3px solid transparent; transition:background .2s; }
+.pod-line-active { background:var(--bg-subtle); }
+.pod-line-host      .pod-line-avatar { background:rgba(55,65,81,.08); }
+.pod-line-marketer  .pod-line-avatar { background:rgba(0,87,255,.08); }
+.pod-line-developer .pod-line-avatar { background:rgba(5,150,105,.08); }
+.pod-line-designer  .pod-line-avatar { background:rgba(124,58,237,.08); }
+.pod-line-executive .pod-line-avatar { background:rgba(217,119,6,.08); }
+.pod-line-host.pod-line-active      { border-left-color:#374151; background:var(--bg-subtle); }
+.pod-line-marketer.pod-line-active  { border-left-color:var(--accent); }
+.pod-line-developer.pod-line-active { border-left-color:#059669; }
+.pod-line-designer.pod-line-active  { border-left-color:#7c3aed; }
+.pod-line-executive.pod-line-active { border-left-color:#d97706; }
+.pod-line-avatar { width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; margin-top:3px; }
+.pod-line-bubble { flex:1; min-width:0; }
+.pod-line-name   { font-size:11px; font-weight:700; margin-bottom:3px; font-family:var(--font-mono); }
+.pod-line-text   { font-size:14px; line-height:1.85; color:var(--fg-muted); }
+.pod-line-active .pod-line-text { color:var(--fg); }
+
+@media (max-width:700px) {
+  .podcast-wrap { padding:32px 20px 72px; }
+  .pod-title { font-size:20px; }
+  .persona-card { width:90px; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .tab-bar { padding: 0 16px; gap: 0; }
+  .tab-btn { padding: 0 10px; font-size: 12.5px; }
+  .tts-btn { padding: 0 10px; font-size: 12px; margin-left: 6px; }
+  .page-wrap { padding: 32px 20px 72px; }
+  h1.headline { font-size: 28px; }
+  .trend-title { font-size: 18px; }
+  .trend-item { gap: 16px; }
+  .glossary-grid { grid-template-columns: 1fr; }
+  .trend-item.tts-active { padding-left: 10px; padding-right: 10px; margin-left: -10px; margin-right: -10px; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- ── STICKY TAB BAR (우측 정렬) ── -->
+<nav class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('all',this)">전체</button>
+  <button class="tab-btn" onclick="switchTab('marketer',this)">마케터</button>
+  <button class="tab-btn" onclick="switchTab('developer',this)">개발자</button>
+  <button class="tab-btn" onclick="switchTab('design',this)">디자인</button>
+  <button class="tab-btn" onclick="switchTab('executive',this)">경영자</button>
+  <button class="tts-btn" id="ttsBtn" onclick="switchTab('podcast',this)" title="팟캐스트로 듣기">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+    <span>팟캐스트</span>
+  </button>
+</nav>
+
+<!-- ── 전체 탭 ── -->
+<div class="tab-panel active" id="tab-all">
+<div class="page-wrap">
+  <div class="report-date">2026년 07월 02일</div>
+  <h1 class="headline">마케팅 자동화, 2028년까지 비율 2배 증가 예상</h1>
+  <p class="editor-comment">마케팅 자동화의 진화는 단순한 도구 도입을 넘어 조직 전체의 의사결정 구조 변화를 의미하는 만큼, 기업들은 AI 역량의 깊이보다 통합성에 주목해야 한다. 2026년부터 2028년까지 자동화 비율이 16%에서 36%로 급증하는 시기에 기술 스택의 크기보다는 이들이 얼마나 유기적으로 연결되어 실시간 의사결정을 지원하는지가 경쟁의 핵심이 될 것이다. 특히 CMO 진출 초기 단계의 기업들이 흔히 빠지는 함정은 AI를 수단으로만 보고 전략적 사고를 외면하는 것인데, 결국 마케팅 리드 생성과 고객 획득 비용 절감이라는 실질적 성과를 내려면 기술과 비즈니스 목표의 정렬이 필수적이다.</p>
+  <hr class="div">
+
+  <div class="toc-box">
+    <div class="toc-label">이 리포트의 구성</div>
+    <ul class="toc-list">
+    <li class="toc-item">
+      <span class="toc-num">01</span>
+      <span class="toc-title">Anthropic, $965B 밸류에이션으로 사상 최대 AI IPO 향해 질주</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">02</span>
+      <span class="toc-title">Google Gemini 3.5 Flash, "플래시가 프로를 이긴다" — AI 모델 위계 역전</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">03</span>
+      <span class="toc-title">트럼프 행정부, 연방 단일 AI 규제 프레임워크 추진 — 주정부 규제 선제 차단</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">04</span>
+      <span class="toc-title">마케팅 AI 자동화, 2028년까지 두 배 급성장…'AI 역량 함정' 경계해야</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">05</span>
+      <span class="toc-title">AI 워크플로우 통합 기업, 리드 50% 증가·CAC 30% 절감 실증</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-num">06</span>
+      <span class="toc-title">생성형 AI, 단순 콘텐츠 도구 넘어 마케팅 전략 설계 인프라로 진화</span>
+    </li></ul>
+  </div>
+
+  <div class="section-label">WHAT'S NEW</div>
+  <div class="tags"><span class="tag">AI 모델 경쟁</span><span class="tag">클로드 코딩</span><span class="tag">젬ini 플래시</span><span class="tag">AI 규제</span><span class="tag">IPO 추진</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="Anthropic, $965B 밸류에이션으로 사상 최대 AI IPO 향해 질주" data-tts-content="Anthropic이 $965억 달러 포스트머니 밸류에이션으로 Series H 라운드에서 650억 달러를 조달하며 AI 업계의 판도를 바꾸고 있다. 2026년 6월 1일, 주요 AI 기업 중 최초로 SEC에 비공개 S-1을 제출했으며, 10월 나스닥 상장을 목표로 Goldman Sachs, JPMorgan, Morgan Stanley가 주관을 맡아 600억 달러 이상을 조달할 것으로 예상된다. 특히 코딩 에이전트 제품인 Claude Code가 2026년 2월 기준 연간 반복 매출(ARR) 25억 달러를 돌파하며 성장을 견인하고 있다.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">Anthropic, $965B 밸류에이션으로 사상 최대 AI IPO 향해 질주</div>
+        <p class="trend-text">Anthropic이 $965억 달러 포스트머니 밸류에이션으로 Series H 라운드에서 650억 달러를 조달하며 AI 업계의 판도를 바꾸고 있다. 2026년 6월 1일, 주요 AI 기업 중 최초로 SEC에 <span class="tooltip" data-tip="기업공개(Initial Public Offering) 전 SEC에 비공개로 제출하는 초안 등록 명세서">비공개 S-1</span>을 제출했으며, 10월 나스닥 상장을 목표로 Goldman Sachs, JPMorgan, Morgan Stanley가 주관을 맡아 600억 달러 이상을 조달할 것으로 예상된다. 특히 코딩 에이전트 제품인 Claude Code가 2026년 2월 기준 연간 반복 매출(ARR) 25억 달러를 돌파하며 성장을 견인하고 있다.</p>
+        <div class="trend-source">출처: <a href="https://techcrunch.com/2026/05/28/anthropic-raises-65-billion-nears-1t-valuation-ahead-of-ipo/" target="_blank">Anthropic raises $65 billion, nears $1T valuation ahead of IPO</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="Google Gemini 3.5 Flash, "플래시가 프로를 이긴다" — AI 모델 위계 역전" data-tts-content="2026년 5월 19일 Google I/O에서 Sundar Pichai가 Gemini 3.5 Flash를 정식 출시했다. 이 모델은 3.5 Flash가 코딩·에이전틱 벤치마크에서 Gemini 3.1 Pro를 능가하며 기존 Pro/Flash 위계를 역전시켰다. Gemini 앱 월간 활성 사용자 9억 명, Search AI Mode 10억 명 이상을 보유한 Google이 이 모델을 기본값으로 설정하면서, 입력 토큰당 $1.50 / 출력 토큰당 $9.00로 기존 3.1 Pro 대비 약 40% 저렴하게 책정해 개발자 생태계 장악을 노리고 있다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">Google Gemini 3.5 Flash, "플래시가 프로를 이긴다" — AI 모델 위계 역전</div>
+        <p class="trend-text">2026년 5월 19일 Google I/O에서 Sundar Pichai가 Gemini 3.5 Flash를 정식 출시했다. 이 모델은 3.5 Flash가 코딩·<span class="tooltip" data-tip="AI가 다단계 작업을 자율적으로 계획하고 실행하는 방식">에이전틱</span> 벤치마크에서 Gemini 3.1 Pro를 능가하며 기존 Pro/Flash 위계를 역전시켰다. Gemini 앱 월간 활성 사용자 9억 명, Search AI Mode 10억 명 이상을 보유한 Google이 이 모델을 기본값으로 설정하면서, 입력 토큰당 $1.50 / 출력 토큰당 $9.00로 기존 3.1 Pro 대비 약 40% 저렴하게 책정해 개발자 생태계 장악을 노리고 있다.</p>
+        <div class="trend-source">출처: <a href="https://www.marktechpost.com/2026/05/20/google-introduces-gemini-3-5-flash-at-i-o-2026-a-faster-and-cheaper-model-for-ai-agents-and-coding/" target="_blank">Google Introduces Gemini 3.5 Flash at I/O 2026</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="트럼프 행정부, 연방 단일 AI 규제 프레임워크 추진 — 주정부 규제 선제 차단" data-tts-content="트럼프 행정부가 2026년 3월 20일 '국가 AI 정책 프레임워크'를 발표하며 전국적으로 통일된 AI 규제 접근 방식을 수립하기 위한 권고안을 의회에 제출했다. 핵심은 의회가 주정부 AI 법률을 선점(Preemption)하는 연방 단일 혁신 지향 체제를 채택하도록 촉구하는 것이다. 6월 2일에는 사이버보안 강화를 위한 AI 활용을 지시하는 추가 행정명령에도 서명했으며, 새로운 연방 AI 규제 기구 설립에는 반대하고 기존 기관을 통한 업종별 감독을 지지하는 방향으로 '경량 규제(light-touch)' 원칙을 일관되게 유지하고 있다.">
+      <span class="trend-num">03</span>
+      <div class="trend-body">
+        <div class="trend-title">트럼프 행정부, 연방 단일 AI 규제 프레임워크 추진 — 주정부 규제 선제 차단</div>
+        <p class="trend-text">트럼프 행정부가 2026년 3월 20일 '국가 AI 정책 프레임워크'를 발표하며 전국적으로 통일된 AI 규제 접근 방식을 수립하기 위한 권고안을 의회에 제출했다. 핵심은 의회가 주정부 AI 법률을 선점(Preemption)하는 연방 단일 혁신 지향 체제를 채택하도록 촉구하는 것이다. 6월 2일에는 사이버보안 강화를 위한 AI 활용을 지시하는 추가 행정명령에도 서명했으며, 새로운 연방 AI 규제 기구 설립에는 반대하고 기존 기관을 통한 업종별 감독을 지지하는 방향으로 '경량 규제(light-touch)' 원칙을 일관되게 유지하고 있다.</p>
+        <div class="trend-source">출처: <a href="https://www.mofo.com/resources/insights/260402-trump-administration-releases-national-ai-policy-framework" target="_blank">Trump Administration Releases National AI Policy Framework</a></div>
+      </div>
+    </div></div>
+
+  <hr class="section-sep">
+
+  <div class="section-label">HOW TO USE</div>
+  <div class="tags"><span class="tag">AI 마케팅 자동화</span><span class="tag">워크플로우 통합</span><span class="tag">생성형 AI</span><span class="tag">마케팅 리드 생성</span><span class="tag">고객 획득 비용 절감</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="마케팅 AI 자동화, 2028년까지 두 배 급성장…'AI 역량 함정' 경계해야" data-tts-content="마케팅 자동화는 이제 고정된 이메일 드립이나 정적 너처링 캠페인을 넘어, 2026년을 기점으로 단순 워크플로우 실행에서 시스템 수준의 의사결정 체계로 전환되고 있다. 가트너 조사에 따르면 마케팅 업무 자동화 비율은 2026년 16%에서 2028년 36%로 두 배 이상 증가가 예상된다. 2026년 자동화에서 가장 많은 성과를 거두는 기업은 가장 큰 스택이 아닌, 자동화를 캠페인 체크리스트가 아닌 통합적 의사결정 시스템으로 다루는 기업이 될 것이다. CMO가 초기 AI 활용 단계에 머물면 AI 역량 함정(AI Competency Trap)에 빠질 위험이 크다.">
+      <span class="trend-num">04</span>
+      <div class="trend-body">
+        <div class="trend-title">마케팅 AI 자동화, 2028년까지 두 배 급성장…'AI 역량 함정' 경계해야</div>
+        <p class="trend-text">마케팅 자동화는 이제 고정된 이메일 드립이나 정적 너처링 캠페인을 넘어, 2026년을 기점으로 단순 워크플로우 실행에서 시스템 수준의 의사결정 체계로 전환되고 있다. 가트너 조사에 따르면 마케팅 업무 자동화 비율은 2026년 16%에서 2028년 36%로 두 배 이상 증가가 예상된다. 2026년 자동화에서 가장 많은 성과를 거두는 기업은 가장 큰 스택이 아닌, 자동화를 캠페인 체크리스트가 아닌 통합적 의사결정 시스템으로 다루는 기업이 될 것이다. CMO가 초기 AI 활용 단계에 머물면 <span class="tooltip" data-tip="AI를 단순 도구로만 쓰고 전략적 역량으로 내재화하지 못하는 함정">AI 역량 함정(AI Competency Trap)</span>에 빠질 위험이 크다.</p>
+        <div class="trend-source">출처: <a href="https://almcorp.com/blog/marketing-automation-trends-2026/" target="_blank">Marketing Automation Trends 2026: How Scheduled Workflows Are Becoming Self-Optimizing Systems</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="AI 워크플로우 통합 기업, 리드 50% 증가·CAC 30% 절감 실증" data-tts-content="하버드 비즈니스 리뷰 연구에 따르면, AI 기반 마케팅 워크플로우를 깊이 통합한 기업은 리드 생성을 50% 향상시키면서 동시에 고객 획득 비용(CAC)을 30% 이상 절감할 수 있다. 이미 기본 자동화와 단순 AI 카피라이팅의 시대는 지났으며, 선도 에이전시와 스타트업들은 AI가 콘텐츠 초안을 넘어 워크플로우를 관리하고 채널 전반에서 캠페인을 최적화하는 '자율 마케팅 오케스트레이션'으로 전환 중이다. Litmus 2026 보고서에 따르면 고급 AI 오케스트레이션을 활용한 마케터들은 이메일 제작 시간이 2주에서 24시간 이내로 단축되는 성과를 거뒀다.">
+      <span class="trend-num">05</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 워크플로우 통합 기업, 리드 50% 증가·CAC 30% 절감 실증</div>
+        <p class="trend-text">하버드 비즈니스 리뷰 연구에 따르면, AI 기반 마케팅 워크플로우를 깊이 통합한 기업은 리드 생성을 50% 향상시키면서 동시에 <span class="tooltip" data-tip="신규 고객 한 명을 획득하는 데 드는 총 비용">고객 획득 비용(CAC)</span>을 30% 이상 절감할 수 있다. 이미 기본 자동화와 단순 AI 카피라이팅의 시대는 지났으며, 선도 에이전시와 스타트업들은 AI가 콘텐츠 초안을 넘어 워크플로우를 관리하고 채널 전반에서 캠페인을 최적화하는 '자율 마케팅 오케스트레이션'으로 전환 중이다. Litmus 2026 보고서에 따르면 고급 AI 오케스트레이션을 활용한 마케터들은 이메일 제작 시간이 2주에서 24시간 이내로 단축되는 성과를 거뒀다.</p>
+        <div class="trend-source">출처: <a href="https://swipedirectory.com/ai-automation-workflow-integration-marketing-efficiency-2026/" target="_blank">The 2026 Guide to AI Automation & Workflow Integration for Marketing Efficiency</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="생성형 AI, 단순 콘텐츠 도구 넘어 마케팅 전략 설계 인프라로 진화" data-tts-content="생성형 AI는 이제 단순 콘텐츠 제작 도구의 범주를 벗어나, 마케팅 전략 수립·캠페인 설계·고객 대응 및 데이터 분석 전 단계의 의사결정 구조를 근본적으로 바꾸고 있다. 선도 기업들은 워크플로우를 AI 역량 중심으로 재설계해 "AI 시스템이 캠페인 의사결정의 70%를 자율 처리"하는 수준에 이르렀으며, 이를 통해 전략가들이 포지셔닝과 크리에이티브 차별화에 집중할 수 있게 됐다. 단순히 'AI 도구를 쓰는' 수준에서 벗어나, 'AI를 전략적으로 내재화해 경쟁력으로 삼는가'가 기업 간 결정적 격차를 만들 것으로 전망된다.">
+      <span class="trend-num">06</span>
+      <div class="trend-body">
+        <div class="trend-title">생성형 AI, 단순 콘텐츠 도구 넘어 마케팅 전략 설계 인프라로 진화</div>
+        <p class="trend-text">생성형 AI는 이제 단순 콘텐츠 제작 도구의 범주를 벗어나, 마케팅 전략 수립·캠페인 설계·고객 대응 및 데이터 분석 전 단계의 의사결정 구조를 근본적으로 바꾸고 있다. 선도 기업들은 워크플로우를 AI 역량 중심으로 재설계해 "AI 시스템이 캠페인 의사결정의 70%를 자율 처리"하는 수준에 이르렀으며, 이를 통해 전략가들이 포지셔닝과 크리에이티브 차별화에 집중할 수 있게 됐다. 단순히 'AI 도구를 쓰는' 수준에서 벗어나, 'AI를 전략적으로 내재화해 경쟁력으로 삼는가'가 기업 간 결정적 격차를 만들 것으로 전망된다.</p>
+        <div class="trend-source">출처: <a href="https://market.rememberapp.co.kr/blog/insights/ai-%EB%A7%88%EC%BC%80%ED%8C%85-%ED%8A%B8%EB%A0%8C%EB%93%9C-2026-%EC%83%9D%EC%84%B1%ED%98%95-ai-%EC%8B%9C%EB%8C%80%EC%9D%98-%EC%A0%84%EB%9E%B5%EA%B3%BC-%EC%84%B1%EA%B3%B5-%EC%82%AC%EB%A1%80" target="_blank">AI 마케팅 트렌드 2026: 생성형 AI 시대의 전략과 성공 사례</a></div>
+      </div>
+    </div></div>
+
+  <hr class="div">
+  <div class="glossary">
+    <div class="glossary-heading">용어사전</div>
+    <div class="glossary-grid">
+      <div class="glossary-card">
+        <div class="glossary-term">비공개 S-1</div>
+        <p class="glossary-desc">기업공개 전 SEC에 제출하는 초안 등록 명세서</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">포스트머니 밸류에이션</div>
+        <p class="glossary-desc">신규 투자 이후 기업의 총 가치 평가액</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">Series H 라운드</div>
+        <p class="glossary-desc">8번째 단계의 벤처캐피탈 투자 라운드</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">코딩 에이전트</div>
+        <p class="glossary-desc">자동으로 코드를 작성하고 실행하는 AI 프로그램</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">마케팅 자동화</div>
+        <p class="glossary-desc">반복적인 마케팅 업무를 자동으로 처리하는 기술</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">워크플로우 통합</div>
+        <p class="glossary-desc">여러 마케팅 시스템을 하나로 연결한 업무 흐름</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">드립 캠페인</div>
+        <p class="glossary-desc">정해진 시간에 자동으로 발송되는 이메일 시퀀스</p>
+      </div>
+      <div class="glossary-card">
+        <div class="glossary-term">AI 역량 함정</div>
+        <p class="glossary-desc">AI 기술 도입 후 실제 성과로 이어지지 못하는 함정</p>
+      </div></div>
+  </div>
+
+  <div class="report-foot">마지막 업데이트: 2026년 07월 02일</div>
+</div>
+</div>
+
+
+<div class="tab-panel" id="tab-marketer">
+<div class="page-wrap">
+  <div class="report-date">2026년 07월 02일</div>
+  <h1 class="headline">캠페인 실무자를 위한<br>AI 활용 전략</h1>
+  <p class="editor-comment">마케터·AE 관점으로 재구성했습니다. 캠페인 기획, 클라이언트 제안, 툴 활용에 바로 쓸 수 있는 인사이트를 담았습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 모델 경쟁</span><span class="tag">클로드 코딩</span><span class="tag">젬ini 플래시</span><span class="tag">AI 규제</span><span class="tag">IPO 추진</span><span class="tag">AI 마케팅 자동화</span><span class="tag">워크플로우 통합</span><span class="tag">생성형 AI</span><span class="tag">마케팅 리드 생성</span><span class="tag">고객 획득 비용 절감</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="AI 마케팅 자동화, 2028년 36%로 두 배 확대 전망" data-tts-content="가트너 조사에 따르면 마케팅 AI 자동화 비율이 2026년 16%에서 2028년 36%로 급증할 전망입니다. Klarna는 생성형 AI 도입으로 연 마케팅 비용 1,000만 달러를 절감하고 캠페인 기간을 6주에서 7일로 단축했습니다. 지금 AI 도입을 미루면 경쟁사 대비 역량 격차가 빠르게 벌어질 수 있습니다.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 마케팅 자동화, 2028년 36%로 두 배 확대 전망</div>
+        <p class="trend-text">가트너 조사에 따르면 마케팅 AI 자동화 비율이 2026년 16%에서 2028년 36%로 급증할 전망입니다. Klarna는 생성형 AI 도입으로 연 마케팅 비용 1,000만 달러를 절감하고 캠페인 기간을 6주에서 7일로 단축했습니다. 지금 AI 도입을 미루면 경쟁사 대비 역량 격차가 빠르게 벌어질 수 있습니다.</p>
+        <div class="trend-source">출처: <a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-11-gartner-survey-reveals-marketing-leaders-expect-ai-automation-of-marketing-work-to-double-to-36-percent-by-2028" target="_blank">Gartner, AI Automation of Marketing Work to Double by 2028</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="AI 워크플로우 통합 기업, 리드 50% 증가·CAC 30% 절감" data-tts-content="하버드 비즈니스 리뷰 연구에 따르면 AI 마케팅 워크플로우를 깊이 통합한 기업은 리드 생성 50% 향상과 고객 획득 비용 30% 절감을 동시에 달성했습니다. Gemini 3.5 Flash 등 고성능 저비용 모델 출시로 중소 마케팅팀도 도입 장벽이 낮아졌습니다. 단순 자동화를 넘어 전략적 워크플로우 설계가 핵심 경쟁력이 됩니다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 워크플로우 통합 기업, 리드 50% 증가·CAC 30% 절감</div>
+        <p class="trend-text">하버드 비즈니스 리뷰 연구에 따르면 AI 마케팅 워크플로우를 깊이 통합한 기업은 리드 생성 50% 향상과 고객 획득 비용 30% 절감을 동시에 달성했습니다. Gemini 3.5 Flash 등 고성능 저비용 모델 출시로 중소 마케팅팀도 도입 장벽이 낮아졌습니다. 단순 자동화를 넘어 전략적 워크플로우 설계가 핵심 경쟁력이 됩니다.</p>
+        <div class="trend-source">출처: <a href="https://almcorp.com/blog/ai-powered-marketing-automation/" target="_blank">AI Marketing Automation Guide 2026</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 07월 02일</div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-developer">
+<div class="page-wrap">
+  <div class="report-date">2026년 07월 02일</div>
+  <h1 class="headline">개발·데이터 팀을 위한<br>기술 변화 포인트</h1>
+  <p class="editor-comment">API 변화, 아키텍처 영향, 데이터 파이프라인 관점에서 오늘 뉴스를 재해석했습니다. 지금 당장 확인해야 할 것들을 정리했습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 모델 경쟁</span><span class="tag">클로드 코딩</span><span class="tag">젬ini 플래시</span><span class="tag">AI 규제</span><span class="tag">IPO 추진</span><span class="tag">AI 마케팅 자동화</span><span class="tag">워크플로우 통합</span><span class="tag">생성형 AI</span><span class="tag">마케팅 리드 생성</span><span class="tag">고객 획득 비용 절감</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="AI 코딩 모델 경쟁 심화, API 비용 구조 변화 주목" data-tts-content="Anthropic이 Claude Code로 코딩 시장 선두를 유지하는 가운데, Google Gemini 3.5 Flash가 백만 토큰당 $1.50/$9.00 API 가격으로 출시되며 속도와 비용 모두 경쟁력을 높였다. 개발자 입장에서는 에이전틱 워크플로우 구축 시 모델 선택 기준이 벤치마크 성능뿐 아니라 토큰 단가와 응답 속도로 이동하고 있다. Anthropic IPO 추진은 장기 API 안정성과 엔터프라이즈 SLA 계약 측면에서도 주시할 변수다.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 코딩 모델 경쟁 심화, API 비용 구조 변화 주목</div>
+        <p class="trend-text">Anthropic이 Claude Code로 코딩 시장 선두를 유지하는 가운데, Google Gemini 3.5 Flash가 백만 토큰당 $1.50/$9.00 API 가격으로 출시되며 속도와 비용 모두 경쟁력을 높였다. 개발자 입장에서는 에이전틱 워크플로우 구축 시 모델 선택 기준이 벤치마크 성능뿐 아니라 토큰 단가와 응답 속도로 이동하고 있다. Anthropic IPO 추진은 장기 API 안정성과 엔터프라이즈 SLA 계약 측면에서도 주시할 변수다.</p>
+        <div class="trend-source">출처: <a href="https://www.cnbc.com/2026/06/01/microsoft-and-google-take-on-anthropic-and-openai-in-ai-coding-models.html" target="_blank">Microsoft and Google Take on Anthropic and OpenAI in AI Coding Models</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="AI 마케팅 워크플로우 통합, 리드 50% 증가·CAC 30% 절감 실증" data-tts-content="하버드 비즈니스 리뷰 연구에 따르면 AI 기반 마케팅 워크플로우를 깊이 통합한 기업은 리드 생성 50% 향상, 고객 획득 비용 30% 절감을 달성했다. Klarna는 생성형 AI 도입으로 캠페인 제작 기간을 6주에서 7일로 단축하고 연간 1,000만 달러를 절감했다. 데이터 파이프라인과 LLM을 연결하는 실질적 워크플로우 설계가 성과를 좌우하는 핵심 변수로 부상하고 있다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 마케팅 워크플로우 통합, 리드 50% 증가·CAC 30% 절감 실증</div>
+        <p class="trend-text">하버드 비즈니스 리뷰 연구에 따르면 AI 기반 마케팅 워크플로우를 깊이 통합한 기업은 리드 생성 50% 향상, 고객 획득 비용 30% 절감을 달성했다. Klarna는 생성형 AI 도입으로 캠페인 제작 기간을 6주에서 7일로 단축하고 연간 1,000만 달러를 절감했다. 데이터 파이프라인과 LLM을 연결하는 실질적 워크플로우 설계가 성과를 좌우하는 핵심 변수로 부상하고 있다.</p>
+        <div class="trend-source">출처: <a href="https://almcorp.com/blog/ai-powered-marketing-automation/" target="_blank">2026 AI 마케팅 워크플로우 통합 가이드</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 07월 02일</div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-design">
+<div class="page-wrap">
+  <div class="report-date">2026년 07월 02일</div>
+  <h1 class="headline">크리에이티브 팀을 위한<br>AI 활용 포인트</h1>
+  <p class="editor-comment">크리에이티브 워크플로우 변화, 브랜드 아이덴티티 유지, 실제 활용 가능한 AI 디자인 툴을 중심으로 정리했습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 모델 경쟁</span><span class="tag">클로드 코딩</span><span class="tag">젬ini 플래시</span><span class="tag">AI 규제</span><span class="tag">IPO 추진</span><span class="tag">AI 마케팅 자동화</span><span class="tag">워크플로우 통합</span><span class="tag">생성형 AI</span><span class="tag">마케팅 리드 생성</span><span class="tag">고객 획득 비용 절감</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="AI 모델 전쟁, 크리에이티브 도구 판도를 바꾼다" data-tts-content="Anthropic이 965B 밸류에이션으로 IPO를 추진하며 Claude Code로 코딩 시장 선두를 달리고, Google은 Gemini 3.5 Flash로 4배 빠른 속도를 앞세웠다. 아트 디렉터 입장에서 AI 코딩·에이전틱 도구 선택이 곧 크리에이티브 파이프라인의 속도를 결정하는 시대가 됐다.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 모델 전쟁, 크리에이티브 도구 판도를 바꾼다</div>
+        <p class="trend-text">Anthropic이 965B 밸류에이션으로 IPO를 추진하며 Claude Code로 코딩 시장 선두를 달리고, Google은 Gemini 3.5 Flash로 4배 빠른 속도를 앞세웠다. 아트 디렉터 입장에서 AI 코딩·에이전틱 도구 선택이 곧 크리에이티브 파이프라인의 속도를 결정하는 시대가 됐다.</p>
+        <div class="trend-source">출처: <a href="https://www.cnbc.com/2026/06/01/microsoft-and-google-take-on-anthropic-and-openai-in-ai-coding-models.html" target="_blank">Microsoft and Google take on Anthropic and OpenAI in AI coding models</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="AI 마케팅 자동화, 비용보다 크리에이티브 속도가 핵심" data-tts-content="Klarna는 생성형 AI로 캠페인 제작을 6주에서 7일로 단축했고, British Council은 콘텐츠 비용을 70% 절감했다. HBR 연구는 AI 워크플로우 통합 기업이 리드를 50% 늘리고 CAC를 30% 줄인다고 밝혔다. 자동화의 진짜 가치는 절약이 아닌 크리에이티브 반복 속도에 있다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 마케팅 자동화, 비용보다 크리에이티브 속도가 핵심</div>
+        <p class="trend-text">Klarna는 생성형 AI로 캠페인 제작을 6주에서 7일로 단축했고, British Council은 콘텐츠 비용을 70% 절감했다. HBR 연구는 AI 워크플로우 통합 기업이 리드를 50% 늘리고 CAC를 30% 줄인다고 밝혔다. 자동화의 진짜 가치는 절약이 아닌 크리에이티브 반복 속도에 있다.</p>
+        <div class="trend-source">출처: <a href="https://almcorp.com/blog/ai-powered-marketing-automation/" target="_blank">AI-Powered Marketing Automation 2026</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 07월 02일</div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-executive">
+<div class="page-wrap">
+  <div class="report-date">2026년 07월 02일</div>
+  <h1 class="headline">의사결정자를 위한<br>전략 브리핑</h1>
+  <p class="editor-comment">시장 포지션, 비용·리스크, 지금 결정해야 할 것. 기술 세부사항 없이 경영 판단에 필요한 핵심만 정리했습니다.</p>
+  <hr class="div">
+  <div class="tags"><span class="tag">AI 모델 경쟁</span><span class="tag">클로드 코딩</span><span class="tag">젬ini 플래시</span><span class="tag">AI 규제</span><span class="tag">IPO 추진</span><span class="tag">AI 마케팅 자동화</span><span class="tag">워크플로우 통합</span><span class="tag">생성형 AI</span><span class="tag">마케팅 리드 생성</span><span class="tag">고객 획득 비용 절감</span></div>
+  <div class="trend-list">
+    <div class="trend-item" data-tts-title="AI 플랫폼 경쟁 격화, 벤더 선택이 곧 경쟁력" data-tts-content="Anthropic이 약 965조 원 밸류에이션으로 IPO를 추진하며 Claude Code로 코딩 시장을 선점했고, Google은 Gemini 3.5 Flash를 4배 빠른 속도로 출시해 대응했습니다. 동시에 미국 정부의 특정 AI 모델 사용 금지 조치와 연방 AI 규제 단일화 추진으로 벤더 리스크 관리가 경영진 핵심 과제로 부상했습니다.">
+      <span class="trend-num">01</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 플랫폼 경쟁 격화, 벤더 선택이 곧 경쟁력</div>
+        <p class="trend-text">Anthropic이 약 965조 원 밸류에이션으로 IPO를 추진하며 Claude Code로 코딩 시장을 선점했고, Google은 Gemini 3.5 Flash를 4배 빠른 속도로 출시해 대응했습니다. 동시에 미국 정부의 특정 AI 모델 사용 금지 조치와 연방 AI 규제 단일화 추진으로 벤더 리스크 관리가 경영진 핵심 과제로 부상했습니다.</p>
+        <div class="trend-source">출처: <a href="https://www.cnbc.com/2026/06/01/microsoft-and-google-take-on-anthropic-and-openai-in-ai-coding-models.html" target="_blank">Microsoft and Google Take On Anthropic and OpenAI in AI Coding Models</a></div>
+      </div>
+    </div>
+    <div class="trend-item" data-tts-title="AI 마케팅 통합 기업, 리드 50% 증가·비용 30% 절감" data-tts-content="가트너는 마케팅 AI 자동화 비율이 2028년까지 36%로 두 배 증가할 것으로 전망했습니다. AI를 조직 전반에 깊이 통합한 기업은 리드 생성 50% 향상과 고객 획득 비용 30% 절감을 달성했으며, Klarna는 캠페인 기간을 6주에서 7일로 단축했습니다. 도입 초기 단계에 머무는 기업은 AI 역량 함정에 빠질 위험이 있습니다.">
+      <span class="trend-num">02</span>
+      <div class="trend-body">
+        <div class="trend-title">AI 마케팅 통합 기업, 리드 50% 증가·비용 30% 절감</div>
+        <p class="trend-text">가트너는 마케팅 AI 자동화 비율이 2028년까지 36%로 두 배 증가할 것으로 전망했습니다. AI를 조직 전반에 깊이 통합한 기업은 리드 생성 50% 향상과 고객 획득 비용 30% 절감을 달성했으며, Klarna는 캠페인 기간을 6주에서 7일로 단축했습니다. 도입 초기 단계에 머무는 기업은 AI 역량 함정에 빠질 위험이 있습니다.</p>
+        <div class="trend-source">출처: <a href="https://www.gartner.com/en/newsroom/press-releases/2026-05-11-gartner-survey-reveals-marketing-leaders-expect-ai-automation-of-marketing-work-to-double-to-36-percent-by-2028" target="_blank">Gartner Survey Reveals Marketing Leaders Expect AI Automation to Double by 2028</a></div>
+      </div>
+    </div></div>
+  <div class="report-foot">마지막 업데이트: 2026년 07월 02일</div>
+</div>
+</div>
+
+<div class="tab-panel" id="tab-podcast">
+<div class="podcast-wrap">
+
+  <div class="pod-header">
+    <div class="pod-eyebrow">
+      <span class="pod-eyebrow-dot"></span>
+      AI Trend Report · 2026년 07월 02일
+    </div>
+    <div class="pod-title">마케팅 자동화, 2028년까지 비율 2배 증가 예상</div>
+    <p class="pod-desc">마케팅 자동화의 진화는 단순한 도구 도입을 넘어 조직 전체의 의사결정 구조 변화를 의미하는 만큼, 기업들은 AI 역량의 깊이보다 통합성에 주목해야 한다. 2026년부터</p>
+  </div>
+
+  <div class="pod-player">
+    <div class="pod-controls">
+      <button class="pod-play-btn" id="podPlayBtn" onclick="podToggle()">
+        <svg id="podPlayIcon" viewBox="0 0 24 24" width="16" height="16" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+      <div class="pod-info">
+        <div class="pod-speaker-now">지금 말하는 사람</div>
+        <div class="pod-speaker-name" id="podSpeakerName">재생 버튼을 눌러 시작하세요</div>
+      </div>
+    </div>
+    <div class="pod-progress-wrap">
+      <div class="pod-progress-bar" onclick="podSeek(event)">
+        <div class="pod-progress-fill" id="podProgressFill"></div>
+      </div>
+      <span class="pod-time" id="podTime">0 / 0</span>
+    </div>
+    <div class="pod-bottom-row">
+      <div class="pod-speed-group">
+        <span class="pod-speed-label">속도</span>
+        <button class="pod-speed-btn" onclick="podSetSpeed(0.8,this)">0.8x</button>
+        <button class="pod-speed-btn pod-speed-active" onclick="podSetSpeed(1.0,this)">1.0x</button>
+        <button class="pod-speed-btn" onclick="podSetSpeed(1.2,this)">1.2x</button>
+        <button class="pod-speed-btn" onclick="podSetSpeed(1.5,this)">1.5x</button>
+      </div>
+      <button class="pod-restart-btn" onclick="podRestart()">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a6 6 0 1 1 1.2 3.6"/><polyline points="4 14 4 10 8 10"/></svg>
+        처음부터
+      </button>
+    </div>
+  </div>
+
+  <div class="pod-personas">
+    <div class="persona-card persona-host"      id="pcard-host">
+      <div class="persona-avatar">🎙️</div>
+      <div class="persona-name">AI리포트</div>
+      <div class="persona-role">Host / 사회자</div>
+    </div>
+    <div class="persona-card persona-marketer"  id="pcard-marketer">
+      <div class="persona-avatar">📢</div>
+      <div class="persona-name">김마케터</div>
+      <div class="persona-role">Marketer / AE</div>
+    </div>
+    <div class="persona-card persona-developer" id="pcard-developer">
+      <div class="persona-avatar">💻</div>
+      <div class="persona-name">이개발자</div>
+      <div class="persona-role">Developer</div>
+    </div>
+    <div class="persona-card persona-designer"  id="pcard-designer">
+      <div class="persona-avatar">🎨</div>
+      <div class="persona-name">박디자이너</div>
+      <div class="persona-role">Art Director</div>
+    </div>
+    <div class="persona-card persona-executive" id="pcard-executive">
+      <div class="persona-avatar">📊</div>
+      <div class="persona-name">최경영자</div>
+      <div class="persona-role">Executive</div>
+    </div>
+  </div>
+
+  <div class="pod-script" id="podScript"></div>
+
+</div>
+</div>
+
+<script>
+(function(){
+var POD_SCRIPT = [{"persona": "host", "name": "AI리포트", "text": "안녕하세요, AI리포트이에요! 오늘은 마케팅 자동화가 2028년까지 얼마나 빠르게 커지는지, 그리고 우리가 거기서 뭘 챙겨야 하는지 이야기 나눠볼 거예요."}, {"persona": "host", "name": "AI리포트", "text": "먼저 요즘 AI 판에서 제일 핫한 소식부터 짚어볼게요. 이개발자 씨, 요즘 Anthropic 얘기가 많이 나오던데 어떻게 보세요?"}, {"persona": "developer", "name": "이개발자", "text": "네, 솔직히 저도 놀랐어요. 기업 가치가 거의 1조 달러 수준인데, 그게 허수가 아니라 Claude Code라는 코딩 에이전트 하나가 ARR 25억 달러를 찍으면서 실적으로 뒷받침되고 있거든요."}, {"persona": "designer", "name": "박디자이너", "text": "저도 요즘 Claude Code 쓰는 개발자분들한테 많이 듣는데, 진짜 코드 작업 속도가 다르다고 하더라고요. 구글도 가만히 있지 않았잖아요?"}, {"persona": "developer", "name": "이개발자", "text": "맞아요, 구글이 Gemini 3.5 Flash를 내놨는데 재밌는 게 원래 Pro 모델이 위에 있어야 하는데 Flash가 코딩 벤치마크에서 Pro를 이겨버렸어요. 게다가 가격도 40% 정도 저렴하니까 개발자 입장에선 선택 안 할 이유가 없죠."}, {"persona": "executive", "name": "최경영자", "text": "경영 관점에서 보면 AI 모델 경쟁이 치열해질수록 기업들한테는 오히려 기회예요. 도구 가격은 내려가고 성능은 올라가니까, 이걸 어떻게 전략에 녹이느냐가 진짜 승부처가 되는 거죠."}, {"persona": "host", "name": "AI리포트", "text": "좋아요, 그럼 이제 실제로 어떻게 써먹을지 얘기해볼게요. 가트너 조사 보면 마케팅 자동화 비율이 2026년 16%에서 2028년엔 36%로 뛴다고 하는데, 김마케터 씨는 현장에서 어떻게 느끼세요?"}, {"persona": "marketer", "name": "김마케터", "text": "저도 딱 그 변화를 몸으로 느끼는 중이에요. 예전엔 이메일 자동화 하면 시퀀스 짜고 끝이었는데, 요즘은 AI가 어떤 채널에 어떤 메시지를 언제 보낼지를 알아서 최적화하는 수준까지 왔거든요."}, {"persona": "marketer", "name": "김마케터", "text": "HBR 연구에서 AI 워크플로우 제대로 연결한 기업이 리드가 50% 늘고 고객 획득 비용이 30% 줄었다고 하는데, 저는 그게 통합이 얼마나 잘 됐느냐의 차이라고 봐요."}, {"persona": "executive", "name": "최경영자", "text": "그게 핵심이에요. 저는 요즘 CMO들한테 꼭 하는 말이, AI 툴을 많이 쓰는 게 중요한 게 아니라 그 툴들이 비즈니스 목표랑 얼마나 연결돼 있냐가 중요하다는 거예요. 툴만 쌓아두면 오히려 복잡성만 늘어나거든요."}, {"persona": "designer", "name": "박디자이너", "text": "크리에이티브 쪽도 비슷해요. 이메일 하나 만드는 데 2주 걸리던 게 AI 오케스트레이션 도입하니까 하루 안에 되더라고요. 시간이 남으면 결국 더 좋은 전략 고민에 쓸 수 있으니까 팀 전체가 달라지는 느낌이에요."}, {"persona": "host", "name": "AI리포트", "text": "오늘 얘기 한 줄로 정리하면 어떻게 될까요? 최경영자 씨 한 말씀 해주세요."}, {"persona": "executive", "name": "최경영자", "text": "AI 많이 쓰는 회사가 이기는 게 아니라, AI를 전략과 제대로 연결한 회사가 이기는 시대가 왔어요."}, {"persona": "host", "name": "AI리포트", "text": "딱 맞는 한 줄이네요! 오늘 함께해 주신 세 분 감사하고요, AI리포트는 다음 주에도 찾아올게요!"}];
+
+var POD_META = {
+  host:      { emoji:'🎙️', color:'#374151', pitch:0.82, rate:0.94 },
+  marketer:  { emoji:'📢', color:'#0057ff', pitch:1.28, rate:1.04 },
+  developer: { emoji:'💻', color:'#059669', pitch:0.72, rate:0.96 },
+  designer:  { emoji:'🎨', color:'#7c3aed', pitch:1.38, rate:1.02 },
+  executive: { emoji:'📊', color:'#d97706', pitch:0.66, rate:0.91 },
+};
+
+var pod = { synth:window.speechSynthesis||null, idx:0, active:false, paused:false, speed:1.0 };
+
+/* 스크립트 렌더 */
+function podRenderScript() {
+  var el = document.getElementById('podScript');
+  if (!el) return;
+  el.innerHTML = POD_SCRIPT.map(function(line, i) {
+    var meta = POD_META[line.persona] || POD_META.host;
+    return '<div class="pod-line pod-line-' + line.persona + '" id="pod-line-' + i + '">'
+      + '<div class="pod-line-avatar">' + meta.emoji + '</div>'
+      + '<div class="pod-line-bubble">'
+      + '<div class="pod-line-name" style="color:' + meta.color + '">' + line.name + '</div>'
+      + '<div class="pod-line-text">' + line.text + '</div>'
+      + '</div></div>';
+  }).join('');
+}
+
+/* UI 업데이트 */
+function podUpdateUI() {
+  var line = POD_SCRIPT[pod.idx] || POD_SCRIPT[0];
+  var meta = POD_META[line.persona] || POD_META.host;
+  var nameEl = document.getElementById('podSpeakerName');
+  if (nameEl) { nameEl.textContent = line.name; nameEl.style.color = meta.color; }
+  var pct = POD_SCRIPT.length > 1 ? (pod.idx / (POD_SCRIPT.length-1)) * 100 : 0;
+  var fill = document.getElementById('podProgressFill');
+  if (fill) fill.style.width = pct + '%';
+  var timeEl = document.getElementById('podTime');
+  if (timeEl) timeEl.textContent = (pod.idx+1) + ' / ' + POD_SCRIPT.length;
+  /* 페르소나 카드 */
+  document.querySelectorAll('.persona-card').forEach(function(c){ c.classList.remove('pod-speaking'); });
+  var card = document.getElementById('pcard-' + line.persona);
+  if (card) card.classList.add('pod-speaking');
+  /* 스크립트 라인 */
+  document.querySelectorAll('.pod-line').forEach(function(l){ l.classList.remove('pod-line-active'); });
+  var activeLine = document.getElementById('pod-line-' + pod.idx);
+  if (activeLine) {
+    activeLine.classList.add('pod-line-active');
+    activeLine.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }
+  /* 재생 아이콘 */
+  var icon = document.getElementById('podPlayIcon');
+  if (icon) {
+    icon.setAttribute('width','16'); icon.setAttribute('height','16');
+    if (pod.active && !pod.paused) {
+      icon.innerHTML = '<rect x="6" y="4" width="4" height="16" fill="white"/><rect x="14" y="4" width="4" height="16" fill="white"/>';
+    } else {
+      icon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3" fill="white"/>';
+    }
+  }
+}
+
+/* TTS */
+function podSpeak(idx) {
+  if (!pod.synth || idx >= POD_SCRIPT.length) { podStopAll(); return; }
+  pod.idx = idx;
+  podUpdateUI();
+  var line = POD_SCRIPT[idx];
+  var meta = POD_META[line.persona] || POD_META.host;
+  var utt  = new SpeechSynthesisUtterance(line.text);
+  utt.lang  = 'ko-KR';
+  utt.rate  = pod.speed * meta.rate;
+  utt.pitch = meta.pitch;
+  var voices = pod.synth.getVoices();
+  var koVoice =
+    voices.find(function(v){ return v.lang==='ko-KR' && v.name.includes('Google'); }) ||
+    voices.find(function(v){ return v.lang==='ko-KR' && v.name.includes('Microsoft'); }) ||
+    voices.find(function(v){ return v.lang.startsWith('ko'); });
+  if (koVoice) utt.voice = koVoice;
+  utt.onend   = function(){ if (!pod.paused) podSpeak(idx+1); };
+  utt.onerror = function(){ podSpeak(idx+1); };
+  pod.synth.speak(utt);
+}
+
+window.podToggle = function() {
+  if (!pod.synth) { alert('Chrome 또는 Edge를 사용해 주세요.'); return; }
+  if (!pod.active) {
+    pod.active = true; pod.paused = false;
+    pod.synth.cancel();
+    /* voiceschanged 콜백 안에서도 active 체크 — 자동재생 방지 */
+    if (pod.synth.getVoices().length === 0) {
+      pod.synth.addEventListener('voiceschanged', function onV(){
+        pod.synth.removeEventListener('voiceschanged', onV);
+        if (pod.active && !pod.paused) podSpeak(pod.idx);
+      });
+    } else { podSpeak(pod.idx); }
+  } else if (pod.paused) {
+    pod.paused = false;
+    pod.synth.resume();
+    if (!pod.synth.speaking) podSpeak(pod.idx);
+    podUpdateUI();
+  } else {
+    /* 재생 중 → 사용자 일시정지
+       pod.paused=true 로 설정하면 keepalive·visibilitychange 모두 resume 안 함 */
+    pod.paused = true;
+    pod.synth.pause();
+    podUpdateUI();
+  }
+};
+
+function podStopAll() {
+  if (pod.synth) pod.synth.cancel();
+  pod.active = false; pod.paused = false;
+  document.querySelectorAll('.pod-line').forEach(function(l){ l.classList.remove('pod-line-active'); });
+  document.querySelectorAll('.persona-card').forEach(function(c){ c.classList.remove('pod-speaking'); });
+  var nameEl = document.getElementById('podSpeakerName');
+  if (nameEl) { nameEl.textContent = '재생이 완료됐습니다'; nameEl.style.color = 'var(--fg-subtle)'; }
+  var icon = document.getElementById('podPlayIcon');
+  if (icon) icon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3" fill="white"/>';
+  var fill = document.getElementById('podProgressFill');
+  if (fill) fill.style.width = '100%';
+  var timeEl = document.getElementById('podTime');
+  if (timeEl) timeEl.textContent = POD_SCRIPT.length + ' / ' + POD_SCRIPT.length;
+}
+
+window.podRestart = function() {
+  if (pod.synth) pod.synth.cancel();
+  pod.active = false; pod.paused = false; pod.idx = 0;
+  document.querySelectorAll('.pod-line').forEach(function(l){ l.classList.remove('pod-line-active'); });
+  document.querySelectorAll('.persona-card').forEach(function(c){ c.classList.remove('pod-speaking'); });
+  var nameEl = document.getElementById('podSpeakerName');
+  if (nameEl) { nameEl.textContent = '재생 버튼을 눌러 시작하세요'; nameEl.style.color = 'var(--fg-subtle)'; }
+  var icon = document.getElementById('podPlayIcon');
+  if (icon) icon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3" fill="white"/>';
+  var fill = document.getElementById('podProgressFill');
+  if (fill) fill.style.width = '0%';
+  var timeEl = document.getElementById('podTime');
+  if (timeEl) timeEl.textContent = '0 / ' + POD_SCRIPT.length;
+};
+
+window.podSeek = function(e) {
+  var pct = e.offsetX / e.currentTarget.offsetWidth;
+  var newIdx = Math.round(pct * (POD_SCRIPT.length-1));
+  if (pod.synth) pod.synth.cancel();
+  pod.idx = newIdx;
+  if (pod.active) { pod.paused=false; podSpeak(newIdx); } else { podUpdateUI(); }
+};
+
+window.podSetSpeed = function(s, btn) {
+  pod.speed = s;
+  document.querySelectorAll('.pod-speed-btn').forEach(function(b){ b.classList.remove('pod-speed-active'); });
+  if (btn) btn.classList.add('pod-speed-active');
+  if (pod.active && !pod.paused) { if (pod.synth) pod.synth.cancel(); podSpeak(pod.idx); }
+};
+
+/* 탭 전환 시 팟캐스트 중지
+   — DOMContentLoaded 이후에 switchTab이 정의되므로 document.ready 이후 등록 */
+function podStopOnTabSwitch(id) {
+  if (id !== 'podcast' && pod.active) {
+    if (pod.synth) pod.synth.cancel();
+    pod.active = false; pod.paused = false;
+    podUpdateUI();
+  }
+}
+
+/* switchTab은 _JS 블록에 정의되어 있으므로
+   팟캐스트 IIFE가 끝난 뒤 window.onPodTabSwitch 훅으로 연결 */
+window._podStopOnTabSwitch = podStopOnTabSwitch;
+
+/* Chrome 백그라운드 TTS 자동 중단 버그 대응
+   — Chrome은 페이지가 숨겨지면 약 30초 후 speechSynthesis를 자동으로 pause()함
+   — 14초마다 pause→resume을 반복해서 재생 유지
+   — 단, 사용자가 직접 일시정지한 경우(pod.paused)는 절대 resume 안 함 */
+setInterval(function() {
+  if (!pod.synth || !pod.active || pod.paused) return;  // 일시정지·비활성 시 완전 스킵
+  if (pod.synth.speaking && !pod.synth.paused) {
+    pod.synth.pause();
+    pod.synth.resume();
+  }
+}, 14000);
+
+/* 초기 렌더 — 절대 자동 재생하지 않음 */
+podRenderScript();
+})();
+</script>
+
+
+
+<script>
+/* ── 탭 전환 ── */
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
+  ttsStop(); // 탭 전환 시 기존 TTS 중단
+  /* 팟캐스트 탭이 아닌 곳으로 이동 시 팟캐스트도 중단 */
+  if (typeof window._podStopOnTabSwitch === 'function') {
+    window._podStopOnTabSwitch(id);
+  }
+}
+
+/* ────────────────────────────────────────
+   TTS — Web Speech API
+   읽기 순서: 헤드라인 → 에디터 코멘트 → 트렌드(제목+내용) 순
+   각 트렌드 아이템 읽는 동안 해당 카드 하이라이트
+──────────────────────────────────────── */
+var tts = {
+  synth:    window.speechSynthesis || null,
+  queue:    [],   // {text, el} 배열
+  idx:      0,
+  active:   false,
+  paused:   false,
+  curEl:    null,
+};
+
+var TTS_ICONS = {
+  play:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>',
+  pause: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>',
+  stop:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>',
+};
+
+function ttsBtn() { return document.getElementById('ttsBtn'); }
+
+function ttsBtnState(state) {
+  var btn = ttsBtn(); if (!btn) return;
+  if (state === 'playing') {
+    btn.innerHTML = TTS_ICONS.pause + '<span>일시정지</span>';
+    btn.classList.add('playing'); btn.classList.remove('paused');
+  } else if (state === 'paused') {
+    btn.innerHTML = TTS_ICONS.play + '<span>계속 읽기</span>';
+    btn.classList.remove('playing'); btn.classList.add('paused');
+  } else {
+    btn.innerHTML = TTS_ICONS.play + '<span>읽어주기</span>';
+    btn.classList.remove('playing', 'paused');
+  }
+}
+
+function ttsHighlight(el) {
+  if (tts.curEl) tts.curEl.classList.remove('tts-active');
+  tts.curEl = el;
+  if (el) {
+    el.classList.add('tts-active');
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function ttsBuildQueue() {
+  /* 현재 활성 탭에서 읽을 내용 수집 */
+  var panel = document.querySelector('.tab-panel.active');
+  if (!panel) return [];
+
+  var queue = [];
+
+  /* 1. 헤드라인 */
+  var h1 = panel.querySelector('h1.headline');
+  if (h1) queue.push({ text: h1.innerText, el: null });
+
+  /* 2. 에디터 코멘트 */
+  var ec = panel.querySelector('.editor-comment');
+  if (ec) queue.push({ text: ec.innerText, el: null });
+
+  /* 3. 트렌드 아이템 — data-tts-title / data-tts-content 속성 사용 */
+  var items = panel.querySelectorAll('.trend-item[data-tts-title]');
+  items.forEach(function(item) {
+    var title   = item.getAttribute('data-tts-title')   || '';
+    var content = item.getAttribute('data-tts-content') || '';
+    if (title) queue.push({ text: title + '. ' + content, el: item });
+  });
+
+  return queue;
+}
+
+function ttsSpeak(idx) {
+  if (!tts.synth || idx >= tts.queue.length) {
+    ttsStop(); return;
+  }
+  tts.idx = idx;
+  var item = tts.queue[idx];
+  ttsHighlight(item.el);
+
+  var utt = new SpeechSynthesisUtterance(item.text);
+  utt.lang = 'ko-KR';
+  utt.rate = 0.92;
+  utt.pitch = 1.05;
+
+  /* 고품질 음성 우선 선택: Google > Microsoft > 기타 ko 순 */
+  var voices = tts.synth.getVoices();
+  var koVoice =
+    voices.find(function(v){ return v.lang === 'ko-KR' && v.name.includes('Google'); }) ||
+    voices.find(function(v){ return v.lang === 'ko-KR' && v.name.includes('Microsoft'); }) ||
+    voices.find(function(v){ return v.lang.startsWith('ko'); });
+  if (koVoice) utt.voice = koVoice;
+
+  utt.onend = function() {
+    if (!tts.paused) ttsSpeak(idx + 1);
+  };
+  utt.onerror = function() {
+    ttsSpeak(idx + 1);
+  };
+
+  tts.synth.speak(utt);
+}
+
+function ttsToggle() {
+  if (!tts.synth) {
+    alert('이 브라우저는 음성 읽기를 지원하지 않습니다. Chrome 또는 Edge를 사용해 주세요.');
+    return;
+  }
+
+  if (!tts.active) {
+    /* 처음 시작 */
+    tts.queue  = ttsBuildQueue();
+    tts.idx    = 0;
+    tts.active = true;
+    tts.paused = false;
+    tts.synth.cancel();
+    ttsBtnState('playing');
+    /* Chrome은 getVoices()가 비동기 로드 → voiceschanged 대응 */
+    if (tts.synth.getVoices().length === 0) {
+      tts.synth.addEventListener('voiceschanged', function onVoices() {
+        tts.synth.removeEventListener('voiceschanged', onVoices);
+        ttsSpeak(0);
+      });
+    } else {
+      ttsSpeak(0);
+    }
+
+  } else if (tts.paused) {
+    /* 일시정지 → 재개 */
+    tts.paused = false;
+    ttsBtnState('playing');
+    tts.synth.resume();
+    /* resume이 동작하지 않는 브라우저 대응: 현재 idx부터 재시작 */
+    if (!tts.synth.speaking) ttsSpeak(tts.idx);
+
+  } else {
+    /* 재생 중 → 일시정지 */
+    tts.paused = true;
+    ttsBtnState('paused');
+    tts.synth.pause();
+  }
+}
+
+function ttsStop() {
+  if (tts.synth) tts.synth.cancel();
+  tts.active = false;
+  tts.paused = false;
+  tts.queue  = [];
+  tts.idx    = 0;
+  ttsHighlight(null);
+  ttsBtnState('idle');
+}
+
+/* visibilitychange 이벤트 미사용
+   — 다중 스크린 환경에서 다른 화면으로 이동해도 팟캐스트가 계속 재생되도록 유지
+   — 탭 전환 시 중단은 switchTab 함수에서 별도 처리 */
+
+/* 화면 복귀 시 팟캐스트 버벅임 방지
+   — 다른 스크린에서 돌아왔을 때 synth가 paused 상태로 굳는 브라우저 버그 대응
+   — 단, 사용자가 직접 일시정지한 경우는 resume 안 함 */
+document.addEventListener('visibilitychange', function() {
+  if (!document.hidden) {
+    var synth = window.speechSynthesis;
+    /* _podStopOnTabSwitch 존재 = 팟캐스트 탭이 있음
+       pod 상태는 IIFE 내부라 직접 접근 불가 → synth.paused && synth.speaking 으로만 판단 */
+    if (synth && synth.paused && synth.speaking) {
+      /* 사용자가 직접 일시정지한 건 podToggle에서 pod.paused=true로 관리됨
+         여기서는 Chrome이 강제로 pause한 경우(synth.paused but pod intended playing)만 resume */
+      synth.resume();
+    }
+  }
+});
+</script>
+
+</body>
+</html>
